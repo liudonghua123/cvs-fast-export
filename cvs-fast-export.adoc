@@ -27,8 +27,8 @@ lifting and various sorts of artifact cleanup.
 If arguments are supplied, the program assumes all ending with the
 extension ",v" are master files and reads them in. If no arguments are
 supplied, the program reads filenames from stdin, one per
-line. Directories and files not ending in ",v" are skipped.
-(But see the description of the -P for how to change this behavior.) 
+line. Directories and files not ending in ",v" are skipped.  (But see
+the description of the -P option for how to change this behavior.)
 
 Files from either Unix CVS or CVS-NT are handled. If a collection of
 files has commitid fields, changesets will be constructed reliably
@@ -226,7 +226,7 @@ run.
 -P::
 Normally cvs-fast-export will skip any filename presented as an argument
 or on stdin that does not end with the RCS/CVS extension ",v", and
-will also ignore a pathnamre containing the string CVSROOT (this
+will also ignore a pathname containing the string CVSROOT (this
 avoids annoyances when running from or above a top-level CVS directory).
 A strict reading of RCS allows masters without the ,v extension.  This
 option sets promiscuous mode, disabling both checks.
