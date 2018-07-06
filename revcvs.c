@@ -44,8 +44,8 @@ static const char*
 dir_name(const char *filename)
 {
     char *slash = strrchr(filename, '/');
-    char buf[PATH_MAX];
     if (slash) {
+	char buf[PATH_MAX];
 	strncpy(buf, filename, slash - filename);
 	buf[slash - filename] = '\0';
 	return atom(buf);
@@ -271,11 +271,10 @@ cvs_master_branch_build(cvs_file *cvs, rev_master *master, const cvs_number *bra
 static void
 cvs_master_patch_vendor_branch(cvs_master *cm, cvs_file *cvs)
 {
-    rev_ref	*trunk = NULL;
+    rev_ref	*trunk = cm->heads;
     rev_ref	*vendor = NULL;
     rev_ref	*nvendor = NULL;
 
-    trunk = cm->heads;
     assert(strcmp(trunk->ref_name, "master") == 0);
     /* walk all the list of branch heads */
     for (vendor = cm->heads; vendor; vendor = vendor->next) {

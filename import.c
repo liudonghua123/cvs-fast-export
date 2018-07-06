@@ -181,7 +181,6 @@ static void *worker(void *arg)
 /* consume masters off the queue */
 {
     analysis_t out = {0, 0};
-    size_t     i;
     for (;;)
     {
 	/* pop a master off the queue, terminating if none left */
@@ -189,7 +188,7 @@ static void *worker(void *arg)
 	if (threads > 1)
 	    pthread_mutex_lock(&enqueue_mutex);
 #endif /* THREADS */
-	i = fn_i++;
+	size_t i = fn_i++;
 #ifdef THREADS
 	if (threads > 1)
 	    pthread_mutex_unlock(&enqueue_mutex);
@@ -327,12 +326,11 @@ void analyze_masters(int argc, char *argv[],
     for (;;)
     {
 	struct stat stb;
-	int l;
 	if (argc < 2) {
 	    /* coverity[tainted_data] Safe, never handed to exec */
 	    if (fgets(name, sizeof(name), stdin) == NULL)
 		break;
-	    l = strlen(name);
+	    int l = strlen(name);
 	    if (name[l-1] == '\n')
 		name[l-1] = '\0';
 	    file = name;

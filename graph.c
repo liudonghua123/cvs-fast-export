@@ -162,7 +162,7 @@ static void dot_refs(git_repo *rl, rev_ref *refs,
 		    if (n)
 			printf("\\n");
 		    dot_ref_name(stdout, o);
-		    printf(" (%d)", o->degree);
+		    printf(" (%u)", o->degree);
 		    n++;
 		}
 	    printf("\" [fontsize=6,fixedsize=false,shape=%s];\n", shape);
@@ -186,7 +186,7 @@ static void dot_refs(git_repo *rl, rev_ref *refs,
 		    if (n)
 			printf("\\n");
 		    dot_ref_name(stdout, o);
-		    printf(" (%d)", o->degree);
+		    printf(" (%u)", o->degree);
 		    n++;
 		}
 	    printf("\"");

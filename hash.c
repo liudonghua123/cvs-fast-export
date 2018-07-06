@@ -59,12 +59,12 @@ static hash_t crc32_table[256];
 static void
 generate_crc32_table(void)
 {
-    hash_t	c, p;
+    hash_t	p;
     int		n, m;
 
     p = 0xedb88320;
     for (n = 0; n < 256; n++) {
-	c = n;
+	hash_t c = n;
 	for (m = 0; m < 8; m++)
 	    c = (c >> 1) ^ ((c & 1) ? p : 0);
 	crc32_table[n] = c;

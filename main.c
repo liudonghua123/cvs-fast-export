@@ -350,6 +350,7 @@ main(int argc, char **argv)
 	    break;
 	case 'S':
 	    print_sizes();
+	    // cppcheck-suppress memleak
 	    return 0;
 	default: /* error message already emitted */
 	    announce("try `%s --help' for more information.\n", argv[0]);
