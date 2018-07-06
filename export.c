@@ -145,8 +145,8 @@ static void export_blob(node_t *node,
     node->commit->serial = seqno_next();
     if (opts->reportmode == fast) {
 	markmap[node->commit->serial] = ++mark;
-	printf("blob\nmark :%d\n", mark);
-	fprintf(stdout, "data %zd\n", len + extralen);
+	printf("blob\nmark :%d\n", (int)mark);
+	fprintf(stdout, "data %lu\n", (unsigned long)(len + extralen));
 	if (extralen > 0)
 	    fwrite(CVS_IGNORES, extralen, sizeof(char), stdout);
 	fwrite(buf, len, sizeof(char), stdout);
@@ -163,7 +163,7 @@ static void export_blob(node_t *node,
 	if (wfp == NULL)
 	    fatal_error("blobfile open of %s: %s (%d)", 
 			path, strerror(errno), errno);
-	fprintf(wfp, "data %zd\n", len + extralen);
+	fprintf(wfp, "data %lu\n", (unsigned long)(len + extralen));
 	if (extralen > 0)
 	    fwrite(CVS_IGNORES, extralen, sizeof(char), wfp);
 	fwrite(buf, len, sizeof(char), wfp);
@@ -415,7 +415,7 @@ export_commit(git_commit *commit, const char *branch,
 		FILE *rfp = fopen(fn, "r");
 		if (rfp) {
 		    char buf[BUFSIZ];
-		    printf("blob\nmark :%d\n", mark);
+		    printf("blob\nmark :%d\n", (int)mark);
 
 		    while (!feof(rfp)) {
 			size_t len = fread(buf, 1, sizeof(buf), rfp);
@@ -449,7 +449,7 @@ export_commit(git_commit *commit, const char *branch,
     dump_commit(commit, stderr);
 #endif /* ORDERDEBUG2 */
     if (report)
-	printf("mark :%d\n", mark);
+	printf("mark :%d\n", (int)mark);
     if (report) {
 	static bool need_ignores = true;
 	const char *ts;
@@ -464,7 +464,7 @@ export_commit(git_commit *commit, const char *branch,
 		commit->log, revpairs);
 	if (commit->parent) {
 	    if (markmap[commit->parent->serial] > 0) 
-		printf("from :%d\n", markmap[commit->parent->serial]);
+		printf("from :%d\n", (int)markmap[commit->parent->serial]);
 	    else
 	    {
 		cleanup(opts);
@@ -478,7 +478,7 @@ export_commit(git_commit *commit, const char *branch,
 	    if (op2->op == 'M')
 		printf("M 100%o :%d %s\n", 
 		       op2->mode, 
-		       markmap[op2->rev->serial], 
+		       (int)markmap[op2->rev->serial], 
 		       op2->path);
 	    if (op2->op == 'D')
 		printf("D %s\n", op2->path);
@@ -491,8 +491,8 @@ export_commit(git_commit *commit, const char *branch,
 	}
 	if (need_ignores) {
 	    need_ignores = false;
-	    printf("M 100644 inline .gitignore\ndata %zd\n%s\n",
-		   sizeof(CVS_IGNORES)-1, CVS_IGNORES);
+	    printf("M 100644 inline .gitignore\ndata %d\n%s\n",
+		   (int)sizeof(CVS_IGNORES)-1, CVS_IGNORES);
 	}
 	if (revpairs != NULL && strlen(revpairs) > 0)
 	{
@@ -500,7 +500,7 @@ export_commit(git_commit *commit, const char *branch,
 		char *cp;
 		for (cp = revpairs; *cp; cp++) {
 		    if (*cp == '\n')
-			fprintf(opts->revision_map, " :%d", here);
+			fprintf(opts->revision_map, " :%d", (int)here);
 		    fputc(*cp, opts->revision_map);
 		}
 	    }
@@ -793,7 +793,7 @@ void export_commits(forest_t *forest,
 		    progress_step();
 		    for (t = all_tags; t; t = t->next)
 			if (t->commit == gc && display_date(gc, markmap[gc->serial], opts->force_dates) > opts->fromtime)
-			    printf("reset refs/tags/%s\nfrom :%d\n\n", t->name, markmap[gc->serial]);
+			    printf("reset refs/tags/%s\nfrom :%d\n\n", t->name, (int)markmap[gc->serial]);
 		}
 
 		free(history);
@@ -854,7 +854,7 @@ void export_commits(forest_t *forest,
 	    export_commit(hp->commit, hp->head->ref_name, report, opts);
 	    for (t = all_tags; t; t = t->next)
 		if (t->commit == hp->commit && display_date(hp->commit, markmap[hp->commit->serial], opts->force_dates) > opts->fromtime)
-		    printf("reset refs/tags/%s\nfrom :%d\n\n", t->name, markmap[hp->commit->serial]);
+		    printf("reset refs/tags/%s\nfrom :%d\n\n", t->name, (int)markmap[hp->commit->serial]);
 	}
 
 	free(history);
@@ -865,7 +865,7 @@ void export_commits(forest_t *forest,
 	    printf("reset %s%s\nfrom :%d\n\n",
 		   opts->branch_prefix,
 		   h->ref_name,
-		   markmap[h->commit->serial]);
+		   (int)markmap[h->commit->serial]);
     }
     free(markmap);
 
