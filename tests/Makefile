@@ -2,7 +2,7 @@
 
 # Set OPTS to pass options to the cvs-fast-export instances.
 
-PATH := ${CURDIR}/..:${PATH}
+PATH := ${CURDIR}/..:${CURDIR}:${PATH}
 SHELL = sh	# Do not introduce bashisms!
 CVS = cvs
 DIFF = diff -u -a
