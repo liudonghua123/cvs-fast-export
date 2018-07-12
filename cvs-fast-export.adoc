@@ -335,7 +335,7 @@ occurs in a set of revisions that does not correspond to any gitspace
 commit.  In this case a tagged branch containing only one commit is
 created, guaranteeing that you can check out a set of files containing
 the CVS content for the tag. The commit comment is "Synthetic commit
-for incomplete tag XXX", where XXX is the relevanr tag.  The root of
+for incomplete tag XXX", where XXX is the relevant tag.  The root of
 the branchlet is the gitspace commit where the latest CVS revision in
 in the tagged set first occurs; this is the commit the tag would point
 at if its incompleteness were ignored. The change in the branchlet
