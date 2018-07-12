@@ -198,7 +198,7 @@ _progress_print(bool newline, const char *format, va_list args)
     fflush(STATUS);
 }
 
-static void progress_interrupt(void)
+void progress_interrupt(void)
 {
     if (progress && progress_in_progress) {
 	fputc('\n', stderr);

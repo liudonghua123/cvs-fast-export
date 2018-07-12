@@ -1,7 +1,8 @@
 		cvs-fast-export project news
 
 Repository head:
-   Documentation poliishing.
+   Always report both file and line in syntax errors, using gcc style.
+   Documentation polishing.
    cppcheck cleanup.
    Minor port fixes to test machinery.
 

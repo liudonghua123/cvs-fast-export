@@ -687,6 +687,9 @@ void
 debugmsg(char const *format,...) _printflike(1, 2);
 
 void
+progress_interrupt(void);
+
+void
 fatal_error(char const *format, ...) _printflike(1, 2) _noreturn;
 
 void

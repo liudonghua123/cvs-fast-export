@@ -313,5 +313,8 @@ strings		: IGNORED strings
 
 void yyerror(yyscan_t scanner, cvs_file *cvs, const char *msg)
 {
-    fatal_error("parse error %s at %s\n", msg, yyget_text(scanner));
+    progress_interrupt();
+    fprintf(stderr, "\"%s\", line %d: cvs-fast-export %s on token %s",
+	    cvs->export_name, yyget_lineno(scanner),
+	    msg, yyget_text(scanner));
 }
