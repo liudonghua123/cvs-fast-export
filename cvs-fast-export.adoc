@@ -423,11 +423,6 @@ tag could not be assigned to a commit::
      this happens, cvs-fast-export will issue this warning and the tag
      named will be discarded.
 
-child commit emitted before parent::
-     Something went wrong diring export canonicalization. This was
-     probably caused by CVS commit timestamps being in the wrong order for
-     their parent-child relathonship. Try the -F option.
-
 discarding dead untagged branch::
      Analysis found a CVS branch with no tag consisting entirely of
      dead revisions. These cannot have been visible in the archival
