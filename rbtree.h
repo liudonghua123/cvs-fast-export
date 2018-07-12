@@ -1,4 +1,7 @@
-/* rbtree.h - prototypes fot red/black tree lookup code */
+/* rbtree.h - prototypes fot red/black tree lookup code
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
+ */
 
 struct rbtree_node;
 

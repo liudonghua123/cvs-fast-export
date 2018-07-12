@@ -1,9 +1,11 @@
-#include "cvs.h"
-#include "rbtree.h"
-
 /*
  * Structures for the red/black tree
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
  */
+
+#include "cvs.h"
+#include "rbtree.h"
 
 typedef enum _rbtree_color {
   RED = 0,

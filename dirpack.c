@@ -1,5 +1,7 @@
 /* Simpler method of packing a file list.
  * Designed to be included in revdir.c
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
  */
 
 #define REV_DIR_HASH	393241

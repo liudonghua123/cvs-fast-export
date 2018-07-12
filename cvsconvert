@@ -7,6 +7,8 @@ the CVS.  The tip state of every branch, and every tag, is checked.
 
 Will produce spurious errors if any CVS branch name had to be sanitized.
 """
+#  SPDX-License-Identifier: GPL-2.0+
+#
 # This is the testlifter.py code from the distribution directory.
 # Modify it there, not here
 

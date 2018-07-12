@@ -1,3 +1,4 @@
+/*  SPDX-License-Identifier: GPL-2.0+ */
 #ifndef _CVSTYPES_H_
 #define _CVSTYPES_H_
 
@@ -31,10 +32,10 @@ typedef uint32_t	serial_t;
 #define MAX_SERIAL_T	UINT32_MAX
 
 /*
- * This type must be wide enough to count all branches cointaining a commit.
+ * This type must be wide enough to count all branches containing a commit.
  * There's a sanity check in the code.
  */
-typedef uint16_t			branchcount_t;
+typedef uint16_t		branchcount_t;
 #define MAX_BRANCHCOUNT_T	UINT16_MAX
 
 /* Hash values */

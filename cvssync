@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # Runs under both Python 2 and Python 3: preserve this property!
+# SPDX-License-Identifier: GPL-2.0+
 """
 cvssync - fetch a CVS repository using rsync
 

@@ -1,3 +1,12 @@
+/*
+ * Manage objects that represent gitspace lightweight tags.
+ *
+ * Because we're going to try to unify tags from different branches
+ * the tag table should *not* be local to any one master.  
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
+ */
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,13 +15,6 @@
 #endif /* THREADS */
 
 #include "cvs.h"
-
-/*
- * Manage objects that represent gitspace lightweight tags.
- *
- * Because we're going to try to unify tags from different branches
- * the tag table should *not* be local to any one master.  
- */
 
 static tag_t *table[4096];
 

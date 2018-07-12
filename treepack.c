@@ -1,6 +1,8 @@
 /*
- * Implementation of revdir.h that saves a lot more space than the original dirpack scheme.
- * Designed to be included in revdir.c.
+ * Implementation of revdir.h that saves a lot more space than the
+ * original dirpack scheme.  Designed to be included in revdir.c.
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
  */
 
 #define REV_DIR_HASH	786433

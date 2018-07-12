@@ -1,5 +1,7 @@
 /*
  * Manage a map from short CVS-syle names to DVCS-style name/email pairs.
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
  */
 
 #include "cvs.h"

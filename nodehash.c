@@ -2,6 +2,8 @@
  * The per-CVS-master node list this module builds and exports is used
  * during the analysis phase (only) to walk through all deltas and 
  * build them into snapshots.
+ *
+ *  SPDX-License-Identifier: GPL-2.0+
  */
 
 #include "cvs.h"

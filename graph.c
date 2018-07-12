@@ -1,5 +1,6 @@
 /*
  *  Copyright © 2006 Keith Packard <keithp@keithp.com>
+ *  Copyright © 2018 Eric S, Raymond <esr@thyrsus.com>
  *
  *  SPDX-License-Identifier: GPL-2.0+
  */
