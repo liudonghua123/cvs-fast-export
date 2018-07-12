@@ -339,7 +339,7 @@ for incomplete tag XXX", where XXX is the relevanr tag.  The root of
 the branchlet is the gitspace commit where the latest CVS revision in
 in the tagged set first occurs; this is the commit the tag would point
 at if its incompleteness were ignored. The change in the branchlet
-commit *is* also applied foward in the nearby mainline.
+commit *is* also applied forward in the nearby mainline.
 
 When running multithreaded, there is an edge case in which the
 program's behavior is nondeterministic.  If the same tag looks like it
