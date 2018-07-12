@@ -7,8 +7,8 @@ of them.  Here is what to do about it.
 
 == Build and port errors ==
 
-These are relatively simple to fix.  Specify your build envipronment:
-OS, compiler version, platform.  Include a transcript of the compiler
+These are relatively simple to fix.  Specify your build environment:
+OS, compiler version, and platform.  Include a transcript of the compiler
 errors.
 
 == Translation errors ==
@@ -53,11 +53,11 @@ master files.
 
 === Transmission ===
 
-Make a tarball including the CVS masters. Make a session transcript
-showing the error relicating on them.  Mail these things to the
-maintainer with any other information you think might be relevant.
-Better yet, open an issue at the project home on Gitlab and attach
-this archive.
+Make a session transcript showing the error replicating on the reduced
+masters. Make a tarball including the reduced masters and the session
+transcript.  Mail this things to the maintainer with any other
+information you think might be relevant.  Better yet, open an issue at
+the project home on Gitlab and attach this archive.
 
 === Warning ===
 
