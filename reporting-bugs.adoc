@@ -55,9 +55,9 @@ master files.
 
 Make a session transcript showing the error replicating on the reduced
 masters. Make a tarball including the reduced masters and the session
-transcript.  Mail this things to the maintainer with any other
-information you think might be relevant.  Better yet, open an issue at
-the project home on Gitlab and attach this archive.
+transcript.  Mail this to the maintainer with any other information
+you think might be relevant.  Better yet, open an issue at the project
+home on Gitlab and attach this archive.
 
 === Warning ===
 
