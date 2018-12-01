@@ -481,9 +481,11 @@ collate_branches(rev_ref **branches, int nbranch,
 	    continue;
 	if (!birth || time_compare(birth, c->date) >= 0)
 	    continue;
-	if (!c->dead)
+	if (!c->dead) {
 	    warn("warning - %s branch %s: tip commit older than imputed branch join\n",
 		     c->master->name, branch->ref_name);
+	    continue;
+	}
 	REVISION_T_PACK(revisions[n], (cvs_commit *)NULL);
     }
 
