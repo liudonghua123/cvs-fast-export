@@ -1,0 +1,210 @@
+cvs-fast-export: ignoring empty branch
+cvs-fast-export: warning - putting emptylabel,v rev 4.8.0.1 on unnamed branch master-UNNAMED-BRANCH off master
+cvs-fast-export: warning - putting emptylabel,v rev 4.6.0.1 on unnamed branch master-UNNAMED-BRANCH off master
+cvs-fast-export: warning - putting emptylabel,v rev 4.4.0.1 on unnamed branch master-UNNAMED-BRANCH off master
+cvs-fast-export: warning - putting emptylabel,v rev 4.4.0.2 on unnamed branch master-UNNAMED-BRANCH off master
+blob
+mark :1
+data 24
+<stdin> content for 4.3
+
+commit refs/heads/master
+mark :2
+committer payne <payne> 508643699 +0000
+data 33
+3b1088ad1b2f68ff9d46494e7106739a
+
+M 100644 :1 emptylabel
+M 100644 inline .gitignore
+data 199
+# CVS default ignores begin
+tags
+TAGS
+.make.state
+.nse_depinfo
+*~
+\#*
+.#*
+,*
+_$*
+*$
+*.old
+*.bak
+*.BAK
+*.orig
+*.rej
+.del-*
+*.a
+*.olb
+*.o
+*.obj
+*.so
+*.exe
+*.Z
+*.elc
+*.ln
+core
+# CVS default ignores end
+
+
+blob
+mark :3
+data 24
+<stdin> content for 4.4
+
+commit refs/heads/master
+mark :4
+committer payne <payne> 508644579 +0000
+data 33
+980c83abde578257c9507386b1d475a9
+
+from :2
+M 100644 :3 emptylabel
+
+blob
+mark :5
+data 24
+<stdin> content for 4.5
+
+commit refs/heads/master
+mark :6
+committer payne <payne> 512340014 +0000
+data 33
+e5f8068c61cbe9a981a3be64dbb3cc89
+
+from :4
+M 100644 :5 emptylabel
+
+blob
+mark :7
+data 24
+<stdin> content for 4.6
+
+commit refs/heads/master
+mark :8
+committer jpayne <jpayne> 522593828 +0000
+data 33
+4b85c1b396c476b34f8fc6cdeb37b8cc
+
+from :6
+M 100644 :7 emptylabel
+
+blob
+mark :9
+data 24
+<stdin> content for 4.7
+
+commit refs/heads/master
+mark :10
+committer jpayne <jpayne> 553432307 +0000
+data 33
+879470b13c3d249462fb192259f9f29d
+
+from :8
+M 100644 :9 emptylabel
+
+blob
+mark :11
+data 24
+<stdin> content for 4.8
+
+commit refs/heads/master
+mark :12
+committer jpayne <jpayne> 561397988 +0000
+data 33
+bd7f93f44b42ec950eade9da9896618a
+
+from :10
+M 100644 :11 emptylabel
+
+blob
+mark :13
+data 28
+<stdin> content for 4.8.1.1
+
+commit refs/heads/master-UNNAMED-BRANCH
+mark :14
+committer jpayne <jpayne> 569509968 +0000
+data 33
+28f2c4e3bf199240438aff6b42024f93
+
+from :12
+M 100644 :13 emptylabel
+
+blob
+mark :15
+data 24
+<stdin> content for 4.9
+
+commit refs/heads/master
+mark :16
+committer jpayne <jpayne> 574370018 +0000
+data 33
+3172c1272eca6673c9c9a2afc714a8be
+
+from :12
+M 100644 :15 emptylabel
+
+blob
+mark :17
+data 25
+<stdin> content for 4.10
+
+commit refs/heads/master
+mark :18
+committer jpayne <jpayne> 593446974 +0000
+data 33
+826d927e821d5edf01364e5270e93a07
+
+from :16
+M 100644 :17 emptylabel
+
+blob
+mark :19
+data 25
+<stdin> content for 4.11
+
+commit refs/heads/master
+mark :20
+committer jpayne <jpayne> 601139470 +0000
+data 33
+39e522b48439c1f4516cea4bc7d59b05
+
+from :18
+M 100644 :19 emptylabel
+
+blob
+mark :21
+data 25
+<stdin> content for 4.12
+
+commit refs/heads/master
+mark :22
+committer jpayne <jpayne> 603366375 +0000
+data 33
+0b7655f86c86c8d69fa029318149a87f
+
+from :20
+M 100644 :21 emptylabel
+
+blob
+mark :23
+data 25
+<stdin> content for 4.14
+
+commit refs/heads/master
+mark :24
+committer jpayne <jpayne> 624622831 +0000
+data 33
+33c465c01a5c07b7aa0ce37b738ef8bb
+
+from :22
+M 100644 :23 emptylabel
+
+reset refs/heads/master
+from :24
+
+reset refs/heads/master-UNNAMED-BRANCH
+from :14
+
+done

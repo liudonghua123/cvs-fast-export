@@ -100,6 +100,8 @@ header		: HEAD opt_number SEMI
 		  { cvsfile->head = atom_cvs_number($2); }
 		| BRANCH NUMBER SEMI
 		  { cvsfile->branch = atom_cvs_number($2); }
+		| BRANCH SEMI
+		  { warn("ignoring empty branch\n"); }
 		| accesslist
 		| symbollist
 		  { cvsfile->symbols = $1; }
@@ -314,7 +316,7 @@ strings		: IGNORED strings
 void yyerror(yyscan_t scanner, cvs_file *cvs, const char *msg)
 {
     progress_interrupt();
-    fprintf(stderr, "\"%s\", line %d: cvs-fast-export %s on token %s",
+    fprintf(stderr, "\"%s\", line %d: cvs-fast-export %s on token %s\n",
 	    cvs->export_name, yyget_lineno(scanner),
 	    msg, yyget_text(scanner));
 }
