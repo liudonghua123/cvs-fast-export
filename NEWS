@@ -1,6 +1,7 @@
 		cvs-fast-export project news
 
-Repository head:
+1.45: 2019-01-22
+   Allow empty branch labels - these have been observed 
    Always report both file and line in syntax errors, using gcc style.
    Documentation polishing.
    cppcheck cleanup.
