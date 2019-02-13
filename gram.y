@@ -18,7 +18,7 @@ extern YY_DECL;	/* FIXME: once the Bison bug requiring this is fixed */
  * Properly, the first declaration in %parse-params should have the
  * type yyscan_t, but this runs into the problem that this type is both
  * declared in lex.h and needed in gram.y - whch lex.h needs.  We
- * used to kluge around this by declaring typredef void *yyscan_t
+ * used to kluge around this by declaring typedef void *yyscan_t
  * in CVS, but this caused other problems including complaints
  * from compilers like clang that barf on duplicate typedefs.
  */
