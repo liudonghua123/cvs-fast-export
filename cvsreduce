@@ -230,10 +230,14 @@ if __name__ == '__main__':
             newname = os.path.join(*newpath)
             if verbose > 0:
                 print('%s -> %s' % (oldname, newname))
-            old = open(oldname, "rb")
-            new = open(newname, "wb")
-            skeletonize(old, new)
-            old.close()
-            new.close()
+            if oldname.endswith(',v'):
+                old = open(oldname, "rb")
+                new = open(newname, "wb")
+                skeletonize(old, new)
+                old.close()
+                new.close()
+            else:
+                sys.stderr.write("cvsreduce: %s isn't a CVS master.\n" % oldname)
+                shutil.copyfile(oldname, newname)
 
 # end
