@@ -407,6 +407,11 @@ Most of the messages cvs-fast-export emits are self-explanatory.  Here
 are a few that aren't. Where it says "check head", be sure to
 sanity-check against the head revision.
 
+fatal: internal error - duplicate key in red black tree::
+     Multiple tags with identical names exist in one of your master
+     files. This is a sign of a corrupted revision history; you will
+     need to manually inspect the master and remove one of the duplicates.
+
 child commit emitted before parent exists::
      Skew in client timestamps produced a situation in which time
      order of parent and child commits is backwards (or, if you are
