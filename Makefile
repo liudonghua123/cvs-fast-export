@@ -71,9 +71,10 @@ CPPFLAGS+=-Drestrict=__restrict__
 
 # To enable profiling, uncomment the following line
 # Note: the profiler gets confused if you don't also turn off -O flags.
-# Warning: Using -O3 has been seen to cause core dumps on repositories with
-# very long revision names - some bounds check gets optimized away. Don't do that. 
 # CFLAGS += -pg
+# Warning: Using -O3 has been seen to cause core dumps on repositories with
+# very long revision names - some bounds check gets optimized away. Don't do that.
+CFLAGS += -O2
 # If your toolchain supports link time optimization this is a cheap speedup
 # CFLAGS += -flto
 # CFLAGS += -g
