@@ -14,7 +14,7 @@
 # You will see some meaningless failures with git 1.7.1 and older.
 # For documentation, you will need asciidoc, xsltproc and docbook stylesheets.
 
-VERSION=1.45
+VERSION=$(shell sed -n <NEWS '/::/s/^\([0-9][^:]*\).*/\1/p' | head -1)
 
 .PATH: $(.PARSEDIR)
 prefix?=/usr/local
@@ -161,6 +161,8 @@ gmon.out: cvs-fast-export
 PROFILE: gmon.out
 	gprof cvs-fast-export >PROFILE
 
+version:
+	@echo $(VERSION)
 
 # Weird suppressions are required because of strange tricks in Bison and Flex.
 CSUPPRESSIONS = -U__UNUSED__ -UYYPARSE_PARAM -UYYTYPE_INT16 -UYYTYPE_INT8 \
