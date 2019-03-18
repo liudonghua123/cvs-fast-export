@@ -103,7 +103,7 @@ def replace_escaped_text(inputf, replacement, outputf):
         sys.stderr.write("cvsreduce: fatal error, @ leader not where expected.\n")
         sys.exit(1)
     else:
-        outputf.write('@' + replacement)
+        outputf.write('@' + replacement.replace("@", r'\@'))
     while True:
         nxt = inputf.read(1)
         if nxt == '@':
