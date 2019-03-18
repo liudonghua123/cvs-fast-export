@@ -1,5 +1,11 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Make cvsreduce so the right (escaping) thing when a filename contains @.
+   In cvreduce, warn on files that aren't CVS masters.
+   Avoid losing commits when warning "tip commit older than imputed branch join" seen
+   Warn about optimization bug triggered by -O3, reduce to -O2.
+
 1.45: 2019-01-22::
    Allow empty branch labels - these have been observed in the wild. 
    Always report both file and line in syntax errors, using gcc style.
