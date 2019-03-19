@@ -1,6 +1,6 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.47: 2019-03-19::
    Deal gracefully with damaged attic files that yield null branch names.
 
 1.46: 2019-03-18::
