@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Deal gracefully with damaged attic files that yield null branch names.
+
 1.46: 2019-03-18::
    Make cvsreduce so the right (escaping) thing when a filename contains @.
    In cvreduce, warn on files that aren't CVS masters.
