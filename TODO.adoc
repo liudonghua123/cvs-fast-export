@@ -1,4 +1,4 @@
-			TO DO
+= TO DO =
 
 Before you try to modify this code, read hacking.adoc.
 
@@ -13,6 +13,7 @@ for creating a close-to-minimal branch cycle testcase in tests/README.
 
 Created as follows:
 
+--------------------------------------
 	mkdir vend-test1.vend
 	cd vend-test1.vend
 	echo 1 > FILE1
@@ -33,6 +34,7 @@ Created as follows:
 	cvs tag lost-repo-state
 	echo 3 > FILE1
 	cvs commit -m c3
+--------------------------------------
 
 Loz says: Subset tag will probably paper over the
 problem. Imagine the repo didn't have the +"lost-repo-state"

@@ -311,6 +311,17 @@ build_delete_op(cvs_commit *c, struct fileop *op)
     op->op = 'D';
     op->path = c->master->fileop_name;
 }
+
+static const char *
+visualize_branch_name(const char *name)
+{
+    if (name == NULL) {
+	return "null";
+	announce("null branch name, probably from a damaged Attic file\n");
+    } else
+	return name;
+}
+
 static void
 export_commit(git_commit *commit, const char *branch,
 	      const bool report, const export_options_t *opts)
@@ -441,7 +452,7 @@ export_commit(git_commit *commit, const char *branch,
     }
 
     if (report)
-	printf("commit %s%s\n", opts->branch_prefix, branch);
+	printf("commit %s%s\n", opts->branch_prefix, visualize_branch_name(branch));
     commit->serial = ++seqno;
     here = markmap[commit->serial] = ++mark;
 #ifdef ORDERDEBUG2
@@ -864,7 +875,7 @@ void export_commits(forest_t *forest,
 	if (display_date(h->commit, markmap[h->commit->serial], opts->force_dates) > opts->fromtime)
 	    printf("reset %s%s\nfrom :%d\n\n",
 		   opts->branch_prefix,
-		   h->ref_name,
+		   visualize_branch_name(h->ref_name),
 		   (int)markmap[h->commit->serial]);
     }
     free(markmap);

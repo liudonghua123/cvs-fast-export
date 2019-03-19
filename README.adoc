@@ -47,5 +47,5 @@ Warning: The regression tests will fail spuriously if your CVS lacks the
 MirOS patches.  These are carried by Debian Linux and derivatives; you can
 check by Looking for "MirDebian" in the output of cvs --version.
 
-See also the NEWS and TODO files.  There is an (incomplete) tour of
+See also the NEWS.adoc and TODO.adoc files.  There is an (incomplete) tour of
 the internals in hacking.adoc.

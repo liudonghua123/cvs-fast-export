@@ -115,7 +115,7 @@ data 33
 from :10
 D emptytag
 
-commit refs/heads/(null)
+commit refs/heads/null
 mark :13
 committer riz <riz> 1158268590 +0000
 data 33
@@ -125,7 +125,7 @@ data 33
 reset refs/heads/master
 from :11
 
-reset refs/heads/(null)
+reset refs/heads/null
 from :13
 
 reset refs/heads/yamt-pdpolicy
