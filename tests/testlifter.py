@@ -216,7 +216,7 @@ class CVSCheckout:
         "Switch to an existing branch."
         self.do("up", "-A")
         if branch != "HEAD":
-            self.do("up", "-r", branch)
+            self.do("up", "-r", "'" + branch + "'")
     def tag(self, name):
         "Create a tag."
         self.do("tag", name)
@@ -251,7 +251,7 @@ class CVSCheckout:
         "Update the content to the specified revision or tag."
         if rev == 'master':
             rev = "HEAD"
-        self.do("up", "-kb", "-A", "-r", rev)
+        self.do("up", "-kb", "-A", "-r", "'" + rev + "'")
     def cleanup(self):
         "Clean up the checkout directory."
         if self.proxy and os.path.exists(self.proxy):
