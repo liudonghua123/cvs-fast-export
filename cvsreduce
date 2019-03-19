@@ -31,7 +31,7 @@ imply the same changeset DAG as the unstripped originals, but be
 easier to pass around, faster to process, and not reveal potentially
 sensitive data.
 """
-import os, sys, getopt, hashlib, io
+import os, sys, getopt, hashlib, io, shutil
 
 strip_tags = True
 strip_logs = True
