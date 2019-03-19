@@ -14,6 +14,8 @@ Description: Export an RCS or CVS history as a fast-import stream.
 
 Homepage: http://www.catb.org/~esr/cvs-fast-export
 
+Destinations: mailto:ubuntu-devel-discuss@lists.ubuntu.com
+
 XBS-HTML-Target: index.html
 
 XBS-Repository-URL: https://gitlab.com/esr/cvs-fast-export
@@ -21,6 +23,8 @@ XBS-Repository-URL: https://gitlab.com/esr/cvs-fast-export
 XBS-Logo: cfe-logo.png
 
 XBS-OpenHub-URL: https://www.ohloh.net/p/cvs-fast-export
+
+XBS-Debian-Packages: cvs-fast-export
 
 XBS-VC-Tag-Template: %(version)s
 
