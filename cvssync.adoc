@@ -101,6 +101,9 @@ cvssync cvs.savannah.gnu.org:/groff groff::
 cvssync cvs://cvs.savannah.gnu.org/groff#groff::
 	Same fetch using the URL argument style.
 
+cvssync cvs:///home/user/foo#bar::
+	Copy module bar from a local CVS repository foo.
+
 == REPORTING BUGS ==
 Report bugs to Eric S. Raymond <esr@thyrsus.com>.  The project page is
 at http://catb.org/~esr/cvs-fast-export

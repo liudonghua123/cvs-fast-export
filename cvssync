@@ -39,6 +39,8 @@ def computesource(sourcehost, sourcepath, sourcemodule):
         if not sourcepath.startswith("/sources"):
             sourcepath = "/sources" + sourcepath
         return "rsync://cvs.savannah.gnu.org%s/%s/" % (sourcepath, sourcemodule)
+    elif not sourcehost:
+        return "%s/%s/" % (sourcepath, sourcemodule)
     else:
         return "%s:%s/%s/" % (sourcehost, sourcepath, sourcemodule)
 
