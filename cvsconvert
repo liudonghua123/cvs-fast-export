@@ -19,6 +19,11 @@ Test framework for cvs-fast-export.
 # Preserve this property!
 import sys, os, shutil, subprocess, time, filecmp
 
+try:
+    from pipes import quote
+except:
+    from shlex import qoute    
+
 DEBUG_STEPS    = 1
 DEBUG_COMMANDS = 2
 DEBUG_VCS      = 3
@@ -332,7 +337,7 @@ class ConvertComparison:
                         yield path
         self.checkout.update(ref)
         with directory_context(self.gitRepoName):
-            if not noisy_run("git checkout --quiet %s" % ref):
+            if not noisy_run("git checkout --quiet %s" % quote(ref)):
                 self.repo.cleanup()
                 sys.exit(1)
         if 0:
