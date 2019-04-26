@@ -1,10 +1,10 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.48: 2019-04-26::
    cvsconvert now properly escapes branch names in shell commands.
    cvssync can now sync from a local cvs respository.
    Fix for a minor bug when reporting fixups on out-of-order commits.
-   Stengthen documentation warnings about unreliability of CVS timestamps.
+   Strengthen documentation warnings about unreliability of CVS timestamps.
 
 1.47: 2019-03-19::
    Deal gracefully with damaged attic files that yield null branch names.
