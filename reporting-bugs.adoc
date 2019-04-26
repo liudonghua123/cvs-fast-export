@@ -43,7 +43,7 @@ to a single file or pair of files.
 
 You should find you can simplify the directory structure by moving
 files from subdirectories to the root, doing file renames to avoid
-mame collisions. Neither moves nor renames should change the errors
+name collisions. Neither moves nor renames should change the errors
 reported except in the obvious way of changing pathnames in the
 messages.  Again, if the errors do change in any other way this is
 interesting and should be reported.
@@ -57,7 +57,7 @@ Make a session transcript showing the error replicating on the reduced
 masters. Make a tarball including the reduced masters and the session
 transcript.  Mail this to the maintainer with any other information
 you think might be relevant.  Better yet, open an issue at the project
-home on Gitlab and attach this archive.
+home on GitLab and attach this archive.
 
 === Warning ===
 
