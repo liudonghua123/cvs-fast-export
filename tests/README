@@ -16,8 +16,8 @@ visualize::
 	Visualize the contents of a test repository or master file
 	using the -g option of cvs-fast-export and the dot(1) renderer.
 
-gitwassh::
-	Canonicalize a git fast-mport stream.
+gitwash::
+	Canonicalize a git fast-import stream.
 
 == The .tst files ==
 
