@@ -135,7 +135,7 @@ used by the graphviz tools, rather than fast-exporting.
 
 -l::
 Warnings normally go to standard error.  This option, which takes a
-filename, allows you to redirect them to a file>  Convenient
+filename, allows you to redirect them to a file.  Convenient
 with the -p option.
 
 -a::
