@@ -277,6 +277,12 @@ cvs-fast-export will try to warn you about these cases rather than
 silently producing broken or incomplete translations, but there be
 dragons. We recommend some precautions under SANITY CHECKING.
 
+Timestamps from CVS histories are not very reliable - assume any
+individual one can be off by up to 24 hours in a random direction,
+and do not assume that timestamp order in the converted repository.
+CVS made them on the client side rather than at the server; this
+makes them subject to local clock skew, timezone, and DST issues.
+
 CVS-NT and versions of GNU CVS after 1.12 (2004) added a changeset
 commit-id to file metadata. Older sections of CVS history without
 these are vulnerable to various problems caused by clock skew between
@@ -316,7 +322,7 @@ been optimized for 64-bit machines and no particular effort has been
 made to keep it 32-bit clean.  Various counters may overflow if you
 try using it to lift a large repository on a 32-bit machine.
 
-Branches occurring in only a subset of the analyzed masters are not
+ranches occurring in only a subset of the analyzed masters are not
 correctly resolved; instead, an entirely disjoint history will be
 created containing the branch revisions and all parents back to the
 root.

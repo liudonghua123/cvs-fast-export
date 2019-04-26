@@ -214,10 +214,23 @@ cvs_master_branch_build(cvs_file *cvs, rev_master *master, const cvs_number *bra
     for (c = head, gc = NULL; (p = c->parent); gc = c, c = p) {
 	if (time_compare(p->date, c->date) > 0) {
 	    atom_n = NULL;
-	    /* Try to catch an odd one out, such as a commit with the
+	    /*
+	     * Try to catch an odd one out, such as a commit with the
 	     * clock set wrong.  Don't push back all commits for that,
 	     * just fix up the current commit instead of the
-	     * parent. */
+	     * parent.
+	     *
+	     * This may look like it's doing a bad thing to the integrity
+	     * of the input data, but in reality we don't get here unless
+	     * some commit times were messed up to begin with.  The reason
+	     * this can happen is that CVS timestamps commits on the client,
+	     * not at the server; the ordering is therefor prone to get
+	     * screwed up by client clock skew, timezones, and DST.
+	     *
+	     * The best thing we can do in this situation is replace garbage
+	     * with a well-formed timestamp sequence that is not too grossly
+	     * fictional.
+	     */
 	    if (gc && time_compare(p->date, gc->date) <= 0) {
 		c->date = p->date;
 		atom_n = c->number;
