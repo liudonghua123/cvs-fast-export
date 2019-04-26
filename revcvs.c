@@ -212,25 +212,26 @@ cvs_master_branch_build(cvs_file *cvs, rev_master *master, const cvs_number *bra
      * in reverse order. p = parent, c = child, gc = grandchild.)
      */
     for (c = head, gc = NULL; (p = c->parent); gc = c, c = p) {
-	if (time_compare(p->date, c->date) > 0 && !nowarn)
-	{
-	    warn("warning - %s:", cvs->gen.master_name);
-	    dump_number_file(LOGFILE, " ", p->number);
-	    dump_number_file(LOGFILE, " is newer than", c->number);
-
+	if (time_compare(p->date, c->date) > 0) {
+	    atom_n = NULL;
 	    /* Try to catch an odd one out, such as a commit with the
 	     * clock set wrong.  Don't push back all commits for that,
 	     * just fix up the current commit instead of the
 	     * parent. */
-	    if (gc && time_compare(p->date, gc->date) <= 0)
-	    {
-	      dump_number_file(LOGFILE, ", adjusting", c->number);
-	      c->date = p->date;
+	    if (gc && time_compare(p->date, gc->date) <= 0) {
+		c->date = p->date;
+		atom_n = c->number;
 	    } else {
-	      dump_number_file(LOGFILE, ", adjusting", c->number);
-	      p->date = c->date;
+		p->date = c->date;
+		atom_n = p->number;
 	    }
-	    fprintf(LOGFILE, "\n");
+	    if (!nowarn) {
+		warn("warning - %s:", cvs->gen.master_name);
+		dump_number_file(LOGFILE, " ", p->number);
+		dump_number_file(LOGFILE, " is newer than", c->number);
+		if (atom_n) dump_number_file(LOGFILE, ", adjusting", atom_n);
+		fprintf(LOGFILE, "\n");
+	    }
 	}
     }
 
