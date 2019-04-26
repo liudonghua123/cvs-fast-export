@@ -9,12 +9,9 @@ Will produce spurious errors if any CVS branch name had to be sanitized.
 """
 #  SPDX-License-Identifier: GPL-2.0+
 #
-# This is the testlifter.py code from the distribution directory.
+# The engine for this is the testlifter.py code from the distribution directory.
 # Modify it there, not here
-
-"""
-Test framework for cvs-fast-export.
-"""
+#
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
 import sys, os, shutil, subprocess, time, filecmp
