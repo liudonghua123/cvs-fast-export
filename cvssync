@@ -122,6 +122,6 @@ if __name__ == '__main__':
             os.mkdir(dummyroot)
         directory = os.path.join(directory, module)
 
-    do_or_die("rsync -a%sz %s %s" % (vopt, source, directory))
+    do_or_die("rsync -sa%sz '%s' '%s'" % (vopt, source, directory))
 
 # end
