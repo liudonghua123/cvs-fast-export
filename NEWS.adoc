@@ -14,7 +14,7 @@ Repository head::
    Deal gracefully with damaged attic files that yield null branch names.
 
 1.46: 2019-03-18::
-   Make cvsreduce so the right (escaping) thing when a filename contains @.
+   Make cvsreduce do the right (escaping) thing when a filename contains @.
    In cvreduce, warn on files that aren't CVS masters.
    Avoid losing commits when warning "tip commit older than imputed branch join" seen
    Warn about optimization bug triggered by -O3, reduce to -O2.
