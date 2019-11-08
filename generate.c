@@ -485,7 +485,9 @@ static void keyreplace(editbuffer_t *eb, enum markers marker)
 
     strftime(date_string, 25, "%Y/%m/%d %H:%M:%S", localtime(&utime));
 
-    out_printf(eb, "%c%s", KDELIM, kw);
+    if (exp != EXPANDKV) {
+        out_printf(eb, "%c%s", KDELIM, kw);
+    }
 
     /* bug: Locker expansion is not implemented */
     if (exp != EXPANDKK) {
@@ -727,17 +729,18 @@ static int expandline(editbuffer_t *eb)
 			continue;   /* last c handled properly */
 		    }
 		}
-		/*
-		 * CVS will expand keywords that have
-		 * overlapping delimiters, eg "$Name$Id$".  To
-		 * support that(mis)feature, push the closing
-		 * delimiter back on the input so that the
-		 * loop will resume processing starting with
-		 * it.
-		 */
-		if (c == KDELIM)
-		    in_buffer_ungetc(eb);
-
+		if (eb->Gexpand != EXPANDKV) {
+			/*
+			 * CVS will expand keywords that have
+			 * overlapping delimiters, eg "$Name$Id$".  To
+			 * support that(mis)feature, push the closing
+			 * delimiter back on the input so that the
+			 * loop will resume processing starting with
+			 * it.
+			 */
+			if (c == KDELIM)
+				in_buffer_ungetc(eb);
+		}
 		/* now put out the new keyword value */
 		keyreplace(eb, matchresult);
 		e = 1;
