@@ -1,7 +1,7 @@
 = cvs-fast-export project news =
 
 Repository head::
-   cvsconvert accept an -A option for authormap and [asses,
+   cvsconvert accepts an -A option for an authormap.
    Minor fix to -kv expansion.
 
 1.48: 2019-04-26::
