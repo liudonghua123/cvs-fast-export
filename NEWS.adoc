@@ -1,5 +1,9 @@
 = cvs-fast-export project news =
 
+Repository head::
+   cvsconvert accept an -A option for authormap and [asses,
+   Minor fix to -kv expansion.
+
 1.48: 2019-04-26::
    cvsconvert now properly escapes branch names in shell commands.
    cvssync can now sync from a local cvs respository.

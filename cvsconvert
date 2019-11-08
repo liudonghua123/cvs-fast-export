@@ -407,7 +407,7 @@ class ConvertComparison:
 
 if __name__ == '__main__':
     import getopt
-    (opts, arguments) = getopt.getopt(sys.argv[1:], "k:npqv")
+    (opts, arguments) = getopt.getopt(sys.argv[1:], "k:npqvA:")
     retain = True
     engine_opts = "-F"
     kexpand = ""
@@ -423,6 +423,8 @@ if __name__ == '__main__':
             engine_opts += " -q"
         elif opt == '-k':
             engine_opts += " -k " + arg
+        elif opt == '-A':
+            engine_opts += " -A " + arg
 
     if not arguments:
         sys.stderr.write("cvsconvert: requires a repo/module argument.\n")
