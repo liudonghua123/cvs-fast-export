@@ -43,8 +43,8 @@ CPPFLAGS += -DVERSION=\"$(VERSION)\"
 CFLAGS += -pthread
 CPPFLAGS += -DTHREADS
 
-# Optimizing for speed. Comment this out for distribution builds
-CFLAGS += -march=native
+# Optimizing for speed. Un-comment for testing Linux build
+#CFLAGS += -march=native
 
 # To enable debugging of the Yacc grammar, uncomment the following line
 #CPPFLAGS += -DYYDEBUG=1
