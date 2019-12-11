@@ -25,7 +25,7 @@ target=$(DESTDIR)$(prefix)
 parsedir:=$(.PARSEDIR)
 srcdir=$(dir $(abspath $(firstword $(MAKEFILE_LIST))))$(parsedir)
 VPATH=$(srcdir)
-mandir?=$(prefix)/share/man
+mandir?=$(DESTDIR)$(prefix)/share/man
 
 INSTALL = install
 TAR = tar
