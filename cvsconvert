@@ -19,7 +19,7 @@ import sys, os, shutil, subprocess, time, filecmp
 try:
     from pipes import quote
 except:
-    from shlex import qoute    
+    from shlex import quote
 
 DEBUG_STEPS    = 1
 DEBUG_COMMANDS = 2
