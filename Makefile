@@ -14,7 +14,7 @@
 # You will see some meaningless failures with git 1.7.1 and older.
 # For documentation, you will need asciidoc, xsltproc and docbook stylesheets.
 #
-# Note: the reason for the .adoc exsentions on README/NEWS/TODO is so they'll
+# Note: the reason for the .adoc extensions on README/NEWS/TODO is so they'll
 # display nicely in GitLab's repsitory-browsing interface.
 
 VERSION=$(shell sed -n <NEWS.adoc '/::/s/^\([0-9][^:]*\).*/\1/p' | head -1)
