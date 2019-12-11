@@ -1,6 +1,7 @@
 = cvs-fast-export project news =
 
 Repository head::
+   Change error messages to modern GCC format.
    cvsconvert accepts an -A option for an authormap.
    Minor fix to -kv expansion.
 

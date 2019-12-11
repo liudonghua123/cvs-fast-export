@@ -74,7 +74,7 @@ load_author_map(const char *filename)
 	    continue;
 	equal = strchr(line, '=');
 	if (!equal) {
-	    announce("\"%s\", line %d: missing '='\n", filename, lineno);
+	    announce("%s:%d: missing '='\n", filename, lineno);
 	    fclose(f);
 	    return false;
 	}
@@ -84,7 +84,7 @@ load_author_map(const char *filename)
 	*equal = '\0';
 	name = atom(line);
 	if (fullname(name)) {
-	    announce("\"%s\", line %d: duplicate username '%s' ignored\n",
+	    announce("%s:%d: duplicate username '%s' ignored\n",
 		     filename, lineno, name);
 	    fclose(f);
 	    return 0;
@@ -93,7 +93,7 @@ load_author_map(const char *filename)
 	a->name = name;
 	angle = strchr(full, '<');
 	if (!angle) {
-	    announce("\"%s\", line %d: missing email address '%s'\n",
+	    announce("%s:%d: missing email address '%s'\n",
 		     filename, lineno, name);
 	    fclose(f);
 	    free(a);
@@ -108,7 +108,7 @@ load_author_map(const char *filename)
 	a->full = atom(full);
 	angle = strchr(email, '>');
 	if (!angle) {
-	    announce("\"%s\", line %d: malformed email address '%s\n",
+	    announce("%s:%d: malformed email address '%s\n",
 		     filename, lineno, name);
 	    fclose(f);
 	    free(a);

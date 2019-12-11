@@ -316,7 +316,7 @@ strings		: IGNORED strings
 void yyerror(yyscan_t scanner, cvs_file *cvs, const char *msg)
 {
     progress_interrupt();
-    fprintf(stderr, "\"%s\", line %d: cvs-fast-export %s on token %s\n",
+    fprintf(stderr, "%s:%d: cvs-fast-export %s on token %s\n",
 	    cvs->export_name, yyget_lineno(scanner),
 	    msg, yyget_text(scanner));
 }
