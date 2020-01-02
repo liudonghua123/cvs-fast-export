@@ -29,10 +29,10 @@ check: test
 ,v.dot:
 	$(CVS_FAST_EXPORT) -g $< >$*.dot
 
-test: s_regress m_regress r_regress i_regress f_regress t_regress c_regress z2_regress z3_regress
+test: s_regress m_regress r_regress i_regress f_regress t_regress c_regress # z2_regress z3_regress
 	@echo "No diff output is good news."
 
-rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild z_rebuild
+rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
 
 testlist:
 	@grep '^##' *.tst *.py
