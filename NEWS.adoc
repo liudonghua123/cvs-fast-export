@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Improvements and bugfixes in the release machinery.
+
 1.49: 2019-12-10::
    Change error messages to modern GCC format.
    cvsconvert accepts an -A option for an authormap.
