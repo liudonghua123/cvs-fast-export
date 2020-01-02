@@ -1,6 +1,6 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.50: 2020-01-02::
    Improvements and bugfixes in the release machinery.
 
 1.49: 2019-12-10::
