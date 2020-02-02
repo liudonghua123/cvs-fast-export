@@ -28,7 +28,10 @@ VPATH=$(srcdir)
 mandir?=$(DESTDIR)$(prefix)/share/man
 
 INSTALL = install
-TAR = tar
+TAR ?= tar
+BISON ?= bison
+FLEX ?= flex
+A2X ?= a2x
 
 GCC_WARNINGS1=-Wall -Wpointer-arith -Wstrict-prototypes
 GCC_WARNINGS2=-Wmissing-prototypes -Wmissing-declarations
@@ -104,12 +107,10 @@ atom.o nodehash.o revcvs.o revdir.o: hash.h
 revdir.o: treepack.c dirpack.c revdir.c
 dump.o export.o graph.o main.o collate.o revdir.o: revdir.h
 
-BISON ?= bison
-
 gram.h gram.c: gram.y
 	$(BISON)  $(YFLAGS) --defines=gram.h --output-file=gram.c $(srcdir)/gram.y
 lex.h lex.c: lex.l
-	flex $(LFLAGS) --header-file=lex.h --outfile=lex.c $(srcdir)/lex.l
+	$(FLEX) $(LFLAGS) --header-file=lex.h --outfile=lex.c $(srcdir)/lex.l
 
 gram.o: gram.c lex.h gram.h
 import.o: import.c lex.h gram.h
@@ -119,9 +120,9 @@ lex.o: lex.c gram.h
 
 # Requires asciidoc and xsltproc/docbook stylesheets.
 .adoc.1:
-	a2x --doctype manpage --format manpage $<
+	$(A2X) --doctype manpage --format manpage $<
 .adoc.html:
-	a2x --doctype manpage --format xhtml -D . $<
+	$(A2X) --doctype manpage --format xhtml -D . $<
 	rm -f docbook-xsl.css
 
 reporting-bugs.html: reporting-bugs.adoc
