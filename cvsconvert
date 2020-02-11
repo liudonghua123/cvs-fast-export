@@ -219,10 +219,10 @@ class CVSCheckout:
             self.repo.run_with_cleanup(cmd)
     def add(self, *filenames):
         "Add a file to the version-controlled set."
-        apply(self.do, ["add"] + list(filenames))
+        self.do(*["add"] + list(filenames))
     def remove(self, *files):
         "Remove a file from the version-controlled set."
-        apply(self.do, ["remove", "-f"] + list(files))
+        self.do(*["remove", "-f"] + list(files))
     def branch(self, branchname):
         "Create a new branch."
         self.do("tag", branchname + "_root")
@@ -248,7 +248,7 @@ class CVSCheckout:
         # succession by scripts; they have race conditions.  This
         # presents misbehavior.
         time.sleep(2)
-        apply(self.do, ["commit", "-m '%s'" % message])
+        self.do(*["commit", "-m '%s'" % message])
     def write(self, fn, content):
         "Create file content in the repository."
         if verbose >= DEBUG_COMMANDS:
