@@ -115,14 +115,14 @@ co.write("f", "different random content")
 co.commit("commit in trunk")
 
 # 5) switch to new branch
-co.outdo("cvs -Q update -r br -kk")
+co.outdo("cvs -Q update -r br")
 
 # 6) modify f, commit in br
 co.write("f", "even more random content")
 co.commit("commit in br")
 
 # 7) switch back to trunk
-co.outdo("cvs -Q -q up -CAd -kk")
+co.outdo("cvs -Q -q up -CAd")
 
 # 8) modify f, commit in trunk
 co.write("f", "even more different random content")
