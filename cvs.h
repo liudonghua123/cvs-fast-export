@@ -508,7 +508,6 @@ typedef struct _import_options {
 
 typedef struct _export_options {
     struct timespec start_time;
-    enum expand_mode id_token_expand;
     char *branch_prefix; 
     time_t fromtime;
     FILE *revision_map;
