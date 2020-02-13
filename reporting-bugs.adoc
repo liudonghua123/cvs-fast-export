@@ -11,7 +11,25 @@ These are relatively simple to fix.  Specify your build environment:
 OS, compiler version, and platform.  Include a transcript of the compiler
 errors.
 
-== Translation errors ==
+== Branch cycle errors ==
+
+Sorry, these are a hard fail.  You may be able to convert with cvs2git.
+
+cvs-fast-export has many advantages over cvs2git. It converts
+.cvsignore files, it sanity-checks tag names, it doesn't generate
+superfluous TAG.FIXUP branches, it delivers an entire well-formed git
+stream that can be fed to git-fast-import directly (rather than two
+disconnected chunks that can't) and it is orders of magnitude faster.
+If you have a choice between these tools, cvs-fast-export will
+almost always do a better and faster job.
+
+Unfortunately, nobody actually understands the core clique-resolution
+logic in cvs-fast-export. Yes, even the person who originally wrote it
+doesn't. Until that changes, there are some limutations that can't be
+fixed.  Whatever causes the "branch cycle error" is the worst of
+these.
+
+== Other translation errors ==
 
 === Reduction ===
 
