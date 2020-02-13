@@ -25,7 +25,7 @@ almost always do a better and faster job.
 
 Unfortunately, nobody actually understands the core clique-resolution
 logic in cvs-fast-export. Yes, even the person who originally wrote it
-doesn't. Until that changes, there are some limutations that can't be
+doesn't. Until that changes, there are some limitations that can't be
 fixed.  Whatever causes the "branch cycle error" is the worst of
 these.
 
