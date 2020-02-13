@@ -1,12 +1,9 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.51: 2020-02-12::
    Keyword expansion default has been changed to match CVS's
    The -k option of cvs-fast-export has been removed.
    Add yet another required warning about time-skew effects.
-
-Repository head::
-   Users can no longer set -k option - it was a footgun.
 
 1.50: 2020-01-02::
    Improvements and bugfixes in the release machinery.
