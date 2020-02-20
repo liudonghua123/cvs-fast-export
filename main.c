@@ -236,8 +236,6 @@ main(int argc, char **argv)
                    "Mandatory arguments to long options are mandatory for short options too.\n"
                    " -h --help                       This help\n"
 		   " -g --graph                      Dump the commit graph\n"
-		   " -k --expand[=MODE]              Enable keyword expansion (default b (old-value, no EOL change))\n"
-		   "                                 valid MODEs are kv, kvl, k, v, o, b\n"
                    " -V --version                    Print version\n"
                    " -w --commit-time-window=WINDOW  Time window for commits(seconds)\n"
 		   " -c --content-only               Don't trust commit-IDs\n"
@@ -344,6 +342,10 @@ main(int argc, char **argv)
 	    export_options.reportmode = fast;
 	    break;
 	case 'S':
+	    print_sizes();
+	    // cppcheck-suppress memleak
+	    return 0;
+	case 'N':
 	    print_sizes();
 	    // cppcheck-suppress memleak
 	    return 0;
