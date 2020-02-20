@@ -138,7 +138,7 @@ static void export_blob(node_t *node,
 
     export_stats.snapsize += len;
 
-    if (strcmp(node->commit->master->name, ".cvsignore") == 0) {
+    if (!noignores && strcmp(node->commit->master->name, ".cvsignore") == 0) {
 	extralen = sizeof(CVS_IGNORES) - 1;
     }
 

@@ -17,7 +17,7 @@ int clock_gettime(clockid_t clock_id, struct timespec *tp)
 }
 #endif
 
-bool nowarn;
+bool nowarn, noignores;
 unsigned int warncount;
 
 
