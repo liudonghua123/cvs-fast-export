@@ -1,0 +1,8 @@
+image: alpine: latest
+
+before_script:
+  - apk update && apk add python cvs pylint cppcheck shellcheck
+
+test:
+  script:
+  - make CONCURRENT_JOBS=4 -k validate check
