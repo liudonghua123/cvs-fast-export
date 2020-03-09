@@ -66,4 +66,3 @@ cc.command_returns("cd t9604-git >/dev/null; git log --format='%s %ai %an'", cor
 os.remove(afp.name)
 afp.close()
 cc.cleanup()
-

@@ -39,7 +39,7 @@
 # running multithreaded.  This is due to commits with identical timestamps
 # being canonicalized backwards from their topo order.
 
-import os, sys, testlifter
+import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")
 repo = testlifter.CVSRepository("t9601.testrepo")
@@ -48,7 +48,7 @@ repo.convert("module", "t9601.git", more_opts="-F")
 
 # Check a file that was imported once
 testlifter.expect_same("t9601.checkout/imported-once.txt",
-                    "t9601.git/imported-once.txt")
+                       "t9601.git/imported-once.txt")
 
 # Check a file that was imported twice
 testlifter.expect_same("t9601.checkout/imported-twice.txt",
@@ -71,4 +71,3 @@ testlifter.expect_same("t9601.checkout/imported-anonymously.txt",
                        "t9601.git/imported-anonymously.txt")
 
 co.cleanup()
-

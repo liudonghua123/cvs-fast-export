@@ -138,11 +138,14 @@ clean:
 	rm -f MANIFEST index.html *.tar.gz
 	rm -f *.gcno *.gcda
 
+validate:
+	make EXTRA=-q cppcheck pylint
+	shellcheck -f gcc tests/gitwash tests/setpython testst/visualize
+
 # Warning: The regression tests will fail spuriously if your CVS lacks the
 # MirOS patches.  These are carried by Debian Linux and derivatives; you can
 # check by Looking for "MirDebian" in the output of cvs --version.
 check: cvs-fast-export
-	make EXTRA=-q cppcheck pylint
 	@[ -d tests ] || mkdir tests
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
 
@@ -182,9 +185,9 @@ cppcheck:
 PYLINTOPTS = --rcfile=/dev/null --reports=n \
 	--msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" \
 	--dummy-variables-rgx='^_'
-PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0413,R0201,R0912,R0913,R0914,W0142,W0221,W0621"
+PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0411,C0413,E1305,R0201,R0801,R0912,R0913,R0914,W0142,W0221,W0621"
 pylint:
-	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsreduce
+	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsreduce tests/*.py
 
 # Because we don't want copies of the test repositories in the distribution.
 distclean: clean
