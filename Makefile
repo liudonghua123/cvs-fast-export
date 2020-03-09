@@ -142,6 +142,7 @@ clean:
 # MirOS patches.  These are carried by Debian Linux and derivatives; you can
 # check by Looking for "MirDebian" in the output of cvs --version.
 check: cvs-fast-export
+	make EXTRA=-q cppcheck pylint
 	@[ -d tests ] || mkdir tests
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
 
@@ -176,12 +177,12 @@ CSUPPRESSIONS = -U__UNUSED__ -UYYPARSE_PARAM -UYYTYPE_INT16 -UYYTYPE_INT8 \
 	-U_SC_NPROCESSORS_ONLN -Ushort -Usize_t -Uyytext_ptr \
 	-Uyyoverflow -U__cplusplus -U__APPLE__ -DCLOCK_REALTIME=0
 cppcheck:
-	cppcheck -I. --template $(CC) --enable=all $(CSUPPRESSIONS) --suppress=unusedStructMember --suppress=unusedFunction --suppress=unreadVariable --suppress=uselessAssignmentPtrArg --suppress=missingIncludeSystem --inline-suppr *.[ch]
+	cppcheck -I. --template $(CC) --enable=all $(CSUPPRESSIONS) --suppress=unusedStructMember --suppress=unusedFunction --suppress=unreadVariable --suppress=uselessAssignmentPtrArg --suppress=missingIncludeSystem $(EXTRA) --inline-suppr *.[ch]
 
 PYLINTOPTS = --rcfile=/dev/null --reports=n \
 	--msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" \
 	--dummy-variables-rgx='^_'
-PYSUPPRESSIONS = --disable="C0103,C0301,C0325,R0912,W0142"
+PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0413,R0201,R0912,R0913,R0914,W0142,W0221,W0621"
 pylint:
 	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsreduce
 

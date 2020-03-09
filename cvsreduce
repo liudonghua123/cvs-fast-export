@@ -41,19 +41,17 @@ verbose = 0
 # Any encoding that preserves 0x80...0x8f through round-tripping from byte
 # streams to Unicode and back would do, latin-1 is the best known of these.
 
-import io
-
 binary_encoding = 'latin-1'
 
 if str is bytes:  # Python 2
-    
+
     polystr = str
     polybytes = bytes
     polyord = ord
     polychr = str
 
 else:  # Python 3
-    
+
     def polystr(o):
         if isinstance(o, str):
             return o
@@ -72,22 +70,20 @@ else:  # Python 3
         "Polymorphic ord() function"
         if isinstance(c, str):
             return ord(c)
-        else:
-            return c
+        return c
 
     def polychr(c):
         "Polymorphic chr() function"
         if isinstance(c, int):
             return chr(c)
-        else:
-            return c
+        return c
 
     def make_std_wrapper(stream):
         "Standard input/output wrapper factory function"
         # This ensures that the encoding of standard output and standard
         # error on Python 3 matches the binary encoding we use to turn
         # bytes to Unicode in polystr above
-        
+
         # newline="\n" ensures that Python 3 won't mangle line breaks
         # line_buffering=True ensures that interactive command sessions work as expected
         return io.TextIOWrapper(stream.buffer, encoding=binary_encoding, newline="\n", line_buffering=True)
