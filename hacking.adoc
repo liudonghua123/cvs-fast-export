@@ -685,7 +685,8 @@ if it's not in the list on cvs-fast-export.adoc, it needs to be.
 
 When modifying this code, run the regression tests (make check) early
 and often.  It is very easy to break even with apparently innocuous
-changes.
+changes.  You will want to have cppcheck, pylint, and shellcheck
+installed for full code validation.
 
 If you find a bug and fix it, please try to create a toy repo exhibiting
 the problem - or, better yet, a minimal set of operations to reproduce
