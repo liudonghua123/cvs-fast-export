@@ -6,7 +6,7 @@ before_script:
   - apt-get update
   - apt-get -qy upgrade
   - apt-get -qy install tzdata
-  - apt-get -y --no-install-recommends install make grep sed gcc bison flex python git rcs cvs pylint cppcheck shellcheck
+  - apt-get -y install make grep sed gcc bison flex python git rcs cvs pylint cppcheck shellcheck
 
 test:
   script:
