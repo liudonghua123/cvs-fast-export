@@ -422,7 +422,7 @@ child commit emitted before parent exists::
      been processed in the wrong order). The -F option prevents such
      pairs from being emitted in the wrong order, at the cost of
      producing a commit and blob ordering very different from that
-     of git-fast-export..
+     of git-fast-export.
 
 tag could not be assigned to a commit::
      RCS/CVS tags are per-file, not per revision. If developers are not

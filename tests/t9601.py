@@ -35,8 +35,8 @@
 #       Like imported-twice.txt, but with a vendor branch whose branch
 #       tag has been removed.
 #
-# Note: Without the -F option this test has intermittent failures when
-# running multithreaded.  This is due to commits with identical timestamps
+# Note: Without the -t 0 option this test has intermittent failures.
+# This is due to commits with identical timestamps
 # being canonicalized backwards from their topo order.
 
 import sys, testlifter
@@ -44,7 +44,7 @@ import sys, testlifter
 testlifter.verbose += sys.argv[1:].count("-v")
 repo = testlifter.CVSRepository("t9601.testrepo")
 co = repo.checkout("module", "t9601.checkout")
-repo.convert("module", "t9601.git", more_opts="-F")
+repo.convert("module", "t9601.git", more_opts="-t 0")
 
 # Check a file that was imported once
 testlifter.expect_same("t9601.checkout/imported-once.txt",
