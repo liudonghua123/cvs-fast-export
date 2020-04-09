@@ -354,7 +354,7 @@ export_commit(git_commit *commit, const char *branch,
     /* Perform a merge join between files in commit and files in parent commit
      * to determine modified (including new) and deleted files  between commits.
      * This works because files are sorted by path_deep_compare order
-     * The merge join also preseves this order, removing the need to sort
+     * The merge join also preserves this order, removing the need to sort
      * operations once generated.
      */
     REVDIR_ITER_START(commit_iter, &commit->revdir);
