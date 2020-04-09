@@ -1,7 +1,9 @@
 image: ubuntu:latest
 
 before_script:
-  - apt install python cvs pylint cppcheck shellcheck
+  - apt-get update
+  - apt-get upgrade
+  - apt-get install python cvs pylint cppcheck shellcheck
 
 test:
   script:
