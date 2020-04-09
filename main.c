@@ -227,7 +227,7 @@ main(int argc, char **argv)
 	    { "noignores",          0, 0, 'N' },	/* undocumented */
 	    { NULL,                 0, 0, '\0'}, 
 	};
-	int c = getopt_long(argc, argv, "+hVw:cl:grvqaA:R:Tk:e:s:pPi:t:CFSE", options, NULL);
+	int c = getopt_long(argc, argv, "+hVw:cl:grvqaA:R:Tk:e:s:pPi:t:CFSEN", options, NULL);
 	if (c < 0)
 	    break;
 	switch(c) {
