@@ -1,6 +1,8 @@
 # Makefile for cvs-fast-export
 #
-# Build requirements: A C compiler, bison 3.x.x, flex, and asciidoc.
+# Build requirements:  Read the "buildprep" script.
+# You may be able to run that to install all dependencies.
+#
 # The C compiler must support anonymous unions (GNU, clang, C11).
 #
 # If you get a link error complaining that clock_gettime() can't be
@@ -9,10 +11,7 @@
 # or older and Debian Wheezy or older.  Alas, we can't unconditionally
 # include -lrt because Darwin.
 #
-# The test suite requires Python 2.6, RCS, and CVS installed.
-#
 # You will see some meaningless failures with git 1.7.1 and older.
-# For documentation, you will need asciidoc, xsltproc and docbook stylesheets.
 #
 # Note: the reason for the .adoc extensions on README/NEWS/TODO is so they'll
 # display nicely in GitLab's repsitory-browsing interface.
@@ -118,7 +117,7 @@ lex.o: lex.c gram.h
 
 .SUFFIXES: .html .adoc .txt .1
 
-# Requires asciidoc and xsltproc/docbook stylesheets.
+# Requires asciidoc
 .adoc.1:
 	$(A2X) --doctype manpage --format manpage $<
 .adoc.html:
@@ -191,7 +190,7 @@ pylint:
 distclean: clean
 	cd tests; $(MAKE) --quiet clean
 
-SOURCES = Makefile *.[ch] *.[yl] cvssync cvsconvert cvsreduce
+SOURCES = Makefile *.[ch] *.[yl] cvssync cvsconvert cvsreduce buildprep
 DOCS = control *.adoc cfe-logo.png
 ALL =  $(SOURCES) $(DOCS) tests
 cvs-fast-export-$(VERSION).tar.gz: $(ALL)

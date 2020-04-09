@@ -1,0 +1,228 @@
+#!/bin/sh
+#
+# buildprep - prepare your system for a cvs-fast-export source build.
+#
+# Use the -n option to dry-run this command, showing what would be done
+# without actually doing it
+#
+# This script swiped from NTPsec.
+
+# Set the defaults
+DRYRUN="no"
+DOC="no"
+
+OS=`uname -s`
+
+# Loop through option flags
+for optflag in "$@"
+do
+	case "$optflag" in
+	 -h|--help)
+		cat <<EOF
+$0 - prepare your system for an NTPsec source build
+
+  Options:
+    -h --help    Show usage information and exit
+    -n --dry-run Only show what would be done instead of doing it
+       --doc     Install dependencies for building documentation
+    -a --all     Install all possible dependencies
+EOF
+		exit 0
+		;;
+	 -n|--dry-run)
+		DRYRUN="yes"
+		;;
+	 --doc)
+		DOC="yes"
+		;;
+	 -a|--all)
+		DOC="yes"
+		;;
+	 *)
+		echo "# WARNING: Unknown argument: $optflag"
+		echo "#"
+		;;
+	esac
+done
+
+cat <<EOF
+# Preparing your system for cvs-fast-export source build...
+# This script presently knows about:
+#   Ubuntu (and POP_OS)
+#
+# It has some stub code for other systems; please fill that in if you
+# can and send us an MR.
+#
+# If you are running something else, such as macOS or Solaris, please
+# read the source for this buildprep script to get an idea of what packages
+# are required.
+#
+EOF
+
+if [ "$DRYRUN" = "yes" ]
+then
+	do=echo
+	echo "# Run this without -n|--dry-run, as root, for actual installation."
+	echo "#You may want to run an update from your package inddex first."
+	echo "#"
+else
+	do=""
+	if [ "$(id -u)" != 0 ]
+	then
+		echo "# ERROR: You must be running as root for your installer to do its thing."
+		echo "# ERROR: If you just wish to see what would be done, use the -n option."
+		exit 1
+	fi
+fi
+
+if emerge --version 2>/dev/null
+then
+    installer=emerge
+    install="$do $installer -q y"
+elif yum version 2>/dev/null
+then
+    installer=yum
+    install="$do $installer -y install"
+elif dnf --version >/dev/null 2>&1
+then
+    installer=dnf
+    install="$do $installer -y install"
+elif apt-get --version >/dev/null 2>&1
+then
+    installer=apt
+    install="$do apt-get install -qy"
+elif zypper -h >/dev/null 2>&1
+then
+    # OpenSUSE prefers zypper over yast
+    installer=zypper
+    install="$do $installer install -y"
+elif yast -h >/dev/null 2>&1
+then
+    installer=yast
+    install="$do $installer --install"
+elif  apk --version >/dev/null 2>&1
+then
+    # Alpine Linux, musl rather than glibc
+    installer=apk
+    install="$do $installer add"
+elif test "$OS" = "NetBSD"
+then
+  if pkgin -v
+  then
+    # NetBSD binary package installer
+    installer=pkgin
+    install="$do $installer install"
+  else
+    echo "## Looks like a NetBSD system"
+    echo "## You need to setup pkgin"
+    echo "## The last page of install disk has a check-box to do it"
+    echo "## But you don't get that option on a Raspberry Pi."
+    echo "## For the Pi, do something like:"
+    echo "## pkg_add ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/earmv7hf/8.0/All/pkgin-0.9.4nb8.tgz"
+    echo "## Adjust the version and arch to match your setup."
+    exit 1
+  fi
+elif test "$OS" = "FreeBSD"
+then
+  if pkg -v
+  then
+    # FreeBSD binary package installer
+    installer=pkg
+    install="$do $installer install"
+  fi
+else
+    echo "# ERROR: Package manager unidentified - Unsupported operating system"
+    exit 1
+fi
+echo "# Your package installer is ${installer}."
+echo ""
+
+main () {
+    # Prerequisites to build the daemon: bison, pps-tools, service libraries
+    case $installer in
+	apk)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	apt)
+	    # tzdata needs to be installed explicitly so it won't try an interactive
+	    # condfiguration when pulled as a dependency.  This package doesn't care
+	    # whethe your Python is 2.x or 3.x.
+	    $install tzdata
+	    $install make grep sed gcc bison flex python git rcs cvs pylint cppcheck shellcheck
+	    ;;
+	emerge)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	pkgin)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	pkg)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	yum|dnf)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	yast)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+	zypper)
+	    echo "Not yet supported" >&2
+	    exit 1
+	    ;;
+    esac
+}
+
+doc () {
+	# prerequisites to build documentation
+	case $installer in
+	 apk)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	 apt)
+	     $install asciidoc
+	     ;;
+	 emerge)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	 pkgin)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	 pkgin)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	 pkg)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	 yast|zypper)
+	     echo "Not yet supported" >&2
+	     exit 1
+	     ;;
+	esac
+}
+
+# Main sequence
+main
+
+if [ "$DOC" = "yes" ]
+then
+	doc
+else
+	echo ""
+	echo "# Skipping documentation dependencies [--doc]"
+fi
+
+echo ""
+echo "# Done."
+
+# end

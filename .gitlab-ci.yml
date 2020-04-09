@@ -1,10 +1,12 @@
 image: ubuntu:latest
 
+# tzdata has to be installed separately and early to avoid it trying
+# to do manual zone configuration.
 before_script:
   - apt-get update
-  - apt-get -y upgrade
-  - apt-get -y install tzdata
-  - apt-get -y install make grep sed gcc bison flex python git rcs cvs pylint cppcheck shellcheck
+  - apt-get -qy upgrade
+  - apt-get -qy install tzdata
+  - apt-get -y --no-install-recommends install make grep sed gcc bison flex python git rcs cvs pylint cppcheck shellcheck
 
 test:
   script:
