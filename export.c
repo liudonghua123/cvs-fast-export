@@ -449,7 +449,9 @@ export_commit(git_commit *commit, const char *branch,
 		char path[PATH_MAX];
 		char *fn = blobfile(op2->path, op2->rev->serial, false, path);
 		FILE *rfp = fopen(fn, "r");
-		if (rfp) {
+		if (rfp == NULL) {
+		    warn("content for %s at %d is missing\n", op2->path, mark);
+		} else {
 		    char buf[BUFSIZ];
 		    printf("blob\nmark :%d\n", (int)mark);
 
