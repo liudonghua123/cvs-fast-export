@@ -3,7 +3,7 @@ image: ubuntu:latest
 before_script:
   - apt-get update
   - apt-get -y upgrade
-  - apt-get -y install python cvs pylint cppcheck shellcheck
+  - apt-get -y install make gcc python cvs pylint cppcheck shellcheck
 
 test:
   script:
