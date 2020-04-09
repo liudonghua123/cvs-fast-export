@@ -38,7 +38,7 @@ testlist:
 	@grep '^##' *.tst *.py *.sh
 
 neutralize.map:
-	@echo "$${USER} = foo <foo> -0500" >neutralize.map
+	@echo "$${USER:-root} = foo <foo> -0500" >neutralize.map
 
 TESTLOADS := $(shell ls -1 *.tst | sed '/.tst/s///')
 TESTOPTS = -T -A neutralize.map --reposurgeon
