@@ -327,6 +327,7 @@ main(int argc, char **argv)
 	case 'i':
 	    assert(optarg);
 	    export_options.fromtime = convert_date(optarg);
+	    noignores = true;
 	    break;
 	case 't':
 #ifdef THREADS

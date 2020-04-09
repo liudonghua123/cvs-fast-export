@@ -463,6 +463,8 @@ export_commit(git_commit *commit, const char *branch,
 	printf("mark :%d\n", (int)mark);
     if (report) {
 	static bool need_ignores = true;
+	if (noignores)
+	    need_ignores = false;
 	const char *ts;
 	ct = display_date(commit, mark, opts->force_dates);
 	ts = utc_offset_timestamp(&ct, timezone);

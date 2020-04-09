@@ -220,12 +220,12 @@ option sets promiscuous mode, disabling both checks.
 
 -i 'date'::
 Enable incremental-dump mode. Only commits with a date after that
-specified by the argument are emitted. Each branch root in the 
-incremental dump is decorated with git-stream magic which, when
-interpreted in context of a live repository, will connect that branch 
-to any branch of the same name.  The date is expected to be RFC3339
-conformant (e.g. yy-mm-ddThh:mm:ssZ) or else an integer Unix time
-in seconds.
+specified by the argument are emitted. Disables inclusion of default
+ignores. Each branch root in the incremental dump is decorated with
+git-stream magic which, when interpreted in context of a live
+repository, will connect that branch to any branch of the same name.
+The date is expected to be RFC3339 conformant
+(e.g. yy-mm-ddThh:mm:ssZ) or else an integer Unix time in seconds.
 
 If neither -F nor -C is specified, cvs-fast-export will choose a mode
 based on the repository size - canonical order for small repositories,

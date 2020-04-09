@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Incremental mode supprsses generation of defaults ignores.
+
 1.51: 2020-02-12::
    Keyword expansion default has been changed to match CVS's
    The -k option of cvs-fast-export has been removed.
