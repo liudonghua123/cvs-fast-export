@@ -37,6 +37,7 @@ rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
 testlist:
 	@grep '^##' *.tst *.py *.sh
 
+# USER may not actually be defined inside CI; in that case we assume root.
 neutralize.map:
 	@echo "$${USER:-root} = foo <foo> -0500" >neutralize.map
 
