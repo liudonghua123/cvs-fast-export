@@ -7,7 +7,6 @@
 #ifndef _CVS_H_
 #define _CVS_H_
 
-#include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>

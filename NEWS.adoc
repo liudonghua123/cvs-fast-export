@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Introduction of buildprep to make fetting prerequisites easy.
+
 1.52: 2020-04-09::
    Incremental mode supprsses generation of defaults ignores.
    The -F and -C mode switches are gone; output is now always mode -C.
