@@ -25,6 +25,7 @@ then
 	echo "$0: PASSED"
     else
 	echo "$0: FAILED"
+	exit 1
     fi
 fi
 
