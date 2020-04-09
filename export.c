@@ -343,7 +343,7 @@ visualize_branch_name(const char *name)
 {
     if (name == NULL) {
 	return "null";
-	announce("null branch name, probably from a damaged Attic file\n");
+	warn("null branch name, probably from a damaged Attic file\n");
     } else
 	return name;
 }
@@ -790,7 +790,7 @@ void export_commits(forest_t *forest,
     for (hp = history; hp < history + export_stats.export_total_commits; hp++) {
 	if (hp->commit->parent && hp->commit->parent->date > hp->commit->date) {
 	    sortable = false;
-	    announce("some parent commits are younger than children.\n");
+	    warn("some parent commits are younger than children.\n");
 	    break;
 	}
     }
