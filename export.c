@@ -757,7 +757,6 @@ void export_commits(forest_t *forest,
 				  forest->total_revisions + export_stats.export_total_commits + 1,
 				  "markmap allocation");
 
-    /* export_blob() touches markmap when in fast mode */
     progress_begin("Generating snapshots...", forest->filecount);
     for (gp = forest->generators; 
 	 gp < forest->generators + forest->filecount;
