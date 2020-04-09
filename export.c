@@ -182,9 +182,15 @@ static void export_blob(node_t *node,
     }
 
     node->commit->serial = seqno_next();
-    FILE *wfp;
 
+    /*
+     * FIXME: Someday, avoid this I/O when incremental-dumping.  For
+     * some unknown reason the obvious test opts->fromtime <
+     * node->commit->date fails - emits too few blobs - but only
+     * if the -T option is not used. See test/badincr.sh
+     */
     char path[PATH_MAX];
+    FILE *wfp;
     blobfile(node->commit->master->name, node->commit->serial, true, path);
     wfp = fopen(path, "w");
 

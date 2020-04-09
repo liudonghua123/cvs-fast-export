@@ -29,13 +29,13 @@ check: test
 ,v.dot:
 	$(CVS_FAST_EXPORT) -g $< >$*.dot
 
-test: s_regress m_regress r_regress i_regress t_regress c_regress # z2_regress z3_regress
+test: s_regress m_regress r_regress i_regress t_regress c_regress sporadic # z2_regress z3_regress
 	@echo "No diff output is good news."
 
 rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
 
 testlist:
-	@grep '^##' *.tst *.py
+	@grep '^##' *.tst *.py *.sh
 
 neutralize.map:
 	@echo "$${USER} = foo <foo> -0500" >neutralize.map
@@ -152,6 +152,10 @@ z3_regress:
 	setpython python3
 	make z_regress
 	setpython python
+
+sporadic:
+	@echo "== Sporadic tests =="
+	@sh incremental.sh
 
 clean:
 	rm -fr neutralize.map *.checkout *.repo *.pyc *.dot *.git *.git.fi
