@@ -476,13 +476,13 @@ export_commit(git_commit *commit, const char *branch,
 	    printf("data %zd\n%s\n%s\n", strlen(commit->log) + strlen(revpairs) + 1,
 		commit->log, revpairs);
 	if (commit->parent) {
-	    if (markmap[commit->parent->serial] > 0) 
-		printf("from :%d\n", (int)markmap[commit->parent->serial]);
-	    else
+	    if (markmap[commit->parent->serial] <= 0) 
 	    {
 		cleanup(opts);
 		fatal_error("child commit emitted before parent exists");
 	    }
+	    else if (opts->fromtime < commit->parent->date)
+		printf("from :%d\n", (int)markmap[commit->parent->serial]);
 	}
 
 	for (op2 = operations; op2 < op; op2++)
