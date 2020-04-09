@@ -7,4 +7,5 @@ before_script:
 
 test:
   script:
+  - echo "Running as ${USER:-root}"
   - make check
