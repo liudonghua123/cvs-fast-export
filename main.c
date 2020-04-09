@@ -220,14 +220,12 @@ main(int argc, char **argv)
             { "promiscuous",        0, 0, 'P' },
             { "incremental",        1, 0, 'i' },
             { "threads",	    1, 0, 't' },
-            { "canonical",          0, 0, 'C' },
-            { "fast",               0, 0, 'F' },
             { "embed-id",           0, 0, 'E' },
 	    { "sizes",              0, 0, 'S' },	/* undocumented */
 	    { "noignores",          0, 0, 'N' },	/* undocumented */
 	    { NULL,                 0, 0, '\0'}, 
 	};
-	int c = getopt_long(argc, argv, "+hVw:cl:grvqaA:R:Tk:e:s:pPi:t:CFSEN", options, NULL);
+	int c = getopt_long(argc, argv, "+hVw:cl:grvqaA:R:Tk:e:s:pPi:t:SEN", options, NULL);
 	if (c < 0)
 	    break;
 	switch(c) {
@@ -336,12 +334,6 @@ main(int argc, char **argv)
 #else
 	    announce("not built with thread support, -t option ignored.\n");
 #endif
-	    break;
-	case 'C':
-	    export_options.reportmode = canonical;
-	    break;
-	case 'F':
-	    export_options.reportmode = fast;
 	    break;
 	case 'S':
 	    print_sizes();

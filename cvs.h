@@ -514,7 +514,6 @@ typedef struct _export_options {
     bool reposurgeon;
     bool embed_ids;
     bool force_dates;
-    enum {adaptive, fast, canonical} reportmode;
     bool authorlist;
     bool progress;
 } export_options_t;

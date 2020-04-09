@@ -29,7 +29,7 @@ check: test
 ,v.dot:
 	$(CVS_FAST_EXPORT) -g $< >$*.dot
 
-test: s_regress m_regress r_regress i_regress f_regress t_regress c_regress # z2_regress z3_regress
+test: s_regress m_regress r_regress i_regress t_regress c_regress # z2_regress z3_regress
 	@echo "No diff output is good news."
 
 rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
@@ -83,22 +83,6 @@ i_regress: neutralize.map
 	    echo -n "  $${file} "; grep -a '##' $${file}.tst  || echo ' ## (no description)'; \
 	    $(MAKE) --quiet $${file}.repo; \
 	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | $(DIFF) $${file}.inc-chk -; \
-	done
-
-# Alas, this produces false failures on branchy repos because of some
-# wacky nondeterminism in the git tools.  Thus we can only test
-# repeatably on linear ones.  There's also some wacky non-idempotency
-# in how git handles timezones.
-LINEAR = basic expand hack1 hack2 hack3 linear longrev twotag
-f_regress: neutralize.map
-	@echo "== Fast format compatibility =="
-	@-for file in $(LINEAR); do \
-	    echo -n "  $${file} "; grep -a '##' $${file}.tst  || echo ' ## (no description)'; \
-	    $(MAKE) --quiet $${file}.repo; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -C -T -A neutralize.map 2>&1 | ./gitwash >canonical$$; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -F -T -A neutralize.map 2>&1 | ./gitwash >fast$$; \
-	    $(DIFF) canonical$$ fast$$; \
-	    rm canonical$$ fast$$; \
 	done
 
 REDUCED=oldhead

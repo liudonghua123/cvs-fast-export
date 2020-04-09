@@ -2,6 +2,7 @@
 
 Repository head::
    Incremental mode supprsses generation of defaults ignores.
+   The -F and -C mode switches are gone; output is now always mode -C.
 
 1.51: 2020-02-12::
    Keyword expansion default has been changed to match CVS's

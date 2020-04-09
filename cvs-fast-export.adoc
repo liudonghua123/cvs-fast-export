@@ -6,7 +6,7 @@ cvs-fast-export - fast-export history from a CVS repository or RCS collection.
 
 == SYNOPSIS ==
 *cvs-fast-export*
-    [-h] [-C] [-F] [-a] [-w 'fuzz'] [-g] [-l] [-v] [-q] [-V] [-T] [-p] [-P]
+    [-h] [-a] [-w 'fuzz'] [-g] [-l] [-v] [-q] [-V] [-T] [-p] [-P]
     [-i 'date'] [-k 'expansion'] [-A 'authormap'] [-t threads]
     [-R 'revmap'] [--reposurgeon] [-e 'remote'] [-s 'stripprefix']
 
@@ -128,17 +128,6 @@ with the -p option.
 -a::
 Dump a list of author IDs found in the repository, rather than fast-exporting.
 
--C::
-Force canonical order (same as git-fast-export's) in the emitted
-stream. Blobs are emitted as late as possible before the commits that
-require them. This option reduces throughput by about a factor of two.  Repositories
-in which the time order of commits is inconsistent with their
-topological order will produce malformed fast-export streams in -C
-mode; these will crash Git's importer.
-
--F::
-Force fast order. Blobs are emitted first, then commits.
-
 -A 'authormap'::
 Apply an author-map file to the attribution lines. Each line must be
 of the form
@@ -227,11 +216,6 @@ repository, will connect that branch to any branch of the same name.
 The date is expected to be RFC3339 conformant
 (e.g. yy-mm-ddThh:mm:ssZ) or else an integer Unix time in seconds.
 
-If neither -F nor -C is specified, cvs-fast-export will choose a mode
-based on the repository size - canonical order for small repositories,
-fast for large ones.  Tools that consume git-fast-import streams should not
-care; this behavior is for backward compatibility.
-
 == EXAMPLE ==
 A very typical invocation would look like this:
 
@@ -264,15 +248,13 @@ cvs-fast-export will try to warn you about these cases rather than
 silently producing broken or incomplete translations, but there be
 dragons. We recommend some precautions under SANITY CHECKING.
 
-Timestamps from CVS histories are not very reliable - assume any
-individual one can be off by up to 24 hours in a random direction,
-and do not assume that timestamp order in the converted repository.
-CVS made them on the client side rather than at the server; this
-makes them subject to local clock skew, timezone, and DST issues.
+Timestamps from CVS histories are not very reliable - CVS made them on
+the client side rather than at the server; this makes them subject to
+local clock skew, timezone, and DST issues.
 
-Time-skew effects cobined with the way $-headers have to be expanded
+Time-skew effects combined with the way $-headers have to be expanded
 to be compatible with CVS's also imoly that if you have $-headers in
-your code they may mot be expanded identically in a tag checkout
+your code they may not be expanded identically in a tag checkout
 from git to the way they were in the corresponding CVS revisions.
 
 CVS-NT and versions of GNU CVS after 1.12 (2004) added a changeset
@@ -356,7 +338,7 @@ certain not to with 64GB.  Attempts to do large conversions in only a
 32-bit (4GB) address space are, on the other hand, unlikely to end
 well.
 
-The program's transient storage requirements can be quite a bit
+The program's transient RAM requirements can be quite a bit
 larger; it must slurp in each entire master file once in order to
 do delta assembly and generate the version snapshots that will 
 become snapshots.  Using the -t option multiplies the expected amount
@@ -364,11 +346,10 @@ of transient storage required by the number of threads; use with
 care, as it is easy to push memory usage so high that swap overhead
 overwhelms the gains from not constantly blocking on I/O.
 
-In -C mode, the program also requires temporary disk space equivalent
-to the sum of the sizes of all revisions in all files.  This is not so
-in -F mode.
+The program also requires temporary disk space equivalent
+to the sum of the sizes of all revisions in all files.
 
-On stock PC hardware in 2014, cvs-fast-export achieves processing
+On stock PC hardware in 2020, cvs-fast-export achieves processing
 speeds upwards of 64K CVS commits per minute on real repositories.
 Time performance is primarily I/O bound and can be improved by running
 on an SSD.
@@ -417,12 +398,12 @@ fatal: internal error - duplicate key in red black tree::
 
 child commit emitted before parent exists::
      Skew in client timestamps produced a situation in which time
-     order of parent and child commits is backwards (or, if you are
-     running multithreaded, timestamps are the same and happen to have
-     been processed in the wrong order). The -F option prevents such
-     pairs from being emitted in the wrong order, at the cost of
-     producing a commit and blob ordering very different from that
-     of git-fast-export.
+     order of parent and child commits is backwards.  If you are
+     running multithreaded, this probably means two CVS commits with
+     identical timestamps were randomly processed in the wrong order;
+     try forcing single-thread operation wuth -t 0. If the error
+     recurs with -t 0, this indicates a serious metadata malformation
+     or cvs-fast-export bug and should be reportedvto the maintainers.
 
 tag could not be assigned to a commit::
      RCS/CVS tags are per-file, not per revision. If developers are not

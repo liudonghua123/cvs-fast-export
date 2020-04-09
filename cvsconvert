@@ -408,7 +408,7 @@ if __name__ == '__main__':
     import getopt
     (opts, arguments) = getopt.getopt(sys.argv[1:], "k:npqvA:")
     retain = True
-    engine_opts = "-F"
+    engine_opts = ""
     kexpand = ""
     quiet = False
     for (opt, arg) in opts:
