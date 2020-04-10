@@ -7,9 +7,8 @@ rendered this way; the program tries to emit useful warnings when it
 can't.  The program can also produce a visualization of the resulting
 commit DAG in the DOT format handled by the graphviz suite.
 
-Source-build prerequisites are explained in the toplevel "buildprep"
-script, which you you should read and may be able to run to get all
-the packages you need installed.
+Build prerequisites are explained in the toplevel "buildprep" script,
+which you may be able too run to get all the packages you need.
 
 This program could have been called rcs-fast-export with equal
 appropriateness; the cvs-fast-export name was chosen to avoid
