@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+1.53: 2020-04-10::
+   A new 'buildprep' script makes installation from source easier.
+
 1.52: 2020-04-09::
    Incremental mode supprsses generation of defaults ignores.
    The -F and -C mode switches are gone; output is now always mode -C.
