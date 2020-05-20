@@ -11,6 +11,23 @@ These are relatively simple to fix.  Specify your build environment:
 OS, compiler version, and platform.  Include a transcript of the compiler
 errors.
 
+== Stack-smashing errors ==
+
+If you get a crash message that says
+
+------------------------------------------
+*** stack smashing detected ***: terminated
+------------------------------------------
+
+you probably have revision identifiers with more branch elements than
+a stock build of cvs-fast-export can handle.  The limit is set by the
+symbol CVS_MAX_BRANCHWIDTH in cvs.h and is normally 10. Try increasing
+it.
+
+The reason the default isn't higher is that increasing this limit
+blows up the program's working-set size. You'll know you've pushed ut
+too far if the program OOMs.
+
 == Branch cycle errors ==
 
 Sorry, these are a hard fail.  You may be able to convert with cvs2git.
@@ -28,7 +45,6 @@ logic in cvs-fast-export. Yes, even the person who originally wrote it
 doesn't. Until that changes, there are some limitations that can't be
 fixed.  Whatever causes the "branch cycle error" is the worst of
 these.
-
 == Other translation errors ==
 
 === Reduction ===
