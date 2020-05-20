@@ -1,12 +1,12 @@
 #!/bin/sh
 ## Test commit and blovb filtering with --
 out="/tmp/incremental-out-$$"
-mode=test
 while getopts os opt
 do
     case $opt in
 	o) out=/dev/stdout;;
 	s) opts="-t 0";;
+	*) echo "$0: unknown option $opt" ;;
     esac
 done
 # shellcheck disable=SC2004
@@ -14,8 +14,10 @@ shift $(($OPTIND - 1))
 
 trap '[ $out != /dev/stdout ] && rm -f $out' EXIT HUP INT QUIT TERM
 
+# shellcheck disable=SC2006
 idate=$(date -u -d"`rlog -r1.1.2.2 twobranch.repo/module/README,v | grep date | sed "s/date: \(.*\)\;  author.*/\1/"`" +%s)
-find twobranch.repo/ -name "*,v" | cvs-fast-export $opts -i `expr $idate - 1` >$out
+# shellcheck disable=SC2003,SC2046,SC2086
+find twobranch.repo/ -name "*,v" | cvs-fast-export $opts -i $(expr $idate - 1) >$out
 
 if [ "$out" != /dev/stdout ]
 then

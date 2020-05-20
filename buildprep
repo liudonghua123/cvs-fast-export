@@ -11,7 +11,7 @@
 DRYRUN="no"
 DOC="no"
 
-OS=`uname -s`
+OS=$(uname -s)
 
 # Loop through option flags
 for optflag in "$@"
@@ -61,6 +61,7 @@ EOF
 
 if [ "$DRYRUN" = "yes" ]
 then
+        # shellcheck disable=SC2209
 	do=echo
 	echo "# Run this without -n|--dry-run, as root, for actual installation."
 	echo "#You may want to run an update from your package inddex first."
@@ -196,11 +197,11 @@ doc () {
 	     echo "Not yet supported" >&2
 	     exit 1
 	     ;;
-	 pkgin)
+	 pkg)
 	     echo "Not yet supported" >&2
 	     exit 1
 	     ;;
-	 pkg)
+	yum|dnf)
 	     echo "Not yet supported" >&2
 	     exit 1
 	     ;;

@@ -143,7 +143,7 @@ clean:
 # check by Looking for "MirDebian" in the output of cvs --version.
 check: cvs-fast-export
 	-make EXTRA=-q cppcheck pylint
-	-shellcheck -f gcc tests/gitwash tests/setpython tests/visualize
+	-shellcheck -f gcc buildprep tests/visualize tests/setpython tests/gitwash tests/incremental.sh
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
 
 install: install-bin install-man
@@ -182,7 +182,7 @@ cppcheck:
 PYLINTOPTS = --rcfile=/dev/null --reports=n \
 	--msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" \
 	--dummy-variables-rgx='^_'
-PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0411,C0413,E1305,R0201,R0801,R0903,R0912,R0913,R0914,W0142,W0221,W0621"
+PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0411,C0413,E1305,R0201,R0205,R0801,R0903,R0912,R0913,R0914,W0142,R1705,R1718,R1721,R1724,W0221,W0621"
 pylint:
 	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsreduce tests/*.py
 
