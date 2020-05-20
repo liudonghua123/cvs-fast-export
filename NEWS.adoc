@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+1.54: 2020-05-20::
+   Docment what an overrun of the branch depth limit looks like.
+
 1.53: 2020-04-10::
    A new 'buildprep' script makes installation from source easier.
 
