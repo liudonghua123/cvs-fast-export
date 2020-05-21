@@ -14,7 +14,7 @@
 # You will see some meaningless failures with git 1.7.1 and older.
 #
 # Note: the reason for the .adoc extensions on README/NEWS/TODO is so they'll
-# display nicely in GitLab's repsitory-browsing interface.
+# display nicely in GitLab's repository-browsing interface.
 
 VERSION=$(shell sed -n <NEWS.adoc '/::/s/^\([0-9][^:]*\).*/\1/p' | head -1)
 
@@ -80,10 +80,10 @@ CPPFLAGS+=-Drestrict=__restrict__
 # CFLAGS += -pg
 # Warning: Using -O3 has been seen to cause core dumps on repositories with
 # very long revision names - some bounds check gets optimized away. Don't do that.
-CFLAGS += -O2
+# CFLAGS += -O2
 # If your toolchain supports link time optimization this is a cheap speedup
 # CFLAGS += -flto
-# CFLAGS += -g
+CFLAGS += -g
 # Test coverage flags
 # CFLAGS += -ftest-coverage -fprofile-arcs
 CFLAGS += $(EXTRA_CFLAGS)
