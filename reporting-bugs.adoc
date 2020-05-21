@@ -28,6 +28,13 @@ The reason the default isn't higher is that increasing this limit
 blows up the program's working-set size. You'll know you've pushed ut
 too far if the program OOMs.
 
+== Core dumps ==
+
+If cvs-fast-export core dumps omn you, try the same invocation with -t
+0 to force it to run single-threaded. It is fairly likely you will get
+a message telling you you have overrun one of the hard limits in
+cvs.h. If this happens, build from source with the limit raised.
+
 == Branch cycle errors ==
 
 Sorry, these are a hard fail.  You may be able to convert with cvs2git.
