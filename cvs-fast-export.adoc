@@ -19,10 +19,11 @@ version-control systems.
 This tool is best used in conjunction with reposurgeon(1).  Plain
 cvs-fast-export conversions contain various sorts of fossils that
 reposurgeon is good for cleaning up. See the
-http://www.catb.org/esr/dvcs-migration-guide.html[DVCS Migration
-HOWTO] to learn about the sanity-checking and polishing steps
-required for a really high-quality conversion, including reference
-lifting and various sorts of artifact cleanup.
+http://www.catb.org/~esr/reposurgeon/repository-editing.html[Repository
+Editing and Conversion With Reposurgeon] to learn about the
+sanity-checking and polishing steps required for a really high-quality
+conversion, including reference lifting and various sorts of artifact
+cleanup.
 
 If arguments are supplied, the program assumes all ending with the
 extension ",v" are master files and reads them in. If no arguments are
