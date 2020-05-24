@@ -302,15 +302,6 @@ correctly resolved; instead, an entirely disjoint history will be
 created containing the branch revisions and all parents back to the
 root.
 
-CVS vendor branches are a source of trouble. Sufficiently strange
-combinations of imports and local modifications will translate
-badly, producing incorrect content on master and elsewhere.
-
-Some other CVS exporters try, or have tried, to deduce changesets from 
-shared tags even when comment metadata doesn't match perfectly. This
-one does not; the designers judge that to trip over too many
-pathological CVS tagging cases.
-
 The program does try to do something useful cases in which a tag
 occurs in a set of revisions that does not correspond to any gitspace
 commit.  In this case a tagged branch containing only one commit is
@@ -321,6 +312,25 @@ the branchlet is the gitspace commit where the latest CVS revision in
 in the tagged set first occurs; this is the commit the tag would point
 at if its incompleteness were ignored. The change in the branchlet
 commit *is* also applied forward in the nearby mainline.
+
+This program does the equivalent of cvs -kb when checking out masters,
+not perforning any $-keyword expansion at all.  This has the advantage
+that binary files can never be clobbered, no matter whan k option was
+set on the master.  It has the disadvantage that the data in $-headers
+is not reliable; at best you'll get the unexpanded version of the
+$-cookie, at worst you mighht get the committer/timestamp information
+for when the master was oriiginally checked in, rather than when ut
+was last checked out.  It's good practice to remove all dollar cookies
+as part of post-conversion cleanup.
+
+CVS vendor branches are a source of trouble. Sufficiently strange
+combinations of imports and local modifications will translate
+badly, producing incorrect content on master and elsewhere.
+
+Some other CVS exporters try, or have tried, to deduce changesets from 
+shared tags even when comment metadata doesn't match perfectly. This
+one does not; the designers judge that to trip over too many
+pathological CVS tagging cases.
 
 When running multithreaded, there is an edge case in which the
 program's behavior is nondeterministic.  If the same tag looks like it
