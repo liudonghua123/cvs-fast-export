@@ -30,7 +30,7 @@ too far if the program OOMs.
 
 == Core dumps ==
 
-If cvs-fast-export core dumps omn you, try the same invocation with -t
+If cvs-fast-export core dumps on you, try the same invocation with -t
 0 to force it to run single-threaded. It is fairly likely you will get
 a message telling you you have overrun one of the hard limits in
 cvs.h. If this happens, build from source with the limit raised.

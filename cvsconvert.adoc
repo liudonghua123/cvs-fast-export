@@ -5,7 +5,7 @@
 cvsconvert - perform a Git conversion and test against the CVS original
 
 == SYNOPSIS ==
-*cvsconvert* [-v] [-n] [-p] [-k 'expandspec'] [-A 'authormap'] [repo | repo/module]
+*cvsconvert* [-v] [-n] [-p] [-A 'authormap'] [repo | repo/module]
 
 == DESCRIPTION ==
 cvsconvert performs a conversion of a CVS repository to Git and
@@ -38,22 +38,14 @@ not compare equal. A diff listing will follow.
 == Troubleshooting ==
 
 There are two kinds of non-serious conversion glitches: file content
-mismatches due to expanded keyword fields in masters, and files deleted
+mismatches due to keyword fields in masters, and files deleted
 in CVS that occur only in the gitspace manifests associated with tags.
 
 You can spot content mismatches due to keyword expansion easily.  They
 will produce single-line diffs of lines containing dollar signs
 surrounding keyword text.  Because binary files can be corrupted by
-keyword expansion, by default cvs-fast-export behaves like cvs -kb
-mode and does no keyword expansion of its own. Thus, you should *never
-see such mismatches* unless you have passed in a -k option.
-
-However, you might want to pass in -k k if (a) you believe the CVS
-masters might contain expanded keyword fields but don't want to clean
-them up by hand, and (b) you are confident your repository contains no
-binary files that might false-match an RCS/CVS keyword. If you are
-wrong about assumption (b) you will receive warning messages about
-content mismatches in the binary files.
+keyword expansion, cvs-fast-export behaves like cvs -kb mode and does
+no keyword expansion of its own.
 
 Manifest mismatches on tags are most likely to occur on
 files which were deleted in CVS but persist under later tags in the
@@ -133,4 +125,4 @@ Report bugs to Eric S. Raymond <esr@thyrsus.com>.  The project page is
 at http://catb.org/~esr/cvs-fast-export
 
 == SEE ALSO ==
-rsync(1), rcs(1), cvs(1), cvs-fast-export(1), reposurgeon(1).
+rcs(1), cvs(1), cvs-fast-export(1), reposurgeon(1).

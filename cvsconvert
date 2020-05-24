@@ -406,10 +406,9 @@ class ConvertComparison(object):
 
 if __name__ == '__main__':
     import getopt
-    (opts, arguments) = getopt.getopt(sys.argv[1:], "k:npqvA:")
+    (opts, arguments) = getopt.getopt(sys.argv[1:], "npqvA:")
     retain = True
     engine_opts = ""
-    kexpand = ""
     quiet = False
     for (opt, arg) in opts:
         if opt == '-v':
@@ -420,8 +419,6 @@ if __name__ == '__main__':
             engine_opts += " -p"
         elif opt == '-q':
             engine_opts += " -q"
-        elif opt == '-k':
-            engine_opts += " -k " + arg
         elif opt == '-A':
             engine_opts += " -A " + arg
 
