@@ -675,6 +675,10 @@ currently very inefficient".  That is a probable hotspot.
 The fact that nobody really understands the resolution algorithm is
 worrying.  It means nobody has much hope of fixing it where it breaks.
 
+There is a rare but fatal problem which manifests as a crash with the
+message "branch cycle error".  It reflects an undiagnosed problem
+in the aforementioned resolution error.
+
 Vendor-branch handling - revcvs.c:cvs_master_patch_vendor_branch() -
 is subject to problems in various ill-defined edge cases.
 

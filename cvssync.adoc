@@ -31,7 +31,7 @@ installed in an account on the target system for it to work. However,
 many CVS repositories are set up in a way that makes anonymous
 read-only rsync possible.
 
-cvssync is an auxiliary tool issued with cvs-fast-export in order
+cvssync is an auxiliary tool issued with cvs-fast-export(1) in order
 to facilitate moving CVS repositories to version control systems
 that aren't chipped out of flint. Of course, you can also use it
 for backups and other purposes.
