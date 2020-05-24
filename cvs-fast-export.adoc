@@ -13,8 +13,8 @@ cvs-fast-export - fast-export history from a CVS repository or RCS collection.
 == DESCRIPTION ==
 cvs-fast-export tries to group the per-file commits and tags in a RCS file
 collection or CVS project repository into per-project changeset
-commits with common metadata, in the style of Subversion and later
-version-control systems.
+commits with common metadata. It emits a Git fast-import stream
+describing these changesets to standard output.
 
 This tool is best used in conjunction with reposurgeon(1).  Plain
 cvs-fast-export conversions contain various sorts of fossils that
@@ -94,7 +94,8 @@ passed through to the git conversion without re-encoding.  In
 particular, it makes no attempt to fix up line endings (Unix \n vs,
 Windows \r\n vs. Macintosh \r), nor does it know about what repository
 filenames might collide with special filenames on any given platform.
-Optionally it may expand CVS $-keywords, but this is not recommended.
+CVS $-keywords in the masters are not interpreted pr expanded; this
+prevents corruption of bimary content.
 
 This program treats change comments as uninterpreted byte sequences to
 be passed through to the git conversion without change or
@@ -159,7 +160,7 @@ Show verbose progress messages mainly of interest to developers.
 Run quietly, suppressing warning messages about absence of commitids
 and other minor problems for which the program can usually compensate but
 which may indicate conversion problems. Meant to be used with
-cvsconvert, which does its own correctness checking.
+cvsconvert(1), which does its own correctness checking.
 
 -T::
 Force deterministic dates for regression testing. Each patchset will
@@ -253,11 +254,6 @@ Timestamps from CVS histories are not very reliable - CVS made them on
 the client side rather than at the server; this makes them subject to
 local clock skew, timezone, and DST issues.
 
-Time-skew effects combined with the way $-headers have to be expanded
-to be compatible with CVS's also imoly that if you have $-headers in
-your code they may not be expanded identically in a tag checkout
-from git to the way they were in the corresponding CVS revisions.
-
 CVS-NT and versions of GNU CVS after 1.12 (2004) added a changeset
 commit-id to file metadata. Older sections of CVS history without
 these are vulnerable to various problems caused by clock skew between
@@ -314,7 +310,7 @@ at if its incompleteness were ignored. The change in the branchlet
 commit *is* also applied forward in the nearby mainline.
 
 This program does the equivalent of cvs -kb when checking out masters,
-not perforning any $-keyword expansion at all.  This has the advantage
+not performing any $-keyword expansion at all.  This has the advantage
 that binary files can never be clobbered, no matter whan k option was
 set on the master.  It has the disadvantage that the data in $-headers
 is not reliable; at best you'll get the unexpanded version of the
