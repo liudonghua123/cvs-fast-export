@@ -454,8 +454,8 @@ warning - xxx newer than yyy::
 
 warning - skew_vulnerable in file xxx rev yyy set to zzz::
      This warning is emitted when verbose is on and only on commits
-     with no commit ID.  It calls out commits that coause the date
-     before which coalescence is unreliable to be set forward.
+     with no commit ID.  It calls out commits that cause the date
+     before which coalescence is unreliable to be pushed forward.
 
 tip commit older than imputed branch join::
      A similar problem to "newer than" being reported at a later
@@ -467,7 +467,7 @@ tip commit older than imputed branch join::
 
 some parent commits are younger than children::
      May indicate that cvs-fast-export aggregated some changesets in
-     the wrong order; probably harmless, but check head.
+     the wrong order; probably a harmless result of clock skew, but check head.
 
 warning - branch point later than branch::
      Late in the analysis, when connecting branches to their parents
@@ -527,17 +527,20 @@ edit script tried to delete beyond eof::
 
 internal error - branch cycle::
      cvs-fast-export found a cycle while topologically sorting commits
-     by parent link.  This should never happen and probably indicates
-     a serious internal error: please file a bug report.
+     by parent link. This should never happen and indicates either
+     damaged metadata or a serious internal error in cvs-fast-export:
+     please file a bug report.
 
 internal error - lost tag::
      Late in analysis (after changeset coalescence) a tag lost its
      commit reference.  This should never happen and probably indicates
-     an internal error: please file a bug report.
+     an internal error in cvs-fast-export: please file a bug report.
 
 == REPORTING BUGS ==
-Report bugs to Eric S. Raymond <esr@thyrsus.com>.  The project page is
-at http://catb.org/~esr/cvs-fast-export
+Report bugs to Eric S. Raymond <esr@thyrsus.com>. Please read 
+http://www.catb.org/~esr/cvs-fast-export/reporting-bugs.html[Reporting
+bugs in cvs-fast-export] before shipping a report. The project page
+itself is at http://catb.org/~esr/cvs-fast-export
 
 == SEE ALSO ==
 rcs(1), cvs(1), cvssync(1), cvsconvert(1), reposurgeon(1), cvs2git(1).
