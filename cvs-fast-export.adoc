@@ -374,9 +374,9 @@ imply bugs in cvs-fast-export; they may simply indicate previously
 undetected malformations in the CVS history. However, reporting them may
 help improve cvs-fast-export.
 
-The above is an abbreviated version of part of
-http://www.catb.org/esr/dvcs-migration-guide.html[DVCS Migration
-HOWTO]; browse it for more.
+A more comprehensive sanity check is described in
+http://www.catb.org/~esr/reposurgeon/repository-editing.html[Repository
+Editing and Conversion With Reposurgeon]; browse it for more.
 
 == RETURN VALUE ==
 
