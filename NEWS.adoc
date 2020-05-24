@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+1.55: 2020-05-24::
+   Document how to cope with vrabch cycle errors.
+
 1.54: 2020-05-20::
    Document what an overrun of the branch depth limit looks like.
 
