@@ -118,6 +118,8 @@ lex.o: lex.c gram.h
 .SUFFIXES: .html .adoc .txt .1
 
 # Requires asciidoc
+# To debug asciidoc problems, you may need to run "xmllint" --nonet --noout --valid"
+# on the intermediate XML.
 .adoc.1:
 	$(A2X) --doctype manpage --format manpage $<
 .adoc.html:

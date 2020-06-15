@@ -50,19 +50,19 @@ Here are the possibilities:
 
 1. Remove one of the masters involved in the cycle.  This is probably
 the right thing to do if one of them is an Attic file.
-
++
 A master goes to an Attic directory when the file it controls is
 deleted. CVS's data representation for deletions is brittle and
 its implementation has a history of buggy behavior in this area.  It 
 is possible that damaged or ambiguous metadata in the Attic file
 is the cause of error.
-
++
 By defintion, deleting an Attic master cannot affect the content at
 the head revision. But deleting it removes the entire past history
 of whatever file it controls.
 
 2. You may be able to convert with cvs2git.
-
++
 cvs-fast-export has many advantages over cvs2git. It converts
 .cvsignore files, it sanity-checks tag names, it doesn't generate
 superfluous TAG.FIXUP branches, it delivers an entire well-formed git
@@ -70,7 +70,7 @@ stream that can be fed to git-fast-import directly (rather than two
 disconnected chunks that can't) and it is orders of magnitude faster.
 If you have a choice between these tools, cvs-fast-export will
 almost always do a better and faster job.
-
++
 But, it has been reported that cv2git can sometimes break branch
 cycles.
 

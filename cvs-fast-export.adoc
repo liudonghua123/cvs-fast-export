@@ -533,10 +533,9 @@ internal error - lost tag::
      an internal error in cvs-fast-export: please file a bug report.
 
 == REPORTING BUGS ==
-Report bugs to Eric S. Raymond <esr@thyrsus.com>. Please read 
-http://www.catb.org/~esr/cvs-fast-export/reporting-bugs.html[Reporting
-bugs in cvs-fast-export] before shipping a report. The project page
-itself is at http://catb.org/~esr/cvs-fast-export
+Report bugs to Eric S. Raymond <esr@thyrsus.com>. Please read
+"Reporting bugs in cvs-fast-export" before shipping a report. The
+project page itself is at http://catb.org/~esr/cvs-fast-export
 
 == SEE ALSO ==
 rcs(1), cvs(1), cvssync(1), cvsconvert(1), reposurgeon(1), cvs2git(1).
