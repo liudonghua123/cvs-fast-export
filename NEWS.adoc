@@ -1,7 +1,8 @@
 = cvs-fast-export project news =
 
-Repository head::
-   Document more exactly how dollar-cookie expamsion works.
+cRepository head::
+   Document more exactly how dollar-cookie expansion works.
+   Describe the known issies with vendor branches.
 
 1.55: 2020-05-24::
    Document how to cope with branch cycle errors.
