@@ -95,7 +95,7 @@ particular, it makes no attempt to fix up line endings (Unix \n vs,
 Windows \r\n vs. Macintosh \r), nor does it know about what repository
 filenames might collide with special filenames on any given platform.
 CVS $-keywords in the masters are not interpreted pr expanded; this
-prevents corruption of bimary content.
+prevents corruption of binary content.
 
 This program treats change comments as uninterpreted byte sequences to
 be passed through to the git conversion without change or
@@ -114,7 +114,7 @@ The default is 300 seconds. This option is irrelevant for changesets
 with commitids.
 
 -c::
-Don't trust commit-IDs; match by ordinary metatada.  Will be useful if
+Don't trust commit-IDs; match by ordinary metadata.  Will be useful if
 you have something like a CVS-NT repository in which per-file commits
 were made in such a way that the cliques don't have matching IDs.
 
@@ -311,11 +311,11 @@ commit *is* also applied forward in the nearby mainline.
 
 This program does the equivalent of cvs -kb when checking out masters,
 not performing any $-keyword expansion at all.  This has the advantage
-that binary files can never be clobbered, no matter whan k option was
+that binary files can never be clobbered, no matter when k option was
 set on the master.  It has the disadvantage that the data in $-headers
 is not reliable; at best you'll get the unexpanded version of the
-$-cookie, at worst you mighht get the committer/timestamp information
-for when the master was oriiginally checked in, rather than when ut
+$-cookie, at worst you might get the committer/timestamp information
+for when the master was originally checked in, rather than when it
 was last checked out.  It's good practice to remove all dollar cookies
 as part of post-conversion cleanup.
 
@@ -339,7 +339,7 @@ cvs2git(1), which uses multiple passes and journals intermediate
 structures to disk.  The tradeoffs are that cvs-fast-export is much
 faster than cvs2git (by a ratio of over 100:1 on real repositories),
 but will fail with an out-of-memory error on CVS repositories large
-enough that the metdata storage (not the content blobs, ust the
+enough that the metadata storage (not the content blobs, just the
 attributions and comments) overflow your physical memory. In practice,
 you are unlikely to push this limit on a machine with 32GB of RAM and
 effectively certain not to with 64GB.  Attempts to do large
@@ -409,9 +409,9 @@ child commit emitted before parent exists::
      order of parent and child commits is backwards.  If you are
      running multithreaded, this probably means two CVS commits with
      identical timestamps were randomly processed in the wrong order;
-     try forcing single-thread operation wuth -t 0. If the error
+     try forcing single-thread operation with -t 0. If the error
      recurs with -t 0, this indicates a serious metadata malformation
-     or cvs-fast-export bug and should be reportedvto the maintainers.
+     or cvs-fast-export bug and should be reported to the maintainers.
 
 tag could not be assigned to a commit::
      RCS/CVS tags are per-file, not per revision. If developers are not
@@ -459,7 +459,7 @@ tip commit older than imputed branch join::
      stage, when file branches are being knit into changeset branches.
      One CVS branch in a collection about to be collated into a gitspace
      branch has a tip commit older than the earliest commit that is a 
-     a parent on some (other) tip in the collection.  The adventious
+     a parent on some (other) tip in the collection.  The adventitious
      branch is snipped off.
 
 some parent commits are younger than children::
@@ -477,7 +477,7 @@ warning - branch point later than branch::
 
 more than one delta with number X.Y.Z::
      The CVS history contained duplicate file delta numbers. Should
-     never happen, and may indice a corrupted CVS archive if it does;
+     never happen, and may indocate a corrupted CVS archive if it does;
      check head.
 
 {revision|patch} with odd depth::
