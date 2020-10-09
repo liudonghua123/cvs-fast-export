@@ -48,7 +48,7 @@ done
 cat <<EOF
 # Preparing your system for cvs-fast-export source build...
 # This script presently knows about:
-#   Ubuntu (and POP_OS)
+#   Ubuntu (and POP_OS), Fedora using yum, Fedora using dnf, Gentoo.
 #
 # It has some stub code for other systems; please fill that in if you
 # can and send us an MR.
