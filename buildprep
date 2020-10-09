@@ -173,9 +173,13 @@ main () {
         echo "Not yet supported" >&2
         exit 1
         ;;
-    yum|dnf)
+    yum)
         echo "Not yet supported" >&2
         exit 1
+        ;;
+    dnf)
+        $install tzdata
+        $install make grep sed gcc bison flex rcs cvs pylint cppcheck ShellCheck
         ;;
     yast)
         echo "Not yet supported" >&2
@@ -213,9 +217,12 @@ doc () {
         echo "Not yet supported" >&2
         exit 1
         ;;
-    yum|dnf)
+    yum)
         echo "Not yet supported" >&2
         exit 1
+        ;;
+    dnf)
+        $install asciidoc
         ;;
     yast|zypper)
         echo "Not yet supported" >&2
