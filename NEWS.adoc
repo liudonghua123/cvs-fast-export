@@ -1,8 +1,9 @@
 = cvs-fast-export project news =
 
-cRepository head::
+Repository head::
    Document more exactly how dollar-cookie expansion works.
-   Describe the known issies with vendor branches.
+   Describe the known issues with vendor branches.
+   Add support for dnf to buildprep.
 
 1.55: 2020-05-24::
    Document how to cope with branch cycle errors.
