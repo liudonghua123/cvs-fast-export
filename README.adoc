@@ -5,49 +5,49 @@ This program analyzes a collection of RCS files in a CVS repository
 the form of a fast-import stream.  Not all possible histories can be
 rendered this way; the program tries to emit useful warnings when it
 can't.  The program can also produce a visualization of the resulting
-commit DAG in the DOT format handled by the graphviz suite.
+commit DAG in the DOT format handled by the `graphviz` suite.
 
-Build prerequisites are explained in the toplevel "buildprep" script,
+Build prerequisites are explained in the toplevel `buildprep` script,
 which you may be able to run to get all the packages you need.
 
-This program could have been called rcs-fast-export with equal
-appropriateness; the cvs-fast-export name was chosen to avoid
+This program could have been called `rcs-fast-export` with equal
+appropriateness; the `cvs-fast-export` name was chosen to avoid
 colliding with a pre-existing script with that name by Giuseppe
 Bilotta.
 
-The analysis stage of this code originally travelled as "parsecvs"
+The analysis stage of this code originally travelled as `parsecvs`
 and was written by Keith Packard in early 2006.  It was briefly
 maintained by Bart Massey before passing to Eric S. Raymond in
 late 2012; ESR wrote the fast-export output stage and renamed the
 program to reflect its new function. More historical details are
-in hacking.asc.
+in `hacking.asc`.
 
-The distribution includes a tool, cvssync, for fetching masters from
-CVS remote repositories so cvs-fast-export can see them.  You will
-need rsync installed to use it.
+The distribution includes a tool, `cvssync`, for fetching masters from
+CVS remote repositories so `cvs-fast-export` can see them.  You will
+need `rsync` installed to use it.
 
-A wrapper script called cvsconvert runs a conversion to git and
+A wrapper script called `cvsconvert` runs a conversion to git and
 looks for content mismatches with the original CVS.
 
-Also included is a tool called cvsreduce that strips content out of
+Also included is a tool called `cvsreduce` that strips content out of
 trees of RCS/CVS masters, leaving only metadata structure in place. If
 you encounter a bug in this program, sending the maintainer a reduced
 version of your CVS tree greatly decreases the expected time to fix.
 
-A more detailed guide to effective bug reporting is at reporting-bugs.adoc.
-This code has a regression-test suite; invoke it with "make check".
+A more detailed guide to effective bug reporting is at `reporting-bugs.adoc`.
+This code has a regression-test suite; invoke it with `make check`.
 You will need RCS and CVS installed to run the tests, but they're
-not required for production use of cvs-fast-export. Installed CVS
-is also required to use the cvsconvert wrapper script.
+not required for production use of `cvs-fast-export`. Installed CVS
+is also required to use the `cvsconvert` wrapper script.
 
-A "make check" can fail in obscure ways if you don't have all the required
+A `make check` can fail in obscure ways if you don't have all the required
 tools installed; you'll need CVS and Python.  If you get complaints indicating
-that *.repo files don't exist, install these tools and try again.  A "make
-clean" in the tests directory might be required to clear out debris.
+that `*.repo` files don't exist, install these tools and try again.  A `make
+clean` in the tests directory might be required to clear out debris.
 
 Warning: The regression tests will fail spuriously if your CVS lacks the
 MirOS patches.  These are carried by Debian Linux and derivatives; you can
-check by Looking for "MirDebian" in the output of cvs --version.
+check by Looking for `MirDebian` in the output of `cvs --version`.
 
-See also the NEWS.adoc and TODO.adoc files.  There is an (incomplete) tour of
-the internals in hacking.adoc.
+See also the `NEWS.adoc` and `TODO.adoc` files.  There is an (incomplete) tour of
+the internals in `hacking.adoc`.
