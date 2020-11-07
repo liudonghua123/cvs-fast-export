@@ -15,9 +15,9 @@ appropriateness; the cvs-fast-export name was chosen to avoid
 colliding with a pre-existing script with that name by Giuseppe
 Bilotta.
 
-The analysis stage of this code originally travelled as "parsecvs" 
-and was written by Keith Packard in early 2006.  It was briefly 
-maintained by Bart Massey before passing to Eric S. Raymond in 
+The analysis stage of this code originally travelled as "parsecvs"
+and was written by Keith Packard in early 2006.  It was briefly
+maintained by Bart Massey before passing to Eric S. Raymond in
 late 2012; ESR wrote the fast-export output stage and renamed the
 program to reflect its new function. More historical details are
 in hacking.asc.
