@@ -1,6 +1,6 @@
 = Hacker's guide to cvs-fast-export =
 
-cvs-fast-export is a complex program doing an intrinsically difficult
+`cvs-fast-export` is a complex program doing an intrinsically difficult
 job.  Because analyzing CVS repositories has lots of strange edge
 cases, it is likely to need modification in the future.  This document
 is a collection of notes intended to make that less intimidating.
@@ -10,18 +10,18 @@ is a collection of notes intended to make that less intimidating.
 This program was originally written as a one-off hack by Keith Packard
 in early 2006, when he was working on migrating the X repositories
 from CVS to git, and was not originally intended to survive that
-conversion.  It was called "parsecvs" then.  It called git tools
+conversion.  It was called `parsecvs` then.  It called git tools
 directly to create translated repositories.
 
 The code was briefly maintained by Bart Massey before passing to Eric
 S. Raymond in late 2012. ESR wrote the fast-export output stage and
 renamed the program to reflect its new function.
 
-Most of ESR's original contributions are in export.c, which is why
+Most of ESR's original contributions are in `export.c`, which is why
 that code is in a somewhat different style than the rest of the
 codebase. ESR also split the original commit structure into
-cvs_commit and git_commit as a space optimization, rescued
-the rather decrepit code for generating graphviz visualizations,
+`cvs_commit` and `git_commit` as a space optimization, rescued
+the rather decrepit code for generating `graphviz` visualizations,
 and hacked the parser code to be fully re-entrant.
 
 A few other people have contributed significant improvements since,
@@ -29,7 +29,7 @@ mainly performance tweaks.  Most notably: Jens Bethkowsky
 <jens.bethkowsky@rwth-aachen.de> added a red-black-tree implementation
 to speed up symbol search; Aidan Hobson Sayers <aidanhs@cantab.net>
 replaced an O(n**3) sort with an O(n log n) sort; David Leonard
-<david.leonard@opengear.com> sped up compute_parent_links() and wrote
+<david.leonard@opengear.com> sped up `compute_parent_links()` and wrote
 several other significant optimizations.  Laurence Hygate
 <loz@flower.powernet.co.uk> wrote many sort and hash
 optimizations. Alan Barrett wrote the improved progress meter.  Tom
@@ -51,12 +51,12 @@ What makes this problem difficult is that CVS records deltas (and
 tags) per-file, but what we want for the fast-import representation is
 changesets - that is, coherent groups of per-file deltas that capture
 multiple per-file changes made with the same intention at the same
-time.  The fundamental thing cvs-fast-export does is identify cliques
+time.  The fundamental thing `cvs-fast-export` does is identify cliques
 of per-file deltas that should be coalesced into changesets.
 
 To do this, it relies on the fact that the CVS command-line tools
 fake supporting changesets by replicating the comment that the user
-supplied to "cvs commit" into every individual file delta that the
+supplied to `cvs commit` into every individual file delta that the
 commit creates.
 
 Under relatively recent implementations, CVS also embeds a common (and
@@ -69,7 +69,7 @@ date.
 Actually, commit-date comparison has to be fuzzy because each file
 commit is actually done as a separate operation and may not complete
 in the same clock second as the previous one (this is why
-cvs-fast-export has the -w option).  Timestamp matching is further
+`cvs-fast-export` has the `-w` option).  Timestamp matching is further
 complicated by clock-skew effects; for historical reasons, deltas are
 committed with a timestamp generated on the client side rather than
 the server.  Thus, clock drift between different client machines can
@@ -84,7 +84,7 @@ cliques can be resolved but the right way to build them into a DAG of
 parent-child links is unclear or ill-defined.  Inconsistent or
 incomplete tagging can cause interpretation problems as well.
 
-Now you should read "RCS/CVS LIMITATIONS" in the cvs-fast-export(1)
+Now you should read "RCS/CVS LIMITATIONS" in the `cvs-fast-export(1)`
 manual page.
 
 == Conformable branch structure ==
@@ -154,8 +154,8 @@ masters with branching:
 -------------------------------------------------------------------------
 
 Note that the branch point and branch ID (the three-part label on the
-branch) for 'alternate' are different in the two CVS masters, so
-cvs-fast-export cannot rely on them matching to figure out the
+branch) for `alternate` are different in the two CVS masters, so
+`cvs-fast-export` cannot rely on them matching to figure out the
 topology.
 
 It also has to deal wth this case correctly:
@@ -204,7 +204,7 @@ every file master in the changeset.
 (Various kinds of operator error and/or CVS bug can cause the creation
 of incomplete tagged sets, which *don't* annotate every master in
 existence at tag creation time.  These are a headache for any
-conversion tool.  cvs-fast-export deals with them by creating tagged
+conversion tool.  `cvs-fast-export` deals with them by creating tagged
 branchlets containing exactly one commit.)
 
 Named CVS branches are represented by adding a "sticky tag" to every
@@ -227,7 +227,7 @@ corresponding branch, whatever the tip revision happens to be.
 Vendor branches are a poorly-documented feature which has been a
 source of great confusion for programs attempting to convert or
 data-mine CVS repositories.  This section describes the assumptions
-cvs-fast-export uses in dealing with them in painstaking detail,
+`cvs-fast-export` uses in dealing with them in painstaking detail,
 because it is not unlikely they will be a continuing source of
 correctness issues.
 
@@ -235,7 +235,8 @@ In "CVS II: Parallelizing Software Development" (1990) Brian Berliner,
 one of the principal CVS developers, write a major section 2.2 titled
 "Tracking Third-Party Source Distributions". It begins:
 
-"Currently, a large amount of software is based on source
+____
+Currently, a large amount of software is based on source
 distributions from a third-party distributor. It is often the case
 that local modifications are to be made to this distribution, and that
 the vendor's future releases should be tracked. Rolling your local
@@ -246,7 +247,8 @@ modules directly from the vendor's release, preserving the directory
 hierarchy of the vendor's distribution.  The branch support of RCS is
 used to build this vendor release as a branch of the main RCS trunk.
 Figure 2 shows how the "head" tracks a sample vendor branch when no
-local modifications have been made to the file."
+local modifications have been made to the file.
+____
 
 The following diagram reproduces the topology of Berliner's figure 2
 using the same conventions as the diagrams in the previous section
@@ -275,11 +277,14 @@ using the same conventions as the diagrams in the previous section
 (The intended meaning of the arrow from "HEAD" to the vendor branch
 label 1.1.1 is not explained in the paper.)
 
-Berliner continues: Once this is done, developers can check out files
+Berliner continues: 
+____
+Once this is done, developers can check out files
 and make local changes to the vendor's source distribution. These
 local changes form a new branch to the tree which is then used as the
 source for future check outs. Figure 3 shows how the "head" moves to
 the main RCS trunk when a local modification is made.
+____
 
 -------------------------------------------------------------------------
 
@@ -301,7 +306,9 @@ the main RCS trunk when a local modification is made.
 
 -------------------------------------------------------------------------
 
-Berliner continues: When a new version of the vendor's source
+Berliner continues:
+_____
+When a new version of the vendor's source
 distribution arrives, the checkin program adds the new and changed
 vendor's files to the already existing source repository. For files
 that have not been changed locally, the new file from the vendor
@@ -310,12 +317,16 @@ locally, checkin warns that the file must be merged with the new
 vendor release. The cvs "join" command is a useful tool that aids this
 process by performing the necessary RCS merge, as is done above when
 performing an "update."
+____
 
-Berliner concludes: There is also limited support for "dual"
+Berliner concludes:
+____
+There is also limited support for "dual"
 derivations for source files. See Figure 4 for a sample dual-derived
 file. This example tracks the SunOS distribution but includes major
 changes from Berkeley. These BSD files are saved directly in the RCS
 file off a new branch.
+____
 
 ----------------------------------------------------------------------------
 
@@ -336,13 +347,13 @@ file off a new branch.
 Note that the paper does not actually describe how CVS should behave
 if the 1.2 revision were absent from this diagram.
 
-Historically, cvs-fast-export's behavior with respect to vendor
-branches (from when it was 'parsecvs') was described by the following
+Historically, `cvs-fast-export`'s behavior with respect to vendor
+branches (from when it was `parsecvs`) was described by the following
 comment due to Keith Packard:
 
 "Vendor branches" (1.1.x) are created by importing sources from an
 external source. In X.org, this was from XFree86 and DRI. When these
-trees are imported, cvs sets the 'default' branch in each ,v file to
+trees are imported, cvs sets the 'default' branch in each `,v` file to
 point along this branch. This means that tags made between the time
 the vendor branch is imported and when a new revision is committed to
 the head branch are placed on the vendor branch In addition, any files
@@ -353,7 +364,7 @@ same."
 All that is consistent with the Berliner paper except, crucially, the
 last sentence (" merging these two branches together as if they were
 the same").  Consider the following revision diagram, which
-corresponds to Changelog,v in the "oldhead" test repository:
+corresponds to `Changelog,v` in the `oldhead` test repository:
 
 ----------------------------------------------------------------------------
  +---------------------+            +---------------------+
@@ -372,7 +383,7 @@ corresponds to Changelog,v in the "oldhead" test repository:
 
 ----------------------------------------------------------------------------
 
-The actual oldhead repo has revisions up to 1.8 on the master branch
+The actual `oldhead` repo has revisions up to 1.8 on the master branch
 and 1.1.1.3, but this subgraph illustrates the problem.  Under the
 merge rule, the tip content will be that of 1.1.1.2 than 1.2.
 This does not match CVS's observed behavior.
@@ -392,15 +403,15 @@ graph) of changesets.  The third stage (export) emits a report on the
 DAG structure, either a fast-export stream expressing it or DOT code
 for a visualization that can be rendered by graphviz.
 
-The main sequence of the code is, unsurprisingly, in the main() portion
-of the file main.c
+The main sequence of the code is, unsurprisingly, in the `main()` portion
+of the file `main.c`.
 
 === Analysis stage ===
 
-The main function of this stage is cvs_master_digest().
+The main function of this stage is `cvs_master_digest()`.
 
 It may be sequenced in one of two ways depending on whether you run
-with the -t option at a value 2 or greater.  Without this, masters are
+with the `-t` option at a value 2 or greater.  Without this, masters are
 processed sequentially as they are encountered.  With it, they are
 dispatched to worker subthreads.  The point of this is to avoid
 allowing I/O waits for one master read or snapshot export to stall
@@ -421,7 +432,7 @@ A consequence is that the code is tied to Bison and Flex.  In order
 for the parallelization to work, the CVS-master parser has to be fully
 re-entrant.  Heirloom Yacc and Lex can't do that.
 
-After some study of the structures in cvs.h, most of the analysis code
+After some study of the structures in `cvs.h`, most of the analysis code
 will be fairly straightforward to understand.
 
 If you have to modify the analysis code, it will most likely involve some
@@ -430,7 +441,7 @@ to somebody's variation on CVS.
 
 === Resolution stage ===
 
-The main function of this stage is collate_to_changesets().  All the
+The main function of this stage is `collate_to_changesets()`.  All the
 really black magic happens inside it.  Nobody understands all of this
 code; a few people have managed to comprehend individual pieces of it.
 
@@ -441,14 +452,14 @@ It takes the annotated DAG produced by the second stage and emits either a
 fast-import stream or a DOT representation of the DAG.
 
 The exception is the actual delta resolution done by the call to
-generate(), which is seriously hairy. Fortunately, that part of the
+`generate()`, which is seriously hairy. Fortunately, that part of the
 CVS master format has (unlike the header and attribute information)
 been extremely stable, and thus the delta-integration code is unlikely
 to require modification.
 
 You will probably find that only part of the export code proper that
 is really difficult to understand is the use of iterators in
-compute_parent_links().  This hair is justified by the fact that it
+`compute_parent_links()`.  This hair is justified by the fact that it
 optimizes what used to be an O(n**3) operation (and the worst hotspot
 in the code at the time) into about O(n).
 
@@ -459,49 +470,49 @@ structures it consumes.  That's our next topic.
 
 This program is rife with tricky data structures. If you want to
 modify it, the first thing you should do is read the definitions
-in cvs.h.
+in `cvs.h`.
 
-The trickiest part is that the rev_list structure is used
+The trickiest part is that the `rev_list` structure is used
 polymorphically in such a way that it's not easy to tell what the
-semantics of a rev_list * are.  Early in processing it tends to point
+semantics of a `rev_list *` are.  Early in processing it tends to point
 at the branch-head head list for a single CVS master.  Later it can
 link to the digested form of an entire CVS repo (e.g. a linked list
-of rev_list objects each encapsulating a CVS master's content).  Still
+of `rev_list` objects each encapsulating a CVS master's content).  Still
 later it can link to a tree of gitspace commit objects.
 
-In an attempt to make the code more readable, cvs.h defines three
+In an attempt to make the code more readable, `cvs.h` defines three
 typedefs, one for each of these uses. The rest of this section
 uses those.
 
-The first stage turns each CVS file into a cvs_repo * - a linked list of
-rev_ref objects, each of which represents a named CVS branch head. The
-rev_ref objects in turn point at chains of cvs_commit objects, each
+The first stage turns each CVS file into a `cvs_repo *` - a linked list of
+`rev_ref` objects, each of which represents a named CVS branch head. The
+`rev_ref` objects in turn point at chains of `cvs_commit` objects, each
 representing a CVS delta.
 
 During the resolution phase, the branch structures associated with
-individual files are transformed into a single git_repo * representing
+individual files are transformed into a single `git_repo *` representing
 a repository-state DAG. At this point, the commit pointers change
-semantics to refer to git_commit objects; a certain amount of type
+semantics to refer to `git_commit` objects; a certain amount of type
 punning is involved.
 
-The export code walks the resulting single git_repo linked list
+The export code walks the resulting single `git_repo` linked list
 generating a report from it.
 
-A notable feature of the git_commit structures is that the code goes
+A notable feature of the `git_commit` structures is that the code goes
 to great lengths to space-optimize (pack) the representation of file
 paths in the commit at the point when it is synthesized (this is
 required in order to hold down the program's working-set size on large
 repositories).  After packing, paths are represented by structure
 trees that coalesce common path prefixes.
 
-The 'refcount' field in the commit structure counts the number of branch
+The `refcount` field in the commit structure counts the number of branch
 heads from which the commit can be reached by an ancestry chain.
 
 == Source files ==
 
 === atom.c  ===
 
-The main entry point, atom(), interns a string, avoiding having
+The main entry point, `atom()`, interns a string, avoiding having
 separate storage for duplicate copies. No ties to other structures.
 The only complexity here is a straightforward hash implementation to
 speed up collision searches.
@@ -513,7 +524,7 @@ pairs. Added by ESR, it has few ties to the core code.
 
 === cvsnumber.c ===
 
-Various small functions (mostly predicates) on the cvs_number objects
+Various small functions (mostly predicates) on the `cvs_number` objects
 that represent CVS revision numbers (1.1, 1.2, 2.1.3.1 and the like).
 No coupling to other structures.
 
@@ -544,29 +555,29 @@ most likely to make your brain hurt.
 === gram.y  ===
 
 A fairly straightforward yacc grammar for CVS masters.  Fills a
-cvs_file structure passed into it as a yyparse() argument.
+`cvs_file` structure passed into it as a `yyparse()` argument.
 
 === graph.c  ===
 
-Like export.c, but emits DOT rather than a fast-export stream.  Takes
+Like `export.c`, but emits DOT rather than a fast-export stream.  Takes
 the DAG generated by the analysis stage and turns it into a
 description of the graph in the DOT markup language used by the
-graphviz tools.
+`graphviz` tools.
 
 === import.c ===
 
 Import/analysis of a collection of CVS master files.  Calls the parser
 and builds the first-stage revlist. The complicated part is in the
-rev_list_cvs() call, which calls out to revcvs.c.
+`rev_list_cvs()` call, which calls out to `revcvs.c`.
 
 In the first-stage revlist, each element corresponds to a CVS master
-and points at a list of named CVS branch heads (rev_refs) in the
+and points at a list of named CVS branch heads (`rev_refs`) in the
 master, each one of which points at a list of CVS commit structures
-(cvs_commit).
+(`cvs_commit`).
 
 === lex.l  ===
 
-The lexical analyzer for the grammar in gram.y.  Pretty straightforward.
+The lexical analyzer for the grammar in `gram.y`.  Pretty straightforward.
 
 === main.c  ===
 
@@ -576,24 +587,24 @@ fairly simple time and date handling.
 === collate.c  ===
 
 Here there be dragons.  Core code used in analysis and resolution.
-Nobody completely understands this. 
+Nobody completely understands this.
 
-The main function is collate_to_changesets(), which is conceptually
+The main function is `collate_to_changesets()`, which is conceptually
 simple - it finds cliques of CVS deltas that match by commitid or
 other metadata, and creates a git changeset for each clique of
 matching CVS deltas.  First it finds all the unique branch heads in
 the CVS masters, creates corresponding git branch heads, and sorts the
 git branch heads in tree order, trunk first.  Then for each git branch
 head, it finds all the CVS masters that have deltas for that git
-branch, and calls collate_branches to create the git changesets. Finally
+branch, and calls `collate_branches` to create the git changesets. Finally
 tags are assigned to the changesets.
 
-The job of collate_branches seems simple - find cliques of matching CVS
+The job of `collate_branches` seems simple - find cliques of matching CVS
 deltas for one branch, and create corresponding git changesets.
 
-The technique used by collate_branches is to put the masters (revisions)
+The technique used by `collate_branches` is to put the masters (revisions)
 in order by change date, and step along that list to find the clique,
-i.e. find deltas that are "close enough" (within the cvs-fast-export
+i.e. find deltas that are "close enough" (within the `cvs-fast-export`
 window).
 
 Reasons the code is hard to understand:
@@ -602,7 +613,7 @@ Reasons the code is hard to understand:
 simplest case, deltas made under recent CVS versions can be matched
 by unique commit-ID cookies generated by CVS. When commit IDS are
 absent, clique matches must be recognized by a match of all other
-metadata (committer ID and change comment content) except for 
+metadata (committer ID and change comment content) except for
 approximate match of time.
 
 2. The revisions array does not contain a static list of revisions,
@@ -631,28 +642,28 @@ from the core data structures.
 === revcvs.c  ===
 
 Build the in-core revision list corresponding to a single CVS master.
-Just one entry point, cvs_master_digest(), which takes the structure built
+Just one entry point, `cvs_master_digest()`, which takes the structure built
 by the grammar parse of the master as its single argument.
 
-A potential trouble spot is revcvs.c:cvs_master_patch_vendor_branch().
+A potential trouble spot is `revcvs.c:cvs_master_patch_vendor_branch()`.
 It's not clear the algorithm is correct in all cases - it's not even
 completely clear what "correct" would look like.
 
 === revdir.c  ===
 
 The least incomprehensible part of the core code.  These functions are
-used to pack file paths in rev_file objects into a more
+used to pack file paths in `rev_file` objects into a more
 space-efficient representation.
 
 This code may use one of two packing implementations.  The older one is in
-dirpack.c; it's the scheme Keith Packard originally wrote.  The newer
+`dirpack.c`; it's the scheme Keith Packard originally wrote.  The newer
 one, which is more complex but drastically reduces working set size,
-is in treepack.c; it is due to Laurence Hygate.
+is in `treepack.c`; it is due to Laurence Hygate.
 
 === revlist.c  ===
 
-Utility functions used by both the CVS analysis code in revcvs.c
-and the black magic in collate.c.
+Utility functions used by both the CVS analysis code in `revcvs.c`
+and the black magic in `collate.c`.
 
 === tags.c  ===
 
@@ -669,7 +680,7 @@ error-reporting.  No coupling to the core data structures.
 
 == Known problems in the code ==
 
-There's a comment in collate_to_changesets() that says "Yes, this is
+There's a comment in `collate_to_changesets()` that says "Yes, this is
 currently very inefficient".  That is a probable hotspot.
 
 The fact that nobody really understands the resolution algorithm is
@@ -679,17 +690,17 @@ There is a rare but fatal problem which manifests as a crash with the
 message "branch cycle error".  It reflects an undiagnosed problem
 in the aforementioned resolution error.
 
-Vendor-branch handling - revcvs.c:cvs_master_patch_vendor_branch() -
+Vendor-branch handling - `revcvs.c:cvs_master_patch_vendor_branch()` -
 is subject to problems in various ill-defined edge cases.
 
 Various mysterious error messages need to be documented.  Basically,
-if it's not in the list on cvs-fast-export.adoc, it needs to be.
+if it's not in the list on `cvs-fast-export.adoc`, it needs to be.
 
 == Good practice ==
 
-When modifying this code, run the regression tests (make check) early
+When modifying this code, run the regression tests (`make check`) early
 and often.  It is very easy to break even with apparently innocuous
-changes.  You will want to have cppcheck, pylint, and shellcheck
+changes.  You will want to have `cppcheck`, `pylint`, and `shellcheck`
 installed for full code validation.
 
 If you find a bug and fix it, please try to create a toy repo exhibiting
