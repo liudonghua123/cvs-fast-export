@@ -357,6 +357,9 @@ overwhelms the gains from not constantly blocking on I/O.
 The program also requires temporary disk space equivalent
 to the sum of the sizes of all revisions in all files.
 
+CVSNT is suppirted, but the CVSNT extension fieldss "hardlinks"
+and "username" are ignored.
+
 On stock PC hardware in 2020, cvs-fast-export achieves processing
 speeds upwards of 64K CVS commits per minute on real repositories.
 Time performance is primarily I/O bound and can be improved by running
