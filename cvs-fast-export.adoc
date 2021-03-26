@@ -287,12 +287,42 @@ the requested reporting interval of the incremental dump is small.
 
 These problems cannot be fixed in cvs-fast-export; they are inherent to CVS.
 
-== CVS-FAST-EXPORT REQUIREMENTS AND LIMITATIONS ==
+== REQUIREMENTS AND PERFORMANCE ==
 Because the code is designed for dealing with large data sets, it has
 been optimized for 64-bit machines and no particular effort has been
 made to keep it 32-bit clean.  Various counters may overflow if you
 try using it to lift a large repository on a 32-bit machine.
 
+cvs-fast-export is designed to do translation with all its
+intermediate structures in memory, in one pass. This contrasts with
+cvs2git(1), which uses multiple passes and journals intermediate
+structures to disk.  The tradeoffs are that cvs-fast-export is much
+faster than cvs2git (by a ratio of over 100:1 on real repositories),
+but will fail with an out-of-memory error on CVS repositories large
+enough that the metadata storage (not the content blobs, just the
+attributions and comments) overflow your physical memory. In practice,
+you are unlikely to push this limit on a machine with 32GB of RAM and
+effectively certain not to with 64GB.  Attempts to do large
+conversions in only a 32-bit (4GB) address space are, on the other
+hand, unlikely to end well.
+
+The program's transient RAM requirements can be quite a bit
+larger; it must slurp in each entire master file once in order to
+do delta assembly and generate the version snapshots that will 
+become snapshots.  Using the -t option multiplies the expected amount
+of transient storage required by the number of threads; use with
+care, as it is easy to push memory usage so high that swap overhead
+overwhelms the gains from not constantly blocking on I/O.
+
+The program also requires temporary disk space equivalent
+to the sum of the sizes of all revisions in all files.
+
+On stock PC hardware in 2020, cvs-fast-export achieves processing
+speeds upwards of 64K CVS commits per minute on real repositories.
+Time performance is primarily I/O bound and can be improved by running
+on an SSD rather than spinning rust.
+
+== LIMITATIONS ==
 Branches occurring in only a subset of the analyzed masters are not
 correctly resolved; instead, an entirely disjoint history will be
 created containing the branch revisions and all parents back to the
@@ -333,37 +363,8 @@ program's behavior is nondeterministic.  If the same tag looks like it
 should be assigned to two different gitspace commits with the same
 timestamp, which tag it actually lands on will be random.
 
-cvs-fast-export is designed to do translation with all its
-intermediate structures in memory, in one pass. This contrasts with
-cvs2git(1), which uses multiple passes and journals intermediate
-structures to disk.  The tradeoffs are that cvs-fast-export is much
-faster than cvs2git (by a ratio of over 100:1 on real repositories),
-but will fail with an out-of-memory error on CVS repositories large
-enough that the metadata storage (not the content blobs, just the
-attributions and comments) overflow your physical memory. In practice,
-you are unlikely to push this limit on a machine with 32GB of RAM and
-effectively certain not to with 64GB.  Attempts to do large
-conversions in only a 32-bit (4GB) address space are, on the other
-hand, unlikely to end well.
-
-The program's transient RAM requirements can be quite a bit
-larger; it must slurp in each entire master file once in order to
-do delta assembly and generate the version snapshots that will 
-become snapshots.  Using the -t option multiplies the expected amount
-of transient storage required by the number of threads; use with
-care, as it is easy to push memory usage so high that swap overhead
-overwhelms the gains from not constantly blocking on I/O.
-
-The program also requires temporary disk space equivalent
-to the sum of the sizes of all revisions in all files.
-
-CVSNT is suppirted, but the CVSNT extension fieldss "hardlinks"
+CVSNT is supported, but the CVSNT extension fieldss "hardlinks"
 and "username" are ignored.
-
-On stock PC hardware in 2020, cvs-fast-export achieves processing
-speeds upwards of 64K CVS commits per minute on real repositories.
-Time performance is primarily I/O bound and can be improved by running
-on an SSD.
 
 == SANITY CHECKING ==
 After conversion, it is good practice to do the following verification
