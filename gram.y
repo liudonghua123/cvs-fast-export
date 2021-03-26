@@ -51,7 +51,7 @@ extern YY_DECL;	/* FIXME: once the Bison bug requiring this is fixed */
 
 %token		HEAD BRANCH ACCESS SYMBOLS LOCKS COMMENT DATE
 %token		BRANCHES DELTATYPE NEXT COMMITID EXPAND
-%token		GROUP KOPT OWNER PERMISSIONS FILENAME MERGEPOINT HARDLINKS
+%token		GROUP KOPT OWNER PERMISSIONS FILENAME MERGEPOINT HARDLINKS USERNAME
 %token		DESC LOG TEXT STRICT AUTHOR STATE
 %token		SEMI COLON IGNORED
 %token		BRAINDAMAGED_NUMBER
@@ -187,7 +187,7 @@ revtrailer	: /* empty */
 
 /* ignored items from CVS-NT (except hardlinks which is from late GNU CVS) */
 ignored         : owner | group | deltatype | kopt | 
-                  permissions | mergepoint | filename | hardlinks;
+                  permissions | mergepoint | filename | hardlinks | username;
 
 revision	: NUMBER date author state branches next revtrailer
 		  {
@@ -306,6 +306,9 @@ mergepoint	: MERGEPOINT NUMBER SEMI
 		  { $$ = $2; }
 		;
 hardlinks	: HARDLINKS strings SEMI
+		;
+
+username	: USERNAME strings SEMI
 		;
 
 strings		: IGNORED strings

@@ -4,6 +4,7 @@ Repository head::
    Document more exactly how dollar-cookie expansion works.
    Describe the known issues with vendor branches.
    Add support for dnf to buildprep.
+   Don't choke on CVS-NT username attribute.
 
 1.55: 2020-05-24::
    Document how to cope with branch cycle errors.

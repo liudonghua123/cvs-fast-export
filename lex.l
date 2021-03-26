@@ -70,6 +70,7 @@ YY_DECL;
 <INITIAL>filename		BEGIN(FNAME); return FILENAME;
 <INITIAL>mergepoint1		BEGIN(REVISION); return MERGEPOINT;
 <INITIAL>hardlinks		BEGIN(SKIPTOSEMI); return HARDLINKS;
+<INITIAL>username		BEGIN(SKIPTOSEMI); return USERNAME;
 <INITIAL>desc			return DESC;
 <INITIAL>log			return LOG;
 <INITIAL>text			BEGIN(SKIP); return TEXT;
@@ -116,9 +117,9 @@ YY_DECL;
 #ifdef __UNUSED__
 					/*
 					 * If we ever need the data from the kopt
-					 * or hardlinks clause,
+					 * or hardlinks (or username) clause,
 					 * (1) Condition in this.
-                                         * (2) Condition in the definition of
+					 * (2) Condition in the definition of
 					 * parse_data_until_newline() below.
 					 * (3) Change IGNORED to DATA
 					 * (4) Make the corresponding change
