@@ -1,6 +1,6 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.56: 2021-04-03::
    Document more exactly how dollar-cookie expansion works.
    Describe the known issues with vendor branches.
    Add support for dnf to buildprep.
