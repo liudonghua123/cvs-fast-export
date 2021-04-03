@@ -5,6 +5,7 @@ Repository head::
    Describe the known issues with vendor branches.
    Add support for dnf to buildprep.
    Don't choke on CVS-NT username attribute.
+   cvsreduce renamed to cvsstrip for consistency with reposurgeon strip.
 
 1.55: 2020-05-24::
    Document how to cope with branch cycle errors.

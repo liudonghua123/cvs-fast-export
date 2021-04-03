@@ -186,13 +186,13 @@ PYLINTOPTS = --rcfile=/dev/null --reports=n \
 	--dummy-variables-rgx='^_'
 PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0411,C0413,E1305,R0201,R0205,R0801,R0903,R0912,R0913,R0914,W0142,R1705,R1718,R1721,R1724,W0221,W0621"
 pylint:
-	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsreduce tests/*.py
+	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsstrip tests/*.py
 
 # Because we don't want copies of the test repositories in the distribution.
 distclean: clean
 	cd tests; $(MAKE) --quiet clean
 
-SOURCES = Makefile *.[ch] *.[yl] cvssync cvsconvert cvsreduce buildprep
+SOURCES = Makefile *.[ch] *.[yl] cvssync cvsconvert cvsstrip buildprep
 DOCS = control *.adoc cfe-logo.png
 ALL =  $(SOURCES) $(DOCS) tests
 cvs-fast-export-$(VERSION).tar.gz: $(ALL)

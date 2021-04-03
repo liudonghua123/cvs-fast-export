@@ -29,7 +29,7 @@ need `rsync` installed to use it.
 A wrapper script called `cvsconvert` runs a conversion to git and
 looks for content mismatches with the original CVS.
 
-Also included is a tool called `cvsreduce` that strips content out of
+Also included is a tool called `cvsstrip` that strips content out of
 trees of RCS/CVS masters, leaving only metadata structure in place. If
 you encounter a bug in this program, sending the maintainer a reduced
 version of your CVS tree greatly decreases the expected time to fix.

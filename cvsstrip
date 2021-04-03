@@ -2,7 +2,7 @@
 # Runs under both Python 2 and Python 3: preserve this property!
 # SPDX-License-Identifier: GPL-2.0+
 """
-cvsreduce - skeletonize CVS master files
+cvsstrip - skeletonize CVS master files
 
 Called as a filter, skeletonizes a CVS master presented on standard input
 and write it to standard output. If an argument is specified, it must be
@@ -96,7 +96,7 @@ def replace_escaped_text(inputf, replacement, outputf):
     "Replace text between @ delimiters with a specified string."
     leader = polystr(inputf.read(1))
     if leader != '@':
-        sys.stderr.write("cvsreduce: fatal error, @ leader not where expected.\n")
+        sys.stderr.write("cvsstrip: fatal error, @ leader not where expected.\n")
         sys.exit(1)
     else:
         outputf.write('@' + replacement.replace("@", r'@@'))
@@ -111,14 +111,14 @@ def replace_escaped_text(inputf, replacement, outputf):
     if nxt2 == '\n':
         outputf.write("@\n")
     else:
-        sys.stderr.write("cvsreduce: fatal error, @ trailer not followed by newline (%s).\n" % nxt2)
+        sys.stderr.write("cvsstrip: fatal error, @ trailer not followed by newline (%s).\n" % nxt2)
         sys.exit(1)
 
 def hash_escaped_text(inputf, outputf):
     "Replace text between @ delimiters with its MD5 hash."
     leader = polystr(inputf.read(1))
     if leader != '@':
-        sys.stderr.write("cvsreduce: fatal error, @ leader not where expected.\n")
+        sys.stderr.write("cvsstrip: fatal error, @ leader not where expected.\n")
         sys.exit(1)
     txt = ""
     while True:
@@ -136,7 +136,7 @@ def hash_escaped_text(inputf, outputf):
         m.update(polybytes(txt))
         outputf.write("@%s\n@\n" % m.hexdigest())
     else:
-        sys.stderr.write("cvsreduce: fatal error, @ trailer not followed by newline (%s).\n" % nxt2)
+        sys.stderr.write("cvsstrip: fatal error, @ trailer not followed by newline (%s).\n" % nxt2)
         sys.exit(1)
 
 def skeletonize(inputf, outputf):
@@ -199,14 +199,14 @@ if __name__ == '__main__':
         skeletonize(sys.stdin, sys.stdout)
         sys.exit(0)
     elif not os.path.isdir(arguments[0]):
-        sys.stderr.write("cvsreduce: argument must be a directory.\n")
+        sys.stderr.write("cvsstrip: argument must be a directory.\n")
         sys.exit(1)
 
     originals = arguments[0]
     if not outdir:
         outdir = originals + "-reduced"
     if os.path.exists(outdir):
-        sys.stderr.write("cvsreduce: refusing to step on %s.\n" % outdir)
+        sys.stderr.write("cvsstrip: refusing to step on %s.\n" % outdir)
         sys.exit(1)
 
     # Directory traversal
@@ -233,7 +233,7 @@ if __name__ == '__main__':
                 old.close()
                 new.close()
             else:
-                sys.stderr.write("cvsreduce: %s isn't a CVS master.\n" % oldname)
+                sys.stderr.write("cvsstrip: %s isn't a CVS master.\n" % oldname)
                 shutil.copyfile(oldname, newname)
 
 # end

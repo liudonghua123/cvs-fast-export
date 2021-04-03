@@ -135,13 +135,13 @@ z_regress:
 	@for rtest in $(UNSTRIPPED); do \
 		base=`basename $${rtest}`; \
 		echo "  $${base}"; \
-		cvsreduce <$${rtest} | $(DIFF) reductions/$${base}.reduced -; \
+		cvsstrip <$${rtest} | $(DIFF) reductions/$${base}.reduced -; \
 	done
 z_rebuild:
 	@for rtest in $(UNSTRIPPED); do \
 		base=`basename $${rtest}`; \
 		echo "Remaking $${base}.reduced "; \
-		cvsreduce <$${rtest} >reductions/$${base}.reduced; \
+		cvsstrip <$${rtest} >reductions/$${base}.reduced; \
 	done
 
 z2_regress:

@@ -58,7 +58,7 @@ its implementation has a history of buggy behavior in this area.  It
 is possible that damaged or ambiguous metadata in the Attic file
 is the cause of error.
 +
-By defintion, deleting an Attic master cannot affect the content at
+By definition, deleting an Attic master cannot affect the content at
 the head revision. But deleting it removes the entire past history
 of whatever file it controls.
 
@@ -96,7 +96,7 @@ reproduce the misbehavior. The cvsconvert wrapper script should be
 useful for getting a concise summary of errors visible at tagged
 locations and branches.
 
-There is a tool called 'cvsreduce" in the cvs-fast-export
+There is a tool called 'cvsstrip" in the cvs-fast-export
 distribution.  It makes a skeletonized copy of a CVS repository,
 dropping out all the content but leaving the metadata in place.
 Revision comments are replaced with their MD5 hashes, very short 
