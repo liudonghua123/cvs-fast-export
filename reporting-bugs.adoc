@@ -112,6 +112,34 @@ keyword expansion, which will all go away when the file is
 skeletonized).  If it does not, try skeletonizing with -t instead
 to preserve non-sticky tags
 
+If you have a core dump that persists after a master has had cvsstrip
+applied, there is probably a garbled diff in the revision sequence
+somewhere.  Here's an example:
+
+-----
+@
+text
+@d7 1
+a7 1
+......
+d9 2
+a13 1
+@
+-----
+
+The last two lines are incorrect.  If they were replaced by three
+lines that are parallel to the earlier append command...
+
+-----
+a13 1
+humpty dumpty
+@
+-----
+
+...that would work.  CVS occasionally drops these broken diff sections
+in masters, but has an unknown interpretation rule (or possibly sn
+outright bug) that masks them.
+
 Now try to make the skeletonized repository as small as possible by
 removing swathes of files from it, checking each time to make sure the
 error continues to reproduce. It is best if you can reduce the fileset
