@@ -408,15 +408,6 @@ fatal: internal error - duplicate key in red black tree::
      files. This is a sign of a corrupted revision history; you will
      need to manually inspect the master and remove one of the duplicates.
 
-child commit emitted before parent exists::
-     Skew in client timestamps produced a situation in which time
-     order of parent and child commits is backwards.  If you are
-     running multithreaded, this probably means two CVS commits with
-     identical timestamps were randomly processed in the wrong order;
-     try forcing single-thread operation with -t 0. If the error
-     recurs with -t 0, this indicates a serious metadata malformation
-     or cvs-fast-export bug and should be reported to the maintainers.
-
 tag could not be assigned to a commit::
      RCS/CVS tags are per-file, not per revision. If developers are not
      careful in their use of tagging, it can be impossible to associate a
@@ -536,6 +527,11 @@ internal error - lost tag::
      Late in analysis (after changeset coalescence) a tag lost its
      commit reference.  This should never happen and probably indicates
      an internal error in cvs-fast-export: please file a bug report.
+
+internal error - child commit emitted before parent exists::
+     This should never happen.  If it does, cvs-fast-export's
+     algorithm for reordering commits into canonical Git form has failed.
+     This is a bug and should be reported to the maintainers.
 
 == REPORTING BUGS ==
 Report bugs to Eric S. Raymond <esr@thyrsus.com>. Please read

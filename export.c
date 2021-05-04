@@ -512,7 +512,8 @@ export_commit(git_commit *commit, const char *branch,
 	    if (markmap[commit->parent->serial] <= 0) 
 	    {
 		cleanup(opts);
-		fatal_error("child commit emitted before parent exists");
+		/* should never happen */
+		fatal_error("internal error: child commit emitted before parent exists");
 	    }
 	    else if (opts->fromtime < commit->parent->date)
 		printf("from :%d\n", (int)markmap[commit->parent->serial]);
@@ -588,63 +589,9 @@ static int export_ncommit(const git_repo *rl)
 struct commit_seq {
     git_commit *commit;
     rev_ref *head;
+    bool isbase;
     bool realized;
 };
-
-static int compare_commit(const git_commit *ac, const git_commit *bc)
-/* attempt the mathematically impossible total ordering on the DAG */
-{
-    time_t timediff;
-    int cmp;
-    
-    timediff = ac->date - bc->date;
-    if (timediff != 0)
-	return timediff;
-    timediff = ac->date - bc->date;
-    if (timediff != 0)
-	return timediff;
-    if (bc == ac->parent || (ac->parent != NULL && bc == ac->parent->parent))
-	return 1;
-    if (ac == bc->parent || (bc->parent != NULL && ac == bc->parent->parent))
-	return -1;
-
-    /* 
-     * Any remaining tiebreakers would be essentially arbitrary,
-     * inserted just to have as few cases where the threaded scheduler
-     * is random as possible.
-     */
-    cmp = strcmp(ac->author, bc->author);
-    if (cmp != 0)
-	return cmp;
-    cmp = strcmp(ac->log, bc->log);
-    if (cmp != 0)
-	return cmp;
-    
-    return 0;
-}
-
-static int sort_by_date(const void *ap, const void *bp)
-/* return > 0 if ap newer than bp, < 0 if bp newer than ap */
-{
-    git_commit *ac = ((struct commit_seq *)ap)->commit;
-    git_commit *bc = ((struct commit_seq *)bp)->commit;
-
-    /* older parents drag tied commits back in time (in effect) */ 
-    for (;;) {
-	int cmp;
-	if (ac == bc)
-	    return 0;
-	cmp = compare_commit(ac, bc);
-	if (cmp != 0)
-	    return cmp;
-	if (ac->parent != NULL && bc->parent != NULL) {
-	    ac = ac->parent;
-	    bc = bc->parent;
-	    continue;
-	}
-	return 0;
-    }
-}
 
 static struct commit_seq *canonicalize(git_repo *rl)
 /* copy/sort collated commits into git-fast-export order */
@@ -667,7 +614,7 @@ static struct commit_seq *canonicalize(git_repo *rl)
      * way to arrange this is to reverse the branches in the array, fill
      * the array in forward order, and dump it forward order.
      */
-    struct commit_seq *history;
+    struct commit_seq *history, *hp;
     int n;
     int branchbase;
     rev_ref *h;
@@ -698,7 +645,35 @@ static struct commit_seq *canonicalize(git_repo *rl)
 		dump_commit(c, stderr);
 #endif /* ORDERDEBUG */
 	    }
+	    history[branchbase].isbase = true;
 	    branchbase += branchlength;
+	}
+    }
+
+    /*
+     * Topological ordering is now correct.  Shuffle commits to make it as
+     * consistent with time order as we can without changing the topology.  To
+     * do this, we go to each commit in turn and move it as far towards the root
+     * as we can without moving it past a commit that is (a) its parent, (b) on
+     * a different branch, or (c) has an older datestamp.
+     *
+     * This is worse than O(n**2) in the number of commits, alas.
+     */
+    for (hp = history+1; hp < history + export_stats.export_total_commits; hp++) {
+	struct commit_seq sc, *tp, *bp = hp;
+#define is_parent_of(x, y) (((struct commit_seq *)x)->commit == ((struct commit_seq *)y)->commit->parent)
+#define is_branchroot_of(x, y) ((x)->head == (y)->head && (x)->isbase)
+#define is_older_than(x, y) (((struct commit_seq *)x)->commit->date < ((struct commit_seq *)y)->commit->date)
+	/* back up as far as we can */
+	while (!is_parent_of(bp-1, hp) && !is_branchroot_of(bp-1, hp) && !is_older_than(bp-1, hp))
+	    bp--;
+	if (bp < hp) {
+	    /* shift commits up and put *hp where *bp was */
+	    sc = *hp;
+	    for (tp = hp; tp > bp; tp--) {
+		tp[0] = tp[-1];
+	    }
+	    *bp = sc;
 	}
     }
 
@@ -779,7 +754,6 @@ void export_commits(forest_t *forest,
 	fputs("#reposurgeon sourcetype cvs\n", stdout);
 
     struct commit_seq *history, *hp;
-    bool sortable;
 
     history = canonicalize(rl);
 
@@ -788,24 +762,6 @@ void export_commits(forest_t *forest,
     for (hp = history; hp < history + export_stats.export_total_commits; hp++)
 	dump_commit(hp->commit, stderr);
 #endif /* ORDERDEBUG2 */
-
-    /* 
-     * Check that the topo order is consistent with time order.
-     * If so, we can sort commits by date without worrying that
-     * we'll try to ship a mark before it's defined.
-     */
-    sortable = true;
-    for (hp = history; hp < history + export_stats.export_total_commits; hp++) {
-	if (hp->commit->parent && hp->commit->parent->date > hp->commit->date) {
-	    sortable = false;
-	    warn("some parent commits are younger than children.\n");
-	    break;
-	}
-    }
-    if (sortable)
-	qsort((void *)history, 
-	      export_stats.export_total_commits, sizeof(struct commit_seq),
-	      sort_by_date);
 
 #ifdef ORDERDEBUG2
     fputs("Export phase 3:\n", stderr);
