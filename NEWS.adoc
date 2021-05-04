@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Abolish commit sorting by timestamp in the emit stage.
+
 1.56: 2021-04-03::
    Document more exactly how dollar-cookie expansion works.
    Describe the known issues with vendor branches.
