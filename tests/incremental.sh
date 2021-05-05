@@ -1,5 +1,5 @@
 #!/bin/sh
-## Test commit and blovb filtering with --
+## Test commit and blob filtering with --
 out="/tmp/incremental-out-$$"
 while getopts os opt
 do
@@ -24,9 +24,9 @@ then
     # :7 and :9 are the blobs attached to the selected commits
     if grep -q ":7" $out && grep -q ":9" $out
     then
-	echo "$0: PASSED"
+	echo "ok - $0"
     else
-	echo "$0: FAILED"
+	echo "not ok - $0"
 	exit 1
     fi
 fi

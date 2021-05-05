@@ -52,9 +52,9 @@ s_rebuild: neutralize.map
 s_regress: neutralize.map
 	@echo "== Dump regressions =="
 	@-for file in $(TESTLOADS); do \
-	    echo -n "  $${file} "; grep -a '##' $${file}.tst  || echo ' ## (no description)'; \
+	    legend=$$( ( grep -a '##' $${file}.tst || echo ' ## (no description)' ) | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | $(DIFF) $${file}.chk -; \
+	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${legend}" $${file}.chk; \
 	done
 
 MASTERS := $(shell ls -1 *,v | sed '/,v/s///')
@@ -66,8 +66,8 @@ m_rebuild:
 m_regress:
 	@echo "== Master-parsing regressions =="
 	@-for file in $(MASTERS); do \
-	    echo -n "  $${file}: "; sed <$${file},v -n -e '/^comment[	 ]*@# \(.*\)@;/s//\1/p'; \
-	    $(CVS_FAST_EXPORT) $${file},v 2>&1 | $(DIFF) $${file}.chk -; \
+	    legend=$$(sed <$${file},v -n -e '/^comment[	 ]*@# \(.*\)@;/s//\1/p'); \
+	    $(CVS_FAST_EXPORT) $${file},v 2>&1 | tapdiffer "$${legend}" $${file}.chk; \
 	done
 
 INCREMENTAL=twobranch
@@ -81,9 +81,9 @@ i_rebuild: neutralize.map
 i_regress: neutralize.map
 	@echo "== Incremental-dump regressions =="
 	@-for file in $(INCREMENTAL); do \
-	    echo -n "  $${file} "; grep -a '##' $${file}.tst  || echo ' ## (no description)'; \
+	    legend=$$( ( grep -a '##' $${file}.tst  || echo ' ## (no description)') | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | $(DIFF) $${file}.inc-chk -; \
+	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | tapdiffer "$${legend}" $${file}.inc-chk; \
 	done
 
 REDUCED=oldhead
@@ -95,8 +95,8 @@ r_rebuild: neutralize.map
 r_regress: neutralize.map
 	@echo "== Repo regressions =="
 	@-for repo in $(REDUCED); do \
-	    echo -n "  $${repo} "; grep -a '##' $${repo}.testrepo/README  || echo ' ## (no description)'; \
-	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | $(DIFF) $${repo}.chk -; \
+	    legend=$$( ( grep -a '##' $${repo}.testrepo/README  || echo ' ## (no description)') | sed 's/## //' ); \
+	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${legend}" $${repo}.chk; \
 	done
 
 PYTESTS=t9601 t9602 t9603 t9604 t9605
@@ -104,8 +104,8 @@ PATHSTRIP = sed -e '/\/.*tests/s//tests/'
 t_regress:
 	@echo "== Pathological cases =="
 	@for pytest in $(PYTESTS); do \
-		echo -n "  $${pytest} "; grep -a '##' $${pytest}.py  || echo ' ## (no description)'; \
-		python $${pytest}.py 2>&1 | $(PATHSTRIP) | $(DIFF) $${pytest}.err -; \
+		legend=$$( ( grep -a '##' $${pytest}.py  || echo ' ## (no description)') | sed 's/## //' ); \
+		python $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${legend}" $${pytest}.err; \
 	done
 t_rebuild:
 	@for pytest in $(PYTESTS); do \
