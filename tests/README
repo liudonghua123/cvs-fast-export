@@ -6,6 +6,9 @@ Warning: The regression tests will fail spuriously if your CVS lacks the
 MirOS patches.  These are carried by Debian Linux and derivatives; you can
 check by Looking for "MirDebian" in the output of cvs --version.
 
+The cygwin cvs package does not respect the -Q (very quiet) flag on all commands.
+Expect some noise when building the test repositories.
+
 Ensure there is no CVSROOT folder in any parent directory.
 
 There are mutiple groups of tests in this directory.

@@ -40,7 +40,7 @@ cvs.h. If this happens, build from source with the limit raised.
 Sorry, these are a hard fail.  Both errors are rare and mysterious.
 If you stumble over either, none of your options are good.
 
-The branch-cycle error a symptom of some problem deep in the core
+The branch-cycle error is a symptom of some problem deep in the core
 clique-resolution logic in cvs-fast-export, and unfortunately nobody
 actually understands that code. Yes, even the person who originally
 wrote it doesn't. Until that changes, there are some limitations that

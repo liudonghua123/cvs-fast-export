@@ -20,7 +20,7 @@ Repository head::
    A new 'buildprep' script makes installation from source easier.
 
 1.52: 2020-04-09::
-   Incremental mode supprsses generation of defaults ignores.
+   Incremental mode suppresses generation of default ignores.
    The -F and -C mode switches are gone; output is now always mode -C.
 
 1.51: 2020-02-12::
