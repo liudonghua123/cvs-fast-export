@@ -439,7 +439,8 @@ if __name__ == '__main__':
             sys.exit(1)
         else:
             (repo, module) = (arguments[0], candidates[0])
-            sys.stderr.write("cvsconvert: processing %s/%s\n" % (repo, module))
+            if "-q" not in engine_opts:
+                sys.stderr.write("cvsconvert: processing %s/%s\n" % (repo, module))
     if repo == module:
         sys.stderr.write("cvsconvert: repo directory and module name cannot be the same.\n")
         sys.exit(1)
