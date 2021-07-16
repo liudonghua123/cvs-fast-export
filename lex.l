@@ -88,7 +88,6 @@ YY_DECL;
 					return LOGIN;
 				}
 <AUTHORSS>[-a-zA-Z_0-9+%][-a-zA-Z_0-9+/%=.~^\\*?]* {
-					fast_export_sanitize(yyscanner, cvs);
 					yylval->atom = atom(yytext);
 					return TOKEN;
 				}
