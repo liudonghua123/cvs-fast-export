@@ -149,7 +149,7 @@ clean:
 	rm -fr neutralize.map *.checkout *.repo *.pyc *.dot *.git *.git.fi
 
 # Here's how we actually run the tests with TAP:
-TEST_TARGETS=$(REGRESS_TARGETS) $(MASTER_TARGETS) $(INCREMENTAL_TARGETS) $(PYTEST_TARGETS) $(CT_TARGETS) $(CD_TARGETS) \
+TEST_TARGETS= $(CT_TARGETS) $(CD_TARGETS) $(REGRESS_TARGETS) $(MASTER_TARGETS) $(INCREMENTAL_TARGETS) $(PYTEST_TARGETS) \
 	$(Z_TARGETS) sporadic
 
 PREREQS=neutralize.map
