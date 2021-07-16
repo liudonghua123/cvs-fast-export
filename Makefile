@@ -145,7 +145,7 @@ clean:
 # check by Looking for "MirDebian" in the output of cvs --version.
 check: cvs-fast-export
 	-make EXTRA=-q cppcheck pylint
-	-shellcheck -f gcc buildprep tests/visualize tests/setpython tests/gitwash tests/incremental.sh
+	-shellcheck -f gcc buildprep tests/visualize tests/gitwash tests/incremental.sh
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
 
 install: install-bin install-man

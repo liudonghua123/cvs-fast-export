@@ -25,7 +25,7 @@ symbol CVS_MAX_BRANCHWIDTH in cvs.h and is normally 10. Try increasing
 it.
 
 The reason the default isn't higher is that increasing this limit
-blows up the program's working-set size. You'll know you've pushed ut
+blows up the program's working-set size. You'll know you've pushed it
 too far if the program OOMs.
 
 == Core dumps ==

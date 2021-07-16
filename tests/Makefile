@@ -33,9 +33,6 @@ check:
 ,v.dot:
 	$(CVS_FAST_EXPORT) -g $< >$*.dot
 
-test: s_regress m_regress r_regress i_regress t_regress c_regress sporadic z2_regress z3_regress
-	@echo "No diff output is good news."
-
 rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
 
 testlist:
@@ -144,16 +141,6 @@ Z_TARGETS=$(UNSTRIPPED:%=z-%)
 $(Z_TARGETS): z-%:
 	@(python2 ../cvsstrip <$(patsubst z-%,%,$@) | tapdiffer "$(patsubst z-%,%,$@) reduction (python2)" reductions/$(shell basename $(patsubst z-%,%,$@)).reduced) || echo "$@" >>$(FAILLOG)
 	@(python3 ../cvsstrip <$(patsubst z-%,%,$@) | tapdiffer "$(patsubst z-%,%,$@) reduction (python3)" reductions/$(shell basename $(patsubst z-%,%,$@)).reduced) || echo "$@" >>$(FAILLOG)
-
-z2_regress:
-	setpython python2
-	make z_regress
-	setpython python
-
-z3_regress:
-	setpython python3
-	make z_regress
-	setpython python
 
 sporadic:
 	@sh incremental.sh
