@@ -366,6 +366,8 @@ timestamp, which tag it actually lands on will be random.
 CVSNT is supported, but the CVSNT extension fieldss "hardlinks"
 and "username" are ignored.
 
+Non-ASCII characters in user IDs are not supported.
+
 == SANITY CHECKING ==
 After conversion, it is good practice to do the following verification
 steps:
