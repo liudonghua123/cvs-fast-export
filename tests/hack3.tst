@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Third example from the Hacking Guide
 
 import sys, testlifter

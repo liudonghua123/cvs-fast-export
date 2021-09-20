@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Testing for correct timestamp handling in author maps.
 import sys, testlifter, tempfile, os
 

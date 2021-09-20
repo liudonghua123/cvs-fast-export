@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Test handling of pathological tags
 #
 # This test was swiped from the git 1.8.1 tree, then modified to exercise

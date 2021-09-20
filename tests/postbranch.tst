@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Ilya Basin's test, failed by cvsps-3.x
 """
 Date: Sat, 20 Apr 2013 14:38:55 +0400

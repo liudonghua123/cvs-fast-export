@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Ubuntu deleted /ustr/bin/python, switch all invocations to python3.
+
 1.58: 2021-07-16::
    Document non-support of non-ASCII chracters in user IDs.
 

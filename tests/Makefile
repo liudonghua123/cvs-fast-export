@@ -7,13 +7,14 @@ SHELL = sh	# Do not introduce bashisms!
 CVS = cvs
 DIFF = diff -u -a
 CVS_FAST_EXPORT = ../cvs-fast-export $(OPTS)
+PYTHON = python3
 
 check: test
 
 .SUFFIXES: .tst .repo .testrepo .checkout .dot .fi ,v
 
 .tst.repo:
-	python $<
+	$(PYTHON) $<
 .repo.checkout:
 	$(CVS) -d :local:${CURDIR}/$*.repo -Q checkout module && mv module $*.checkout
 .repo.dot:
@@ -29,7 +30,7 @@ check: test
 ,v.dot:
 	$(CVS_FAST_EXPORT) -g $< >$*.dot
 
-test: s_regress m_regress r_regress i_regress t_regress c_regress sporadic # z2_regress z3_regress
+test: s_regress m_regress r_regress i_regress t_regress c_regress sporadic
 	@echo "No diff output is good news."
 
 rebuild: s_rebuild m_rebuild r_rebuild i_rebuild t_rebuild # z_rebuild
@@ -105,12 +106,12 @@ t_regress:
 	@echo "== Pathological cases =="
 	@for pytest in $(PYTESTS); do \
 		legend=$$( ( grep -a '##' $${pytest}.py  || echo ' ## (no description)') | sed 's/## //' ); \
-		python $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${legend}" $${pytest}.err; \
+		$(PYTHON) $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${legend}" $${pytest}.err; \
 	done
 t_rebuild:
 	@for pytest in $(PYTESTS); do \
 		echo "Remaking $${pytest}.err "; \
-		python $${pytest}.py 2>&1 | $(PATHSTRIP) >$${pytest}.err; \
+		$(PYTHON) $${pytest}.py 2>&1 | $(PATHSTRIP) >$${pytest}.err; \
 	done
 
 # Omitted:
@@ -143,16 +144,6 @@ z_rebuild:
 		echo "Remaking $${base}.reduced "; \
 		cvsstrip <$${rtest} >reductions/$${base}.reduced; \
 	done
-
-z2_regress:
-	setpython python2
-	make z_regress
-	setpython python
-
-z3_regress:
-	setpython python3
-	make z_regress
-	setpython python
 
 sporadic:
 	@echo "== Sporadic tests =="

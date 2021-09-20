@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## simplest possible linear repository with multiple commits
 
 import sys, testlifter

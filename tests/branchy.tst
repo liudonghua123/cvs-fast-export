@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## A branchy repo with deletions and only valid tags
 
 import sys, testlifter

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## basic test for CVS master parsing
 
 import sys, testlifter

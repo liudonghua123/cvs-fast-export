@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## A repo with identical tags attached to different changesets
 
 import sys, testlifter, time

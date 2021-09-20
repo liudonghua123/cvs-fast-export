@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Two-branch repo to test incremental dumping
 
 import sys, testlifter

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## A widely branched repo with long file revision strings.
 
 import sys, testlifter

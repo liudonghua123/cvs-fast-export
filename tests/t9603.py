@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Testing for correct patchset estimation
 
 # Structure of the test cvs repository

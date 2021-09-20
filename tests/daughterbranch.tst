@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Test for the daughter-branch bug
 
 # This was the description:

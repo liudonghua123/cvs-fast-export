@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ## Test handling of executable bit
 
 import sys, testlifter
