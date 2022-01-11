@@ -63,7 +63,7 @@ if [ "$DRYRUN" = "yes" ]
 then
     do='echo'
     echo "# Run this without -n|--dry-run, as root, for actual installation."
-    echo " #You may want to run an update from your package inddex first."
+    echo " #You may want to run an update from your package index first."
     echo "#"
 else
     do=""
