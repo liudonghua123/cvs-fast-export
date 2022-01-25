@@ -14,6 +14,10 @@ Will produce spurious errors if any CVS branch name had to be sanitized.
 #
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
+
+# pylint: disable=line-too-long,invalid-name,missing-class-docstring,useless-object-inheritance,missing-function-docstring,redefined-outer-name
+
+# pylint: disable=multiple-imports
 import sys, os, shutil, subprocess, time, filecmp
 
 try:
@@ -173,6 +177,7 @@ class CVSRepository(RCSRepository):
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("Creating module %s\n" % module)
         os.mkdir(module)
+    # pylint: disable=arguments-differ
     def checkout(self, module, checkout=None):
         "Create a checkout of this repo."
         self.checkouts.append(CVSCheckout(self, module, checkout))
@@ -305,6 +310,7 @@ class ConvertComparison(object):
     "Compare a CVS repository and its conversion for equality."
     # Needs to stay synchronized with reposurgeon's generic conversion makefile
     SUFFIX = "-git"
+    # pylint: disable=too-many-arguments
     def __init__(self, srepo=None, smodule=None, checkout=None, options="", showdiffs=False):
         self.repo        = CVSRepository(srepo, readonly=True)
         self.checkout    = self.repo.checkout(smodule, checkout)
@@ -314,11 +320,12 @@ class ConvertComparison(object):
 
         with directory_context(self.gitRepoName):
             self.branches = [name for name in capture_or_die("git branch -l").split() if name != '*' and not junkbranch(name)]
-            self.tags = [name for name in capture_or_die("git tag -l").split()]
+            self.tags = capture_or_die("git tag -l").split()
         self.branches.sort()
         if "master" in self.branches:
             self.branches.remove("master")
             self.branches = ["master"] + self.branches
+    # pylint: disable=too-many-branches,too-many-locals
     def compare_tree(self, legend, ref, success_expected=True):
         "Test to see if a tag or branch checkout has the expected content."
         preamble = "%s %s %s: " % (self.repo.name, legend, ref)
@@ -354,11 +361,11 @@ class ConvertComparison(object):
                 if self.showdiffs:
                     sys.stderr.write(preamble + "common: %d\n" %
                                      len([f for f in gitfiles if f in cvsfiles]))
-                    gitspace_only = set([f for f in gitfiles if not f in cvsfiles])
+                    gitspace_only = {f for f in gitfiles if not f in cvsfiles}
                     if gitspace_only:
                         sys.stderr.write(preamble + "gitspace only: %s\n" %
                                          gitspace_only)
-                    cvs_only = set([f for f in cvsfiles if not f in gitfiles])
+                    cvs_only = {f for f in cvsfiles if not f in gitfiles}
                     if cvs_only:
                         sys.stderr.write(preamble + "CVS only: %s\n" %
                                          cvs_only)
@@ -391,6 +398,7 @@ class ConvertComparison(object):
                 cc.compare_tree("branch", branch)
         for tag in cc.tags:
             cc.compare_tree("tag", tag)
+    # pylint: disable=no-self-use
     def command_returns(self, cmd, expected):
         seen = capture_or_die(cmd)
         succeeded = (seen.strip() == expected.strip())

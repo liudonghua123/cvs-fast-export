@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
-## Testing for correct timestamp handling in author maps.
-import sys, testlifter, tempfile, os
+'''
+Testing for correct timestamp handling in author maps.
+'''
+
+# pylint: disable=invalid-name
+
+# pylint: disable=multiple-imports
+import sys, tempfile, os, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")
 

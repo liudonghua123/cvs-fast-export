@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-## Testing for correct patchset estimation
+'''Testing for correct patchset estimation'''
 
 # Structure of the test cvs repository
 #
@@ -48,6 +48,7 @@
 #
 # Reported by Chris Rorvick.
 
+# pylint: disable=multiple-imports
 import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")

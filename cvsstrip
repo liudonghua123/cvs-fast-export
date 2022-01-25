@@ -31,6 +31,10 @@ imply the same changeset DAG as the unstripped originals, but be
 easier to pass around, faster to process, and not reveal potentially
 sensitive data.
 """
+
+# pylint: disable=line-too-long,invalid-name,missing-function-docstring,no-else-continue,too-many-branches
+
+# pylint: disable=multiple-imports
 import os, sys, getopt, hashlib, io, shutil
 
 strip_tags = True

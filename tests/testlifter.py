@@ -1,8 +1,12 @@
-"""
+'''
 Test framework for cvs-fast-export.
-"""
+'''
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
+
+# pylint: disable=line-too-long,invalid-name,useless-object-inheritance,missing-function-docstring,missing-class-docstring,.too-many-branches,too-many-arguments,too-many-locals
+
+# pylint: disable=multiple-imports
 import sys, os, shutil, subprocess, time, filecmp
 
 DEBUG_STEPS    = 1
@@ -118,7 +122,7 @@ class RCSRepository(object):
         streamfile = "%s.git.fi" % module
         self.stream(module, gitdir, streamfile, more_opts)
         self.run_with_cleanup("rm -fr {0} && mkdir {0} && git init --quiet {0}".format(gitdir))
-        self.run_with_cleanup('cat {2} | (cd {1} >/dev/null; git fast-import --quiet --done && git checkout)'.format(self.directory, gitdir, streamfile))
+        self.run_with_cleanup('cat {1} | (cd {0} >/dev/null; git fast-import --quiet --done && git checkout)'.format(gitdir, streamfile))
         self.conversions.append(gitdir)
         if not self.retain:
             os.remove(streamfile)
@@ -157,6 +161,7 @@ class CVSRepository(RCSRepository):
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("Creating module %s\n" % module)
         os.mkdir(module)
+    # pylint: disable=arguments-differ
     def checkout(self, module, checkout=None):
         "Create a checkout of this repo."
         self.checkouts.append(CVSCheckout(self, module, checkout))
@@ -299,7 +304,7 @@ class ConvertComparison(object):
         self.repo.convert("module", stem + ConvertComparison.SUFFIX, more_opts=options)
         with directory_context(stem + ConvertComparison.SUFFIX):
             self.branches = [name for name in capture_or_die("git branch -l").split() if name != '*' and not junkbranch(name)]
-            self.tags = [name for name in capture_or_die("git tag -l").split()]
+            self.tags = capture_or_die("git tag -l").split()
         self.branches.sort()
         if "master" in self.branches:
             self.branches.remove("master")
@@ -339,11 +344,11 @@ class ConvertComparison(object):
                 if self.showdiffs:
                     sys.stderr.write(preamble + "common: %d\n" %
                                      len([f for f in gitfiles if f in cvsfiles]))
-                    gitspace_only = set([f for f in gitfiles if not f in cvsfiles])
+                    gitspace_only = {f for f in gitfiles if not f in cvsfiles}
                     if gitspace_only:
                         sys.stderr.write(preamble + "gitspace only: %s\n" %
                                          gitspace_only)
-                    cvs_only = set([f for f in cvsfiles if not f in gitfiles])
+                    cvs_only = {f for f in cvsfiles if not f in gitfiles}
                     if cvs_only:
                         sys.stderr.write(preamble + "CVS only: %s\n" %
                                          cvs_only)
@@ -376,6 +381,7 @@ class ConvertComparison(object):
                 self.compare_tree("branch", branch)
         for tag in self.tags:
             self.compare_tree("tag", tag)
+    # pylint: disable=no-self-use
     def command_returns(self, cmd, expected):
         seen = capture_or_die(cmd)
         succeeded = (seen.strip() == expected.strip())

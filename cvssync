@@ -12,6 +12,8 @@ The magic (when there is any) is in knowing how to construct the
 actual path to the repository from the host, path and module arguments.
 """
 
+# pylint: disable=invalid-name.no-else-return
+
 # Hosting-site rules live inside the following function.
 
 def computesource(sourcehost, sourcepath, sourcemodule):
@@ -46,6 +48,7 @@ def computesource(sourcehost, sourcepath, sourcemodule):
 
 # You should not need to modify anything below this line
 
+# pylint: disable=multiple-imports,wrong-import-position
 import os, sys, getopt, subprocess
 
 verbose = False

@@ -181,12 +181,9 @@ CSUPPRESSIONS = -U__UNUSED__ -UYYPARSE_PARAM -UYYTYPE_INT16 -UYYTYPE_INT8 \
 cppcheck:
 	cppcheck -I. --template $(CC) --enable=all $(CSUPPRESSIONS) --suppress=unusedStructMember --suppress=unusedFunction --suppress=unreadVariable --suppress=uselessAssignmentPtrArg --suppress=missingIncludeSystem $(EXTRA) --inline-suppr *.[ch]
 
-PYLINTOPTS = --rcfile=/dev/null --reports=n \
-	--msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" \
-	--dummy-variables-rgx='^_'
-PYSUPPRESSIONS = --disable="C0103,C0111,C0301,C0325,C0326,C0410,C0411,C0413,E1305,R0201,R0205,R0801,R0903,R0912,R0913,R0914,W0142,R1705,R1718,R1721,R1724,W0221,W0621"
 pylint:
-	@pylint $(PYLINTOPTS) $(PYSUPPRESSIONS) cvssync cvsconvert cvsstrip tests/*.py
+	@pylint --score=n cvssync cvsconvert cvsstrip
+	@pylint --score=n tests/*.py
 
 # Because we don't want copies of the test repositories in the distribution.
 distclean: clean
