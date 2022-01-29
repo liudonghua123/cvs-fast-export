@@ -144,7 +144,7 @@ clean:
 # MirOS patches.  These are carried by Debian Linux and derivatives; you can
 # check by Looking for "MirDebian" in the output of cvs --version.
 check: cvs-fast-export
-	-make EXTRA=-q cppcheck pylint
+	-$(MAKE) EXTRA=-q cppcheck pylint
 	-shellcheck -f gcc buildprep tests/visualize tests/gitwash tests/incremental.sh
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
 

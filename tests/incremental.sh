@@ -15,7 +15,8 @@ shift $(($OPTIND - 1))
 trap '[ $out != /dev/stdout ] && rm -f $out' EXIT HUP INT QUIT TERM
 
 # shellcheck disable=SC2006
-idate=$(date -u -d"`rlog -r1.1.2.2 twobranch.repo/module/README,v | grep date | sed "s/date: \(.*\)\;  author.*/\1/"`" +%s)
+idate=$(cvs -d "$PWD/twobranch.repo" rlog -r1.1.2.2 module/README | sed -n "s/date: \(.*\)\;  author.*/\1/p" | ./parsedate.py)
+
 # shellcheck disable=SC2003,SC2046,SC2086
 find twobranch.repo/ -name "*,v" | cvs-fast-export $opts -i $(expr $idate - 1) >$out
 
