@@ -51,3 +51,6 @@ check by Looking for `MirDebian` in the output of `cvs --version`.
 
 See also the `NEWS.adoc` and `TODO.adoc` files.  There is an (incomplete) tour of
 the internals in `hacking.adoc`.
+
+If you find this code useful, please 
+https://www.patreon.com/esr[support me on Patreon.]
