@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
+## Test handling of vendor branches
 '''
-Test handling of vendor branches
 
 This test was swiped from the git 1.8.1 tree, then modified to exercise
 lifters directly rather than through git-cvsimport.

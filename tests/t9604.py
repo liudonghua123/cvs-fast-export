@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-Testing for correct timestamp handling in author maps.
+## Testing for correct timestamp handling in author maps.
 '''
 
 # pylint: disable=invalid-name

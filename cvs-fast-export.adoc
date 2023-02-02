@@ -7,7 +7,7 @@ cvs-fast-export - fast-export history from a CVS repository or RCS collection.
 == SYNOPSIS ==
 *cvs-fast-export*
     [-h] [-a] [-w 'fuzz'] [-g] [-l] [-v] [-q] [-V] [-T] [-p] [-P]
-    [-i 'date'] [-k 'expansion'] [-A 'authormap'] [-t threads]
+    [-i 'date'] [-A 'authormap'] [-t threads]
     [-R 'revmap'] [--reposurgeon] [-e 'remote'] [-s 'stripprefix']
 
 == DESCRIPTION ==
@@ -94,7 +94,7 @@ passed through to the git conversion without re-encoding.  In
 particular, it makes no attempt to fix up line endings (Unix \n vs,
 Windows \r\n vs. Macintosh \r), nor does it know about what repository
 filenames might collide with special filenames on any given platform.
-CVS $-keywords in the masters are not interpreted pr expanded; this
+CVS $-keywords in the masters are not interpreted or expanded; this
 prevents corruption of binary content.
 
 This program treats change comments as uninterpreted byte sequences to
