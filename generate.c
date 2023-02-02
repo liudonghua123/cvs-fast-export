@@ -216,13 +216,14 @@ enum expand_mode expand_override(char const *s)
 {
     if (s != NULL)
     {
+        /* Don't modify this without syncing the EXPAND constants in cvs.h */
 	char *const expand_names[] = {"kv", "kvl", "k", "v", "o", "b"};
 	int i;
 	for (i=0; i < 6; ++i)
 	    if (strcmp(s,expand_names[i]) == 0)
 		return(enum expand_mode) i;
     }
-    return EXPANDUNSPEC;
+    return EXPANDKB;
 }
 
 static char const *basefilename(const char* const p)
@@ -1052,10 +1053,7 @@ static node_t *generate_setup(generator_t *gen)
 
 	eb->current = eb->stack;
 	eb->Gfilename = gen->master_name;
-	if (gen->expand != EXPANDUNSPEC)
-	    eb->Gexpand = gen->expand;
-	else
-	    eb->Gexpand = EXPANDKKV;
+	eb->Gexpand = gen->expand;
 	eb->Gabspath = NULL;
 	Gline(eb) = NULL; Ggap(eb) = Ggapsize(eb) = Glinemax(eb) = 0;
     }
@@ -1091,7 +1089,7 @@ void generate_files(generator_t *gen,
     for (;;) {
 	if (node->commit != NULL && !node->commit->dead) {
 	    out_buffer_init(eb);
-	    if (eb->Gexpand < EXPANDKO)
+	    if (eb->Gexpand != EXPANDKB && eb->Gexpand != EXPANDKO)
 		expandedit(eb);
 	    else
 		snapshotedit(eb);

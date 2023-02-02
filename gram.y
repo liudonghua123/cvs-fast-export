@@ -108,8 +108,8 @@ header		: HEAD opt_number SEMI
 		| LOCKS locks SEMI lock_type
 		| COMMENT DATA SEMI
 		  { free($2); }
-		| EXPAND DATA SEMI
-		{ cvsfile->gen.expand = expand_override($2); }
+		| EXPAND TOKEN SEMI
+		  { cvsfile->gen.expand = expand_override($2); }
 		;
 locks		: locks lock
 		|

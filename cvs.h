@@ -133,13 +133,13 @@ typedef struct _edit_line {
 } editline_t;
 #endif
 
+/* Don't modify this without syncing expand_names in generate.c */
 enum expand_mode {EXPANDKKV,	/* default form, $<key>: <value>$ */
 		  EXPANDKKVL,	/* like KKV but with locker's name inserted */
 		  EXPANDKK,	/* keyword-only expansion, $<key>$ */
 		  EXPANDKV,	/* value-only expansion, $<value>$ */
 		  EXPANDKO,	/* old-value expansion */
 		  EXPANDKB,	/* old-value with no EOL normalization */
-		  EXPANDUNSPEC,	/* Not specified on command line */
 		};
 
 typedef struct _editbuffer {

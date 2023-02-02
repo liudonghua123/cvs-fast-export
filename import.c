@@ -135,7 +135,7 @@ rev_list_file(rev_file *file, analysis_t *out, cvs_master *cm, rev_master *rm)
 
     cvs = xcalloc(1, sizeof(cvs_file), __func__);
     cvs->gen.master_name = file->name;
-    cvs->gen.expand = EXPANDUNSPEC;
+    cvs->gen.expand = EXPANDKB;
     cvs->export_name = file->rectified;
     cvs->mode = buf.st_mode;
     cvs->verbose = verbose;

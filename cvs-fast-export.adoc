@@ -94,8 +94,11 @@ passed through to the git conversion without re-encoding.  In
 particular, it makes no attempt to fix up line endings (Unix \n vs,
 Windows \r\n vs. Macintosh \r), nor does it know about what repository
 filenames might collide with special filenames on any given platform.
-CVS $-keywords in the masters are not interpreted or expanded; this
-prevents corruption of binary content.
+
+By default, CVS $-keywords in the masters are not interpreted or
+expanded; this prevents corruption of binary content. However, this
+will be overridden if a master has an explicit "expand" metadata field
+specifying a CVS expansion type ("kv", "kvl", "k", "v", "o" or "b").
 
 This program treats change comments as uninterpreted byte sequences to
 be passed through to the git conversion without change or
@@ -339,15 +342,16 @@ in the tagged set first occurs; this is the commit the tag would point
 at if its incompleteness were ignored. The change in the branchlet
 commit *is* also applied forward in the nearby mainline.
 
-This program does the equivalent of cvs -kb when checking out masters,
-not performing any $-keyword expansion at all.  This has the advantage
-that binary files can never be clobbered, no matter when k option was
-set on the master.  It has the disadvantage that the data in $-headers
-is not reliable; at best you'll get the unexpanded version of the
-$-cookie, at worst you might get the committer/timestamp information
-for when the master was originally checked in, rather than when it
-was last checked out.  It's good practice to remove all dollar cookies
-as part of post-conversion cleanup.
+Unless there an explicit expand directive in the master, this program
+does the equivalent of cvs -kb when checking out masters, not
+performing any $-keyword expansion at all.  This has the advantage
+that binary files can never be clobbered.  It has the disadvantage
+that the data in $-headers is not reliable; at best you'll get the
+unexpanded version of the $-cookie, at worst you might get the
+committer/timestamp information for when the master was originally
+checked in, rather than when it was last checked out.  It's good
+practice to remove all dollar cookies as part of post-conversion
+cleanup.
 
 CVS vendor branches are a source of trouble. Sufficiently strange
 combinations of imports and local modifications will translate

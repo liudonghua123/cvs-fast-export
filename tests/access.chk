@@ -1,8 +1,8 @@
 blob
 mark :1
-data 1116
+data 1074
 static const char cexe_t_c[] =
-"@(#)$Id: access,v 1.1 2013/09/10 08:31:47 jw Exp $";
+"@(#)$Id$";
 /********************************************************************
  *
  *	Copyright (C) 1985-2013  John E. Wulff

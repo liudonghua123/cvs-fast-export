@@ -1,8 +1,8 @@
 blob
 mark :1
-data 356
+data 251
 #
-# $Header: /home/esr/public_html/cvs-fast-export/tests/keywords_default.c,v 1.1 2006/04/01 16:43:51 flameeyes Exp $
+# $Header$
 #
 # PAM configuration for the "passwd" service
 #
