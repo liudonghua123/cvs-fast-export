@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# Default keyword expansion@;
+
+
+1.1
+date	2006.04.01.16.43.51;	author flameeyes;	state Exp;
+branches;
+next	;
+commitid	3f7f442eadb44567;
+
+
+desc
+@@
+
+
+1.1
+log
+@Import sys-freebsd into main portage.
+(Portage version: 2.1_pre7-r3)
+@
+text
+@#
+# $Header$
+#
+# PAM configuration for the "passwd" service
+#
+
+# passwd(1) does not use the auth, account or session services.
+
+# password
+#password	requisite	pam_passwdqc.so		enforce=users
+password	required	pam_unix.so		no_warn try_first_pass nullok
+@
