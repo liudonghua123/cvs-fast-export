@@ -1,0 +1,42 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2005.01.30.03.50.15;	author dragonheart;	state Exp;
+branches
+	1.1.1.1;
+next	;
+
+1.1.1.1
+date	2005.11.30.09.53.24;	author chriswhite;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@c3daf4871240e6d537f7557c3d7b4818
+@
+text
+@parapin-1.0.0.ebuild,v content for 1.1
+@
+
+
+1.1.1.1
+log
+@585e3addfd28851ce8284bca18e152df
+@
+text
+@d1 1
+a1 1
+parapin-1.0.0.ebuild,v content for 1.1.1.1
+@
+

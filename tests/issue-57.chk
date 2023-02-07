@@ -1,0 +1,106 @@
+#reposurgeon sourcetype cvs
+blob
+mark :1
+data 31
+metadata.xml,v content for 1.1
+
+blob
+mark :2
+data 39
+parapin-1.0.0.ebuild,v content for 1.1
+
+commit refs/heads/master
+mark :3
+committer dragonheart <dragonheart> 101800 +0000
+data 33
+c3daf4871240e6d537f7557c3d7b4818
+
+M 100644 :1 metadata.xml
+M 100644 :2 parapin-1.0.0.ebuild
+M 100644 inline .gitignore
+data 199
+# CVS default ignores begin
+tags
+TAGS
+.make.state
+.nse_depinfo
+*~
+\#*
+.#*
+,*
+_$*
+*$
+*.old
+*.bak
+*.BAK
+*.orig
+*.rej
+.del-*
+*.a
+*.olb
+*.o
+*.obj
+*.so
+*.exe
+*.Z
+*.elc
+*.ln
+core
+# CVS default ignores end
+
+property cvs-revisions 42 metadata.xml 1.1
+parapin-1.0.0.ebuild 1.1
+
+blob
+mark :4
+data 35
+metadata.xml,v content for 1.1.1.1
+
+commit refs/heads/import-1.1.1
+mark :5
+committer chriswhite <chriswhite> 103000 +0000
+data 33
+585e3addfd28851ce8284bca18e152df
+
+from :3
+M 100644 :4 metadata.xml
+D parapin-1.0.0.ebuild
+property cvs-revisions 21 metadata.xml 1.1.1.1
+
+blob
+mark :6
+data 43
+parapin-1.0.0.ebuild,v content for 1.1.1.1
+
+commit refs/heads/master
+mark :7
+committer chriswhite <chriswhite> 104200 +0000
+data 33
+585e3addfd28851ce8284bca18e152df
+
+from :3
+M 100644 :6 parapin-1.0.0.ebuild
+property cvs-revisions 29 parapin-1.0.0.ebuild 1.1.1.1
+
+blob
+mark :8
+data 31
+metadata.xml,v content for 1.2
+
+commit refs/heads/master
+mark :9
+committer jlec <jlec> 105400 +0000
+data 33
+5878b14275f92af2aed588db1375412c
+
+from :7
+M 100644 :8 metadata.xml
+property cvs-revisions 17 metadata.xml 1.2
+
+reset refs/heads/master
+from :9
+
+reset refs/heads/import-1.1.1
+from :5
+
+done

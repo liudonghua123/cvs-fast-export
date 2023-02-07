@@ -87,7 +87,7 @@ i_regress: neutralize.map
 	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | tapdiffer "$${legend}" $${file}.inc-chk; \
 	done
 
-REDUCED=oldhead
+REDUCED=oldhead issue-57
 r_rebuild: neutralize.map
 	@-for file in $(REDUCED); do \
 	    echo "Remaking $${file}.chk"; \

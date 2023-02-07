@@ -1,0 +1,16 @@
+## test for GitLab issue #57
+
+This is the bug description from GitLaab isse #57L:
+
+----------------------------------------------------
+The CVS repository contains two files:
+
+parapin-1.0.0.ebuild with revisions 1.1 and 1.1.1.1
+metadata.xml with revisions 1.1, 1.2, and 1.1.1.1
+After conversion, I see commit 3481164 in the git master branch which doesn't belong there.
+
+Also, commit a01ad40 in the import-1.1.1 branch removes parapin-1.0.0.ebuild but it shouldn't.
+----------------------------------------------------
+
+The spurious delete is at mark :5.
+The commit that puts branch data on master is mark :7.
