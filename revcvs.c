@@ -258,6 +258,19 @@ cvs_master_branch_build(cvs_file *cvs, rev_master *master, const cvs_number *bra
     return head;
 }
 
+#ifdef __UNUSED__
+static void
+excise_branch(cvs_master *cm, rev_ref *branchtokill)
+{
+    rev_ref *branchhead;
+    /* find current vendor branch tip among all the branch tips ... */
+    for (branchhead = cm->heads; branchhead; branchhead = branchhead->next)
+	if (branchhead->next == branchtokill)
+	    /* ... and excise it */
+	    branchhead->next = branchtokill->next;
+}
+#endif /* __UNUSED__ */
+
 /*
  * "Vendor branches" (1.1.x) are created by importing sources from
  * an external source. In X.org, this was from XFree86 and DRI. When
