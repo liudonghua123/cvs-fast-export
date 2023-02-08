@@ -137,7 +137,7 @@ humpty dumpty
 -----
 
 ...that would work.  CVS occasionally drops these broken diff sections
-in masters, but has an unknown interpretation rule (or possibly sn
+in masters, but has an unknown interpretation rule (or possibly an
 outright bug) that masks them.
 
 Now try to make the skeletonized repository as small as possible by
