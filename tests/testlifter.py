@@ -4,7 +4,7 @@ Test framework for cvs-fast-export.
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
 
-# pylint: disable=line-too-long,invalid-name,useless-object-inheritance,missing-function-docstring,missing-class-docstring,.too-many-branches,too-many-arguments,too-many-locals
+# pylint: disable=line-too-long,invalid-name,useless-object-inheritance,missing-function-docstring,missing-class-docstring,.too-many-branches,too-many-arguments,too-many-locals,consider-using-f-string
 
 # pylint: disable=multiple-imports
 import sys, os, shutil, subprocess, time, filecmp
@@ -99,7 +99,7 @@ class RCSRepository(object):
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("%s <- %s" % (fn, content))
         with directory_context(self.directory):
-            with open(fn, "w") as fp:
+            with open(fn, "w", encoding='ascii', errors='surrogateescape') as fp:
                 fp.write(content)
     def add(self, filename):
         "Add a file to the version-controlled set."
@@ -243,14 +243,14 @@ class CVSCheckout(object):
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("%s <- %s" % (fn, content))
         with directory_context(self.directory):
-            with open(fn, "w") as fp:
+            with open(fn, "w", encoding='ascii', errors='surrogateescape') as fp:
                 fp.write(content)
     def append(self, fn, content):
         "Append to file content in the repository."
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("%s <-| %s" % (fn, content))
         with directory_context(self.directory):
-            with open(fn, "a") as fp:
+            with open(fn, "a", encoding='ascii', errors='surrogateescape') as fp:
                 fp.write(content)
     def update(self, rev):
         "Update the content to the specified revision or tag."

@@ -3,7 +3,7 @@
 ## Testing for correct timestamp handling in author maps.
 '''
 
-# pylint: disable=invalid-name
+# pylint: disable=invalid-name,consider-using-f-string,consider-using-with
 
 # pylint: disable=multiple-imports
 import sys, tempfile, os, testlifter
@@ -61,7 +61,7 @@ Rev  2 2005-01-31 18:00:00 -0600 User Two
 Rev  1 2005-01-01 00:00:00 +0000 User One
 """
 
-afp = open(tempfile.mktemp(), "w")
+afp = open(tempfile.mktemp(), "w", encoding='ascii', errors='surrogateescape')
 afp.write(authormap)
 afp.flush()
 cc = testlifter.ConvertComparison(stem="t9604", module="module",
