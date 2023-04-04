@@ -55,7 +55,7 @@ s_regress: neutralize.map
 	@-for file in $(TESTLOADS); do \
 	    legend=$$( ( grep -a '##' $${file}.tst || echo ' ## (no description)' ) | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${legend}" $${file}.chk; \
+	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${file}: $${legend}" $${file}.chk; \
 	done
 
 MASTERS := $(shell ls -1 *,v | sed '/,v/s///')
@@ -68,7 +68,7 @@ m_regress:
 	@echo "== Master-parsing regressions =="
 	@-for file in $(MASTERS); do \
 	    legend=$$(sed <$${file},v -n -e '/^comment[	 ]*@# \(.*\)@;/s//\1/p'); \
-	    $(CVS_FAST_EXPORT) $${file},v 2>&1 | tapdiffer "$${legend}" $${file}.chk; \
+	    $(CVS_FAST_EXPORT) $${file},v 2>&1 | tapdiffer "$${file}: $${legend}" $${file}.chk; \
 	done
 
 INCREMENTAL=twobranch
@@ -84,7 +84,7 @@ i_regress: neutralize.map
 	@-for file in $(INCREMENTAL); do \
 	    legend=$$( ( grep -a '##' $${file}.tst  || echo ' ## (no description)') | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
-	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | tapdiffer "$${legend}" $${file}.inc-chk; \
+	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -i $(THRESHOLD) -A neutralize.map 2>&1 | tapdiffer "$${file} $${legend}" $${file}.inc-chk; \
 	done
 
 REDUCED=oldhead issue-57
@@ -97,7 +97,7 @@ r_regress: neutralize.map
 	@echo "== Repo regressions =="
 	@-for repo in $(REDUCED); do \
 	    legend=$$( ( grep -a '##' $${repo}.testrepo/README  || echo ' ## (no description)') | sed 's/## //' ); \
-	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${legend}" $${repo}.chk; \
+	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${repo}; $${legend}" $${repo}.chk; \
 	done
 
 PYTESTS=t9601 t9602 t9603 t9604 t9605
@@ -106,7 +106,7 @@ t_regress:
 	@echo "== Pathological cases =="
 	@for pytest in $(PYTESTS); do \
 		legend=$$( ( grep -a '##' $${pytest}.py  || echo ' ## (no description)') | sed 's/## //' ); \
-		$(PYTHON) $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${legend}" $${pytest}.err; \
+		$(PYTHON) $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${pytest}: $${legend}" $${pytest}.err; \
 	done
 t_rebuild:
 	@for pytest in $(PYTESTS); do \
