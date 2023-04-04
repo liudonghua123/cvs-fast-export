@@ -97,7 +97,7 @@ r_regress: neutralize.map
 	@echo "== Repo regressions =="
 	@-for repo in $(REDUCED); do \
 	    legend=$$( ( grep -a '##' $${repo}.testrepo/README  || echo ' ## (no description)') | sed 's/## //' ); \
-	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${repo}; $${legend}" $${repo}.chk; \
+	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${repo}: $${legend}" $${repo}.chk; \
 	done
 
 PYTESTS=t9601 t9602 t9603 t9604 t9605
