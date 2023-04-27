@@ -49,7 +49,7 @@ CPPFLAGS += -DTHREADS
 #CFLAGS += -march=native
 
 # To enable debugging of the Yacc grammar, uncomment the following line
-# CPPFLAGS += -DYYDEBUG=1
+CPPFLAGS += -DYYDEBUG=1
 # To enable verbose debugging of the analysis stage, uncomment the following line
 #CPPFLAGS += -DCVSDEBUG=1
 # To enable debugging of blob export, uncomment the following line

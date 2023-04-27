@@ -1,0 +1,65 @@
+blob
+mark :1
+data 51
+projectx/doc/jms-1_0_2b-spec.pdf,v content for 1.1
+
+commit refs/heads/master
+mark :2
+committer cisers <cisers> 1094545449 +0000
+data 33
+da28248b4ec75efbe0ba7461142ed60d
+
+M 100644 :1 altexpand
+M 100644 inline .gitignore
+data 199
+# CVS default ignores begin
+tags
+TAGS
+.make.state
+.nse_depinfo
+*~
+\#*
+.#*
+,*
+_$*
+*$
+*.old
+*.bak
+*.BAK
+*.orig
+*.rej
+.del-*
+*.a
+*.olb
+*.o
+*.obj
+*.so
+*.exe
+*.Z
+*.elc
+*.ln
+core
+# CVS default ignores end
+
+
+blob
+mark :3
+data 55
+projectx/doc/jms-1_0_2b-spec.pdf,v content for 1.1.1.1
+
+commit refs/heads/master
+mark :4
+committer cisers <cisers> 1094545449 +0000
+data 33
+03a6ecc1dbc74cfaacfeb8b1f09b8998
+
+from :2
+M 100644 :3 altexpand
+
+reset refs/tags/rc1
+from :4
+
+reset refs/heads/master
+from :4
+
+done
