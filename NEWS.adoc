@@ -2,6 +2,7 @@
 
 Repository head::
    Fix for expansion of $ headers, doing what the manual actually says.
+   Fix for interpretation of the expand keywaord.
 
 1.59: 2021-09-20::
    Ubuntu deleted /usr/bin/python, switch all invocations to python3.
