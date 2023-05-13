@@ -28,7 +28,7 @@ XBS-Debian-Packages: cvs-fast-export
 
 XBS-VC-Tag-Template: %(version)s
 
-XBS-Validate: make check
+XBS-Validate: (cd tests; make clean); make check
 
 XBS-IRC-Channel: irc://chat.freenode.net/#reposurgeon
 
