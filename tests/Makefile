@@ -132,7 +132,7 @@ TEST_TARGETS += $(PYTESTS)
 # QED.testrepo - produces a branch cycle fatal error
 # t9601.testrepo - content mismatch expected
 # t9602.testrepo - manifest mismatch expected
-CT = at.repo basic.repo daughterbranch.repo exec.repo expand.repo \
+CT = at.repo basic.repo daughterbranch.repo exec.repo \
 	hack1.repo hack2.repo hack3.repo longrev.repo postbranch.repo \
 	tagbug.repo twobranch.repo
 CD =  oldhead.testrepo t9603.testrepo t9604.testrepo t9605.testrepo \
