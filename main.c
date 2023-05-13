@@ -367,7 +367,7 @@ main(int argc, char **argv)
     gather_stats("before parsing");
 
     /* build CVS structures by parsing masters; may read stdin */
-    analyze_masters(argc, argv, &import_options, &forest);
+    analyze_masters(argc, (const char**)argv, &import_options, &forest);
 
     gather_stats("after parsing");
 

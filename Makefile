@@ -179,7 +179,7 @@ CSUPPRESSIONS = -U__UNUSED__ -UYYPARSE_PARAM -UYYTYPE_INT16 -UYYTYPE_INT8 \
 	-U_SC_NPROCESSORS_ONLN -Ushort -Usize_t -Uyytext_ptr \
 	-Uyyoverflow -U__cplusplus -U__APPLE__ -DCLOCK_REALTIME=0
 cppcheck:
-	cppcheck -I. --template $(CC) --enable=all $(CSUPPRESSIONS) --suppress=unusedStructMember --suppress=unusedFunction --suppress=unreadVariable --suppress=uselessAssignmentPtrArg --suppress=missingIncludeSystem $(EXTRA) --inline-suppr *.[ch]
+	cppcheck -I. --template=gcc --enable=all $(CSUPPRESSIONS) --suppress=unusedStructMember --suppress=unusedFunction --suppress=unreadVariable --suppress=uselessAssignmentPtrArg --suppress=missingIncludeSystem --suppress=knownConditionTrueFalse $(EXTRA) --inline-suppr *.[ch]
 
 pylint:
 	@pylint --score=n cvssync cvsconvert cvsstrip

@@ -486,6 +486,8 @@ collate_branches(rev_ref **branches, int nbranch,
 		     c->master->name, branch->ref_name);
 	    continue;
 	}
+
+	// cppcheck-suppress nullPointer
 	REVISION_T_PACK(revisions[n], (cvs_commit *)NULL);
     }
 
@@ -602,6 +604,7 @@ collate_branches(rev_ref **branches, int nbranch,
 	    REVISION_T_PACK(revisions[n], to);
 	    continue;
 	Kill:
+	    // cppcheck-suppress nullPointer
 	    REVISION_T_PACK(revisions[n], (cvs_commit *)NULL);
 	}
 
@@ -1113,7 +1116,7 @@ collate_to_changesets(cvs_master *masters, size_t nmasters, int verbose)
  * Generate a list of files in uniq that aren't in common
  */
 static cvs_commit_list *
-rev_uniq_file(git_commit *uniq, git_commit *common, int *nuniqp)
+rev_uniq_file(git_commit *uniq, git_commit const *common, int *nuniqp)
 {
     int nuniq = 0;
     cvs_commit_list   *head = NULL, **tail = &head, *fl;

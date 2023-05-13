@@ -299,7 +299,7 @@ file_compare(const void *f1, const void *f2)
     return path_deep_compare(r1.rectified, r2.rectified);
 }
 
-void analyze_masters(int argc, char *argv[], 
+void analyze_masters(int argc, const char *argv[],
 			  import_options_t *analyzer, 
 			  forest_t *forest)
 /* main entry point; collect and parse CVS masters */

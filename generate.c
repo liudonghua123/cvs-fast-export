@@ -440,6 +440,7 @@ static enum edit_op parse_next_delta_command(editbuffer_t *eb,
     while (in_buffer_getc(eb) != '\n')
 	;
 
+    // cppcheck-suppress invalidTestForOverflow
     if (!nlines || line1+nlines < line1)
 	fatal_error("corrupt delta in %s", eb->Gfilename);
 
@@ -825,21 +826,23 @@ static uchar *
 load_text(editbuffer_t *eb, const cvs_text *text)
 {
     FILE *f = fopen(text->filename, "rb");
-    uchar *data;
 
     if (!f)
 	fatal_error("Cannot open %s", text->filename);
-    if (fseek(f, text->offset, SEEK_SET) == -1)
-        fatal_system_error("fseek %s", text->filename);
-    data = xmalloc(text->length + 2, __func__);
-    if (fread(data, 1, text->length, f) != text->length)
-        fatal_system_error("short read %s", text->filename);
-    if (data[0] != '@') fatal_error("doesn't start with '@'");
-    if (data[text->length - 1] != '@') fatal_error("doesn't end with '@'");
-    data[text->length] = ' ';
-    data[text->length + 1] = '\0';
-    fclose(f);
-    return data;
+    else {
+	uchar *data;
+	if (fseek(f, text->offset, SEEK_SET) == -1)
+	    fatal_system_error("fseek %s", text->filename);
+	data = xmalloc(text->length + 2, __func__);
+	if (fread(data, 1, text->length, f) != text->length)
+	    fatal_system_error("short read %s", text->filename);
+	if (data[0] != '@') fatal_error("doesn't start with '@'");
+	if (data[text->length - 1] != '@') fatal_error("doesn't end with '@'");
+	data[text->length] = ' ';
+	data[text->length + 1] = '\0';
+	fclose(f);
+	return data;
+    }
 }
 
 static void

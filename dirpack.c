@@ -245,9 +245,9 @@ revdir_pack_files(const cvs_commit ** files,
 		  const size_t nfiles, revdir *revdir)
 {
     size_t           start = 0, i;
-    const master_dir *curdir = NULL, *dir = NULL;
+    const master_dir *tdir = NULL, *adir = NULL;
     file_list        *fl;
-    unsigned short   ndirs = 0;
+    unsigned short   countdirs = 0;
 #ifdef ORDERDEBUG
     fputs("Packing:\n", stderr);
     {
@@ -270,24 +270,24 @@ revdir_pack_files(const cvs_commit ** files,
     /* pull out directories */
     for (i = 0; i < nfiles; i++) {
 	/* avoid strncmp as much as possible */
-	if (curdir != files[i]->dir) {
-	    if (!dir_is_ancestor(files[i]->dir, dir)) {
+	if (tdir != files[i]->dir) {
+	    if (!dir_is_ancestor(files[i]->dir, adir)) {
 		if (i > start) {
 		    fl = pack_file_list(files + start, i - start);
-		    fl_put(ndirs++, fl);
+		    fl_put(countdirs++, fl);
 		    start = i;
 		}
-		dir = files[i]->dir;
+		adir = files[i]->dir;
 	    }
-	    curdir = files[i]->dir;
+	    tdir = files[i]->dir;
 	}
     }
     if (dir) {
         fl = pack_file_list(files + start, nfiles - start);
-        fl_put(ndirs++, fl);
+        fl_put(countdirs++, fl);
     }
     
-    revdir->dirs = xmalloc(ndirs * sizeof(file_list *), "rev_dir");
-    revdir->ndirs = ndirs;
-    memcpy(revdir->dirs, dirs, ndirs * sizeof(file_list *));
+    revdir->dirs = xmalloc(countdirs * sizeof(file_list *), "rev_dir");
+    revdir->ndirs = countdirs;
+    memcpy(revdir->dirs, dirs, countdirs * sizeof(file_list *));
 }

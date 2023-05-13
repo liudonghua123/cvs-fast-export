@@ -175,30 +175,30 @@ cvs_master_branch_build(cvs_file *cvs, rev_master *master, const cvs_number *bra
     atom_n = atom_cvs_number(n);
     for (node = cvs_find_version(cvs, atom_n); node; node = node->next) {
 	cvs_version *v = node->version;
-	cvs_patch *p = node->patch;
-	cvs_commit *c;
+	cvs_patch *patch = node->patch;
+	cvs_commit *commit;
 	if (!v)
 	     continue;
-	c = master->commits + master->ncommits++;
-	c->dir = master->dir;
-	c->date = v->date;
-	c->commitid = v->commitid;
-	c->author = v->author;
-	c->tail = c->tailed = false;
-	c->refcount = c->serial = 0;
-	if (p)
-	    c->log = p->log;
-	 c->dead = v->dead;
+	commit = master->commits + master->ncommits++;
+	commit->dir = master->dir;
+	commit->date = v->date;
+	commit->commitid = v->commitid;
+	commit->author = v->author;
+	commit->tail = commit->tailed = false;
+	commit->refcount = commit->serial = 0;
+	if (patch != NULL)
+	    commit->log = patch->log;
+	 commit->dead = v->dead;
 	/* leave this around so the branch merging stuff can find numbers */
-	c->master = master;
-	c->number = v->number;
+	commit->master = master;
+	commit->number = v->number;
 	if (!v->dead) {
-	    node->commit = c;
+	    node->commit = commit;
 	}
-	c->parent = head;
+	commit->parent = head;
 	/* commits are already interned, these hashes build up revdir hashes */
-	c->hash = HASH_VALUE(c);
-	head = c;
+	commit->hash = HASH_VALUE(c);
+	head = commit;
     }
 
     if (head == NULL)

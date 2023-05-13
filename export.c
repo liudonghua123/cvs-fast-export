@@ -197,12 +197,14 @@ static void export_blob(node_t *node,
     if (wfp == NULL)
 	fatal_error("blobfile open of %s: %s (%d)", 
 		    path, strerror(errno), errno);
-    fprintf(wfp, "data %lu\n", (unsigned long)(len + extralen));
-    if (extralen > 0)
-	fwrite(CVS_IGNORES, extralen, sizeof(char), wfp);
-    fwrite(buf, len, sizeof(char), wfp);
-    fputc('\n', wfp);
-    (void)fclose(wfp);
+    else {
+	fprintf(wfp, "data %lu\n", (unsigned long)(len + extralen));
+	if (extralen > 0)
+	    fwrite(CVS_IGNORES, extralen, sizeof(char), wfp);
+	fwrite(buf, len, sizeof(char), wfp);
+	fputc('\n', wfp);
+	(void)fclose(wfp);
+    }
 }
 
 static int unlink_cb(const char *fpath, 
@@ -348,8 +350,9 @@ static const char *
 visualize_branch_name(const char *name)
 {
     if (name == NULL) {
+	//FIX ME: This warning should get uncommented - 2 tests wil need fixing
+	//warn("null branch name, probably from a damaged Attic file\n");
 	return "null";
-	warn("null branch name, probably from a damaged Attic file\n");
     } else
 	return name;
 }
@@ -492,24 +495,23 @@ export_commit(git_commit *commit, const char *branch,
     /* can't move before mark is updated */
     dump_commit(commit, stderr);
 #endif /* ORDERDEBUG2 */
-    if (report)
-	printf("mark :%d\n", (int)mark);
     if (report) {
 	static bool need_ignores = true;
 	if (noignores)
 	    need_ignores = false;
 	const char *ts;
+	printf("mark :%d\n", (int)mark);
 	ct = display_date(commit, mark, opts->force_dates);
 	ts = utc_offset_timestamp(&ct, timezone);
 	//printf("author %s <%s> %s\n", full, email, ts);
 	printf("committer %s <%s> %s\n", full, email, ts);
 	if (!opts->embed_ids)
-	    printf("data %zd\n%s\n", strlen(commit->log), commit->log);
+	    printf("data %zd\n%s\n", (ssize_t)strlen(commit->log), commit->log);
 	else
 	    printf("data %zd\n%s\n%s\n", strlen(commit->log) + strlen(revpairs) + 1,
 		commit->log, revpairs);
 	if (commit->parent) {
-	    if (markmap[commit->parent->serial] <= 0) 
+	    if (markmap[commit->parent->serial] == 0)
 	    {
 		cleanup(opts);
 		/* should never happen */
@@ -551,10 +553,8 @@ export_commit(git_commit *commit, const char *branch,
 		    fputc(*cp, opts->revision_map);
 		}
 	    }
-	    if (opts->reposurgeon)
-	    {
-		if (report)
-		    printf("property cvs-revisions %zd %s", strlen(revpairs), revpairs);
+	    if (opts->reposurgeon) {
+		printf("property cvs-revisions %zd %s", (ssize_t)strlen(revpairs), revpairs);
 	    }
 	}
     }
