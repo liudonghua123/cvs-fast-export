@@ -478,7 +478,7 @@ warning - branch point later than branch::
 
 more than one delta with number X.Y.Z::
      The CVS history contained duplicate file delta numbers. Should
-     never happen, and may indocate a corrupted CVS archive if it does;
+     never happen, and may indicate a corrupted CVS archive if it does;
      check head.
 
 {revision|patch} with odd depth::
