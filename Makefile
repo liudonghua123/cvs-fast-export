@@ -139,7 +139,6 @@ clean:
 	rm -f MANIFEST index.html *.tar.gz
 	rm -f *.gcno *.gcda
 
-
 # Warning: The regression tests will fail spuriously if your CVS lacks the
 # MirOS patches.  These are carried by Debian Linux and derivatives; you can
 # check by Looking for "MirDebian" in the output of cvs --version.
@@ -147,6 +146,11 @@ check: cvs-fast-export
 	-$(MAKE) EXTRA=-q cppcheck pylint
 	-shellcheck -f gcc buildprep tests/visualize tests/gitwash tests/incremental.sh
 	$(MAKE) -C tests -s -f $(srcdir)tests/Makefile
+
+# Like check, but forces rebuild of the generated test repositories first
+cleancheck:
+	@$(MAKE) -s -C tests clean
+	@$(MAKE) -s check
 
 install: install-bin install-man
 install-bin: cvs-fast-export cvssync cvsconvert
