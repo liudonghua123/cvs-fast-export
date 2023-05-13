@@ -9,7 +9,15 @@ DIFF = diff -u -a
 CVS_FAST_EXPORT = ../cvs-fast-export $(OPTS)
 PYTHON = python3
 
-check: test
+.PHOMY: CHECK FULLCHECK
+
+# Ordinary tests, use pregenerated repos for speed.
+check:
+	@$(MAKE) --quiet tap | ./tapview
+
+# Full test with rebuild of genert
+fullcheck:
+	@$(MAKE) --quiet clean tap | ./tapview
 
 .SUFFIXES: .tst .repo .testrepo .checkout .dot .fi ,v
 
