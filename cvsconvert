@@ -15,7 +15,7 @@ Will produce spurious errors if any CVS branch name had to be sanitized.
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
 
-# pylint: disable=line-too-long,invalid-name,missing-class-docstring,useless-object-inheritance,missing-function-docstring,redefined-outer-name,consider-using-f-string
+# pylint: disable=line-too-long,invalid-name,missing-class-docstring,useless-object-inheritance,missing-function-docstring,redefined-outer-name,consider-using-f-string,too-many-statements
 
 # pylint: disable=multiple-imports
 import sys, os, shutil, subprocess, time, filecmp
@@ -330,6 +330,8 @@ class ConvertComparison(object):
     def compare_tree(self, legend, ref, success_expected=True):
         "Test to see if a tag or branch checkout has the expected content."
         preamble = "%s %s %s: " % (self.repo.name, legend, ref)
+        if self.tapify:
+            preamble = "not ok = " + preamble
         if ref not in self.tags and ref not in self.branches:
             if success_expected:
                 sys.stderr.write(preamble + "%s unexpectedly missing.\n" % ref)
@@ -377,10 +379,13 @@ class ConvertComparison(object):
             if not filecmp.cmp(a, b, shallow=False):
                 success = False
                 if success_expected:
-                    sys.stderr.write("%s %s %s: %s and %s are different.\n" % (self.repo.name, legend, ref, a, b))
+                    sys.stderr.write(preamble + "%s and %s are different.\n" % (a, b))
                     if self.showdiffs:
-                        # FIX ME: tap mode should ussue thus as a TAP14 YAML block *after* a not ok
-                        os.system("diff -u %s %s" % (a, b))
+                        diff = capture_or_die("diff -u %s %s" % (a, b))
+                        if self.tapify:
+                            diff = "--- |\n" + diff + "...\n"
+                            diff = "".join(["    " + ln for ln in diff.splitlines()])
+                        sys.stdout.write(diff)
         if success:
             if not success_expected:
                 sys.stderr.write(preamble + "trees unexpectedly match\n")
@@ -405,11 +410,9 @@ class ConvertComparison(object):
             immediate = cc.compare_tree("tag", tag)
             if success and not immediate:
                 success = False
-        # FIX ME: issued after the diff in the failure case
+        # Messages for the failure case were shipped earlier
         if success:
             sys.stdout.write("ok - %s conversion compares clean.\n" % repo)
-        else:
-            sys.stdout.write("ok - %s conversion failed.\n" % repo)
         return success
     # pylint: disable=no-self-use
     def command_returns(self, cmd, expected):
