@@ -1,4 +1,6 @@
 cvs-fast-export: warning - putting nullbranch,v rev 1.1.0.2 on unnamed branch master-UNNAMED-BRANCH off master
+cvs-fast-export: null branch name, probably from a damaged Attic file
+cvs-fast-export: null branch name, probably from a damaged Attic file
 blob
 mark :1
 data 64

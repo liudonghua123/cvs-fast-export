@@ -350,8 +350,7 @@ static const char *
 visualize_branch_name(const char *name)
 {
     if (name == NULL) {
-	//FIX ME: This warning should get uncommented - 2 tests wil need fixing
-	//warn("null branch name, probably from a damaged Attic file\n");
+	warn("null branch name, probably from a damaged Attic file\n");
 	return "null";
     } else
 	return name;
