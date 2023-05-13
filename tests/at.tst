@@ -10,7 +10,7 @@ repo.init()
 repo.module("module")
 co = repo.checkout("module", "at.checkout")
 
-co.write("README", "The quick brown fox jumped @t the lazy dög.")
+co.write("README", "The quick brown fox jumped @t the lazy dog.")
 co.add("README")
 co.commit("This is a sample commit")
 

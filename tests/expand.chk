@@ -1,8 +1,8 @@
 #reposurgeon sourcetype cvs
 blob
 mark :1
-data 60
-$Revision: 1.1 $ should expand to something with 1.1 in it.
+data 54
+$Revision$ should expand to something with 1.1 in it.
 
 commit refs/heads/master
 mark :2
@@ -46,8 +46,8 @@ property cvs-revisions 11 README 1.1
 
 blob
 mark :3
-data 60
-$Revision: 1.2 $ should expand to something with 1.2 in it.
+data 54
+$Revision$ should expand to something with 1.2 in it.
 
 commit refs/heads/master
 mark :4
