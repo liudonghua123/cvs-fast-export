@@ -5,7 +5,7 @@
 cvsconvert - perform a Git conversion and test against the CVS original
 
 == SYNOPSIS ==
-*cvsconvert* [-v] [-n] [-p] [-A 'authormap'] [repo | repo/module]
+*cvsconvert* [-n] [-p] [-q] [-t] [-v] [-A 'authormap'] [repo | repo/module]
 
 == DESCRIPTION ==
 cvsconvert performs a conversion of a CVS repository to Git and
@@ -89,22 +89,22 @@ do when preparing the report to make a rapid resolution of the problem
 more likely.
 
 == OPTIONS ==
--p::
-    Enable progress reports from cvs-fast-export as it runs.
-
--k::
-    Pass a keyword-expansion specification to cvs-fast-export(1) and cvs(1).
-
 -n::
     Test only, do not keep the Git conversion after emitting diagnostics.
 
--v::
-    Verbose.  Show subcommands as they are being executed, and various
-    debugging messages.
+-p::
+    Enable progress reports from cvs-fast-export as it runs.
 
 -q::
     Tell cvs-fast-export to run quietly.
     
+-t::
+    Ship diagnostics in TAP format.
+    
+-v::
+    Verbose.  Show subcommands as they are being executed, and various
+    debugging messages.
+
 -A 'authormap'::
     Pass cvs-fast-export an author map; see its man page for the format.
 

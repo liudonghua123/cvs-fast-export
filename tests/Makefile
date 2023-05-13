@@ -51,7 +51,7 @@ s_rebuild: neutralize.map
 	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) >$${file}.chk 2>&1; \
 	done;
 s_regress: neutralize.map
-	@echo "== Dump regressions =="
+	@echo "# Dump regressions"
 	@-for file in $(TESTLOADS); do \
 	    legend=$$( ( grep -a '##' $${file}.tst || echo ' ## (no description)' ) | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
@@ -65,7 +65,7 @@ m_rebuild:
 	    $(CVS_FAST_EXPORT) $${file},v >$${file}.chk 2>&1; \
 	done;
 m_regress:
-	@echo "== Master-parsing regressions =="
+	@echo "# Master-parsing regressions"
 	@-for file in $(MASTERS); do \
 	    legend=$$(sed <$${file},v -n -e '/^comment[	 ]*@# \(.*\)@;/s//\1/p'); \
 	    $(CVS_FAST_EXPORT) $${file},v 2>&1 | tapdiffer "$${file}: $${legend}" $${file}.chk; \
@@ -80,7 +80,7 @@ i_rebuild: neutralize.map
 	    find $${file}.repo/module -name '*,v' | $(CVS_FAST_EXPORT) -T -A neutralize.map -i $(THRESHOLD) >$${file}.inc-chk 2>&1; \
 	done;
 i_regress: neutralize.map
-	@echo "== Incremental-dump regressions =="
+	@echo "# Incremental-dump regressions"
 	@-for file in $(INCREMENTAL); do \
 	    legend=$$( ( grep -a '##' $${file}.tst  || echo ' ## (no description)') | sed 's/## //' ); \
 	    $(MAKE) --quiet $${file}.repo; \
@@ -94,7 +94,7 @@ r_rebuild: neutralize.map
 	    find $${file}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) >$${file}.chk 2>&1; \
 	done;
 r_regress: neutralize.map
-	@echo "== Repo regressions =="
+	@echo "# Repo regressions"
 	@-for repo in $(REDUCED); do \
 	    legend=$$( ( grep -a '##' $${repo}.testrepo/README  || echo ' ## (no description)') | sed 's/## //' ); \
 	    find $${repo}.testrepo/module -name '*,v' | $(CVS_FAST_EXPORT) $(TESTOPTS) 2>&1 | tapdiffer "$${repo}: $${legend}" $${repo}.chk; \
@@ -103,7 +103,7 @@ r_regress: neutralize.map
 PYTESTS=t9601 t9602 t9603 t9604 t9605
 PATHSTRIP = sed -e '/\/.*tests/s//tests/'
 t_regress:
-	@echo "== Pathological cases =="
+	@echo "# Pathological cases"
 	@for pytest in $(PYTESTS); do \
 		legend=$$( ( grep -a '##' $${pytest}.py  || echo ' ## (no description)') | sed 's/## //' ); \
 		$(PYTHON) $${pytest}.py 2>&1 | $(PATHSTRIP) | tapdiffer "$${pytest}: $${legend}" $${pytest}.err; \
@@ -126,13 +126,13 @@ CT = at.repo basic.repo daughterbranch.repo exec.repo expand.repo \
 CD =  oldhead.testrepo t9603.testrepo t9604.testrepo t9605.testrepo \
 	vendor.testrepo
 c_regress:
-	@echo "== Conversion checks =="
-	@for ct in $(CT); do $(MAKE) --quiet $$ct; cvsconvert -q -n $$ct; done
-	@for cd in $(CD); do cvsconvert -q -n $$cd; done
+	@echo "# Conversion checks"
+	@for ct in $(CT); do $(MAKE) --quiet $$ct; cvsconvert -q -n -t $$ct; done
+	@for cd in $(CD); do cvsconvert -q -n -t $$cd; done
 
 UNSTRIPPED = $(shell ls issue22.txt,v t9601.testrepo/module/* at.repo/module/*)
 z_regress:
-	@echo "== Reductions =="
+	@echo "# Reductions"
 	@for rtest in $(UNSTRIPPED); do \
 		base=`basename $${rtest}`; \
 		echo "  $${base}"; \
@@ -146,7 +146,7 @@ z_rebuild:
 	done
 
 sporadic:
-	@echo "== Sporadic tests =="
+	@echo "# Sporadic tests"
 	@sh incremental.sh
 
 clean:

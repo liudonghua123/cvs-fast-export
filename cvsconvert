@@ -311,11 +311,12 @@ class ConvertComparison(object):
     # Needs to stay synchronized with reposurgeon's generic conversion makefile
     SUFFIX = "-git"
     # pylint: disable=too-many-arguments
-    def __init__(self, srepo=None, smodule=None, checkout=None, options="", showdiffs=False):
+    def __init__(self, srepo=None, smodule=None, checkout=None, options="", showdiffs=False, tapify=False):
         self.repo        = CVSRepository(srepo, readonly=True)
         self.checkout    = self.repo.checkout(smodule, checkout)
         self.gitRepoName = "%s-%s%s" % (self.repo.name, self.checkout.module, ConvertComparison.SUFFIX)
         self.showdiffs   = showdiffs
+        self.tapify      = tapify
         self.repo.convert(self.checkout.module, self.gitRepoName, more_opts=options)
 
         with directory_context(self.gitRepoName):
@@ -378,6 +379,7 @@ class ConvertComparison(object):
                 if success_expected:
                     sys.stderr.write("%s %s %s: %s and %s are different.\n" % (self.repo.name, legend, ref, a, b))
                     if self.showdiffs:
+                        # FIX ME: tap mode should ussue thus as a TAP14 YAML block *after* a not ok
                         os.system("diff -u %s %s" % (a, b))
         if success:
             if not success_expected:
@@ -390,14 +392,25 @@ class ConvertComparison(object):
         return success
     def checkall(self):
         "Check all named references - branches and tags - expecting matches."
+        success = True
         for branch in self.branches:
             if branch.endswith("UNNAMED-BRANCH"):
                 if verbose > 0:
                     sys.stderr.write("%s: skipping %s\n" % (os.path.basename(sys.argv[0]), branch))
             else:
-                cc.compare_tree("branch", branch)
+                immediate = cc.compare_tree("branch", branch)
+                if success and not immediate:
+                    success = False
         for tag in cc.tags:
-            cc.compare_tree("tag", tag)
+            immediate = cc.compare_tree("tag", tag)
+            if success and not immediate:
+                success = False
+        # FIX ME: issued after the diff in the failure case
+        if success:
+            sys.stdout.write("ok - %s conversion compares clean.\n" % repo)
+        else:
+            sys.stdout.write("ok - %s conversion failed.\n" % repo)
+        return success
     # pylint: disable=no-self-use
     def command_returns(self, cmd, expected):
         seen = capture_or_die(cmd)
@@ -414,10 +427,12 @@ class ConvertComparison(object):
 
 if __name__ == '__main__':
     import getopt
-    (opts, arguments) = getopt.getopt(sys.argv[1:], "npqvA:")
+    (opts, arguments) = getopt.getopt(sys.argv[1:], "npqtvA:")
     retain = True
     engine_opts = ""
     quiet = False
+    tap_output = False
+    err_leader = ""
     for (opt, arg) in opts:
         if opt == '-v':
             verbose += 1
@@ -427,6 +442,9 @@ if __name__ == '__main__':
             engine_opts += " -p"
         elif opt == '-q':
             engine_opts += " -q"
+        elif opt == '-t':
+            tap_output = True
+            err_leader = "not ok - "
         elif opt == '-A':
             engine_opts += " -A " + arg
 
@@ -440,35 +458,36 @@ if __name__ == '__main__':
     else:
         candidates = [sub for sub in os.listdir(arguments[0]) if sub != "CVSROOT" and os.path.isdir(os.path.join(arguments[0], sub))]
         if not candidates:
-            sys.stderr.write("cvsconvert: no modules under %s.\n" % arguments[0])
+            sys.stderr.write(err_leader + "cvsconvert: no modules under %s.\n" % arguments[0])
             sys.exit(1)
         elif len(candidates) > 1:
-            sys.stderr.write("cvsconvert: choose one of %s\n" % candidates)
+            sys.stderr.write(err_leader + "cvsconvert: choose one of %s\n" % candidates)
             sys.exit(1)
         else:
             (repo, module) = (arguments[0], candidates[0])
             if "-q" not in engine_opts:
-                sys.stderr.write("cvsconvert: processing %s/%s\n" % (repo, module))
+                sys.stderr.write(err_leader + "cvsconvert: processing %s/%s\n" % (repo, module))
     if repo == module:
-        sys.stderr.write("cvsconvert: repo directory and module name cannot be the same.\n")
+        sys.stderr.write(err_leader + "cvsconvert: repo directory and module name cannot be the same.\n")
         sys.exit(1)
     if not os.path.exists(repo):
-        sys.stderr.write("cvsconvert: repo %s does not exist.\n" % repo)
+        sys.stderr.write(err_leader + "cvsconvert: repo %s does not exist.\n" % repo)
         sys.exit(1)
     if os.path.realpath(os.path.abspath(".")) == os.path.realpath(os.path.abspath(repo)):
-        sys.stderr.write("cvsconvert: repo directory cannot be the current directory.\n")
+        sys.stderr.write(err_leader + "cvsconvert: repo directory cannot be the current directory.\n")
         sys.exit(1)
     cc = ConvertComparison(srepo=repo, smodule=module,
                            checkout=None,
                            options=engine_opts,
-                           showdiffs=True)
+                           showdiffs=True,
+                           tapify=tap_output)
     if verbose == 0 and "-p" in engine_opts:
         verbose = DEBUG_STEPS
     cc.repo.retain = retain
     cc.checkall()
     cc.checkout.cleanup()
     if retain:
-        sys.stderr.write("cvsconvert: conversion is in %s\n" % (cc.gitRepoName))
+        sys.stderr.write(err_leader + "cvsconvert: conversion is in %s\n" % (cc.gitRepoName))
     else:
         cc.cleanup()
 
