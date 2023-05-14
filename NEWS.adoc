@@ -1,8 +1,8 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.60: 2023-05-14::
    Fix for expansion of $ headers, doing what the manual actually says.
-   Fix for interpretation of the expand keywaord.
+   Fix for interpretation of the expand keyword.
    Test machinery is fully TAPified.
 
 1.59: 2021-09-20::
