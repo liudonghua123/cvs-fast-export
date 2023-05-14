@@ -48,7 +48,8 @@ standard output:
 * Permissions on all fileops related to a particular file will be
   controlled by the permissions on the corresponding master.  If the
   executable bit on the master is on, all its fileops will have 100755
-  permissions; otherwise 100644.
+  permissions; otherwise 100644. This tracks what GNU RCS does; the
+  "permissions" field in CVS-NT masters is not interpreted.
 
 * A set of file operations is coalesced into a changeset if either (a) they
   all share the same commitid, or (b) all have no commitid but
@@ -78,6 +79,10 @@ standard output:
   ignore behavior of CVS, those defaults are prepended to root
   .cvsignore blobs renamed to .gitignore, and a root .gitignore
   containing the defaults is generated if no such blobs exist.
+
+* The CVS-NT extension keywords "owner", "group", "deltatype", "kopt",
+  "permissions", "mergepoint", "filename", "hardlinks", and "username"
+  are all ignored. So is the "access" keyword.
 
 See the later section on RCS/CVS LIMITATIONS for more information on
 edge cases and conversion problems.
@@ -546,3 +551,5 @@ project page itself is at http://catb.org/~esr/cvs-fast-export
 
 == SEE ALSO ==
 rcs(1), cvs(1), cvssync(1), cvsconvert(1), reposurgeon(1), cvs2git(1).
+
+// end
