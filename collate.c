@@ -891,9 +891,9 @@ rev_tag_search(tag_t *tag, cvs_commit **revisions, git_repo *gl)
 	continue;
     r->next = tag_branch;
     g->author = atom("cvs-fast-export");
-    size_t len = strlen(tag->name) + 41;
+    size_t len = strlen(tag->name) + 42;
     char *log = xmalloc(len, __func__);
-    snprintf(log, len, "Synthetic commit for incomplete tag %s", tag->name);
+    snprintf(log, len, "Synthetic commit for incomplete tag %s\n", tag->name);
     g->log = atom(log);
     free(log);
 }
