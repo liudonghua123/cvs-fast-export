@@ -9,7 +9,6 @@ mark :2
 committer foo <foo> 101200 +0000
 data 24
 This is a sample commit
-
 M 100644 :1 README
 M 100644 inline .gitignore
 data 199
@@ -54,7 +53,6 @@ mark :4
 committer foo <foo> 102400 +0000
 data 52
 Should not generate an extra fileop after branching
-
 from :2
 M 100644 :3 superfluous
 property cvs-revisions 16 superfluous 1.1
@@ -72,7 +70,6 @@ mark :6
 committer foo <foo> 103600 +0000
 data 51
 This file should not appear on the daughter branch
-
 from :4
 M 100644 :5 feedyourhead
 property cvs-revisions 17 feedyourhead 1.1

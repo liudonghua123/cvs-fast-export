@@ -14,7 +14,6 @@ mark :3
 committer foo <foo> 101800 +0000
 data 25
 An example first checkin
-
 M 100644 :1 tweedledee
 M 100644 :2 tweedledum
 M 100644 inline .gitignore
@@ -66,7 +65,6 @@ mark :6
 committer foo <foo> 103600 +0000
 data 26
 An example second checkin
-
 from :3
 M 100644 :4 tweedledee
 M 100644 :5 tweedledum
@@ -78,7 +76,6 @@ mark :7
 committer cvs-fast-export <cvs-fast-export> 104200 +0000
 data 42
 Synthetic commit for incomplete tag FUBAR
-
 from :6
 M 100644 :2 tweedledum
 property cvs-revisions 15 tweedledum 1.1

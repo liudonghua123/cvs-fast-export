@@ -14,7 +14,6 @@ mark :3
 committer foo <foo> 101800 +0000
 data 13
 First commit
-
 M 100644 :1 bar.c
 M 100644 :2 foo.c
 M 100644 inline .gitignore
@@ -61,7 +60,6 @@ mark :5
 committer foo <foo> 103000 +0000
 data 14
 Second commit
-
 from :3
 M 100644 :4 bar.c
 property cvs-revisions 10 bar.c 1.2
@@ -81,7 +79,6 @@ mark :8
 committer foo <foo> 104800 +0000
 data 13
 Third commit
-
 from :5
 M 100644 :6 bar.c
 M 100644 :7 foo.c

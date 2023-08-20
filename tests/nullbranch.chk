@@ -12,7 +12,6 @@ mark :2
 committer obuyansk <obuyansk> 1311880677 +0000
 data 52
 commit latest build system version taken from louis
-
 M 100644 :1 nullbranch
 M 100644 inline .gitignore
 data 199
@@ -57,7 +56,6 @@ mark :4
 committer rcraighe <rcraighe> 1312215370 +0000
 data 66
 defect: 1 commit changes merged from br_REL-072811 to HEAD branch
-
 M 100644 :3 nullbranch
 
 commit refs/heads/master
@@ -65,7 +63,6 @@ mark :5
 committer aandriy <aandriy> 1511365518 +0000
 data 21
 Removed unused files
-
 from :4
 D nullbranch
 
@@ -74,7 +71,6 @@ mark :6
 committer jplejacq <jplejacq> 1512484400 +0000
 data 66
 defect: 1 commit changes merged from HEAD to br_REL-042916 branch
-
 
 reset refs/heads/master
 from :5

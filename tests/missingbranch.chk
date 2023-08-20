@@ -13,7 +13,6 @@ mark :2
 committer mycroft <mycroft> 744702676 +0000
 data 33
 89a25a6875ea64d374c9fe96cf975445
-
 M 100644 :1 missingbranch
 M 100644 inline .gitignore
 data 199
@@ -59,7 +58,6 @@ mark :4
 committer cgd <cgd> 752816103 +0000
 data 33
 e5c4dd39ec32f6d824ebb8fbc925873d
-
 from :2
 M 100644 :3 missingbranch
 
@@ -75,7 +73,6 @@ mark :6
 committer cgd <cgd> 752818136 +0000
 data 33
 d071e58f46e8bafc924f2e8585d485bf
-
 from :4
 M 100644 :5 missingbranch
 
@@ -91,7 +88,6 @@ mark :8
 committer cgd <cgd> 759400619 +0000
 data 33
 d3f06456d1d40470f261651166f36347
-
 from :6
 M 100644 :7 missingbranch
 
@@ -107,7 +103,6 @@ mark :10
 committer mycroft <mycroft> 776874476 +0000
 data 33
 eac3a5a5fe408f0129d454a84fc3fdb5
-
 from :8
 M 100644 :9 missingbranch
 

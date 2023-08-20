@@ -9,7 +9,6 @@ mark :2
 committer foo <foo> 101200 +0000
 data 24
 This is a sample commit
-
 M 100644 :1 README
 M 100644 inline .gitignore
 data 199
@@ -57,7 +56,6 @@ mark :4
 committer foo <foo> 102400 +0000
 data 30
 This is another sample commit
-
 from :2
 M 100644 :3 README
 property cvs-revisions 15 README 1.1.2.1
@@ -72,7 +70,6 @@ mark :6
 committer foo <foo> 103600 +0000
 data 38
 The obligatory Monty Python reference
-
 from :2
 M 100644 :5 README
 property cvs-revisions 11 README 1.2
@@ -87,7 +84,6 @@ mark :8
 committer foo <foo> 104800 +0000
 data 50
 We will put the dump theshold before this commit.
-
 from :4
 M 100644 :7 README
 property cvs-revisions 15 README 1.1.2.2
@@ -102,7 +98,6 @@ mark :10
 committer foo <foo> 106000 +0000
 data 44
 This commit should alter the master branch.
-
 from :6
 M 100644 :9 README
 property cvs-revisions 11 README 1.3

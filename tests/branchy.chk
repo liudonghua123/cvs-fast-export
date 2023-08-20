@@ -9,7 +9,6 @@ mark :2
 committer foo <foo> 101200 +0000
 data 24
 This is a sample commit
-
 M 100644 :1 README
 M 100644 inline .gitignore
 data 199
@@ -54,7 +53,6 @@ mark :4
 committer foo <foo> 102400 +0000
 data 30
 This is another sample commit
-
 from :2
 M 100644 :3 README
 property cvs-revisions 11 README 1.2
@@ -69,7 +67,6 @@ mark :6
 committer foo <foo> 103600 +0000
 data 21
 Create a doomed file
-
 from :4
 M 100644 :5 doomed
 property cvs-revisions 11 doomed 1.1
@@ -84,7 +81,6 @@ mark :8
 committer foo <foo> 104800 +0000
 data 20
 Add a spacer commit
-
 from :6
 M 100644 :7 doomed
 property cvs-revisions 11 doomed 1.2
@@ -130,7 +126,6 @@ mark :10
 committer foo <foo> 106000 +0000
 data 60
 Check that .cvsignore -> .gitignore name translation works.
-
 from :8
 M 100644 :9 .gitignore
 property cvs-revisions 15 .cvsignore 1.1
@@ -174,7 +169,6 @@ mark :12
 committer foo <foo> 107200 +0000
 data 79
 Check that .cvsignore -> .gitignore name translation works on updates as well.
-
 from :10
 M 100644 :11 .gitignore
 property cvs-revisions 15 .cvsignore 1.2
@@ -189,7 +183,6 @@ mark :14
 committer foo <foo> 108400 +0000
 data 38
 The obligatory Monty Python reference
-
 from :12
 M 100644 :13 README
 property cvs-revisions 11 README 1.3
@@ -199,7 +192,6 @@ mark :15
 committer foo <foo> 109000 +0000
 data 21
 Testing file removal
-
 from :14
 D doomed
 
@@ -213,7 +205,6 @@ mark :17
 committer foo <foo> 110200 +0000
 data 36
 Only README should be visible here.
-
 from :15
 M 100644 :16 README
 property cvs-revisions 11 README 1.4
@@ -228,7 +219,6 @@ mark :19
 committer foo <foo> 111400 +0000
 data 52
 Should not generate an extra fileop after branching
-
 from :17
 M 100644 :18 superfluous
 property cvs-revisions 16 superfluous 1.1
@@ -249,7 +239,6 @@ mark :21
 committer foo <foo> 112600 +0000
 data 34
 Do we get branch detection right?
-
 from :19
 M 100644 :20 README
 property cvs-revisions 15 README 1.4.2.1
@@ -264,7 +253,6 @@ mark :23
 committer foo <foo> 113800 +0000
 data 44
 This commit should alter the master branch.
-
 from :19
 M 100644 :22 README
 property cvs-revisions 11 README 1.5

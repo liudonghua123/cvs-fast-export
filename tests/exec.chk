@@ -9,7 +9,6 @@ mark :2
 committer foo <foo> 101200 +0000
 data 27
 Committing executable file
-
 M 100755 :1 exec
 M 100644 inline .gitignore
 data 199
@@ -54,7 +53,6 @@ mark :4
 committer foo <foo> 102400 +0000
 data 31
 Committing nonexecutable file.
-
 from :2
 M 100644 :3 nonexec
 property cvs-revisions 12 nonexec 1.1

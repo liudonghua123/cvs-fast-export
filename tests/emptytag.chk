@@ -10,7 +10,6 @@ mark :2
 committer tron <tron> 1153910331 +0000
 data 33
 72edc95d3d3d8b19f17b383c8b48e7be
-
 M 100644 :1 emptytag
 M 100644 inline .gitignore
 data 199
@@ -54,7 +53,6 @@ mark :4
 committer yamt <yamt> 1155311039 +0000
 data 33
 dcc6c11cf7931986275c70972415738c
-
 M 100644 :3 emptytag
 
 blob
@@ -67,7 +65,6 @@ mark :6
 committer plunky <plunky> 1156057618 +0000
 data 33
 9e702d6fea48c1d3bb95c46b5beedfc2
-
 from :2
 M 100644 :5 emptytag
 
@@ -81,7 +78,6 @@ mark :8
 committer christos <christos> 1156724090 +0000
 data 33
 dcc02b8f68044956a92e64506313b1be
-
 from :6
 M 100644 :7 emptytag
 
@@ -95,7 +91,6 @@ mark :10
 committer yamt <yamt> 1157297036 +0000
 data 33
 4ded2b4af9bcadc17a16a481bf7db843
-
 from :4
 M 100644 :9 emptytag
 
@@ -104,7 +99,6 @@ mark :11
 committer plunky <plunky> 1157903156 +0000
 data 33
 32f882f6d9d435658b9d045cec6ebec0
-
 from :8
 D emptytag
 
@@ -113,7 +107,6 @@ mark :12
 committer yamt <yamt> 1158237087 +0000
 data 33
 4ded2b4af9bcadc17a16a481bf7db843
-
 from :10
 D emptytag
 
@@ -122,7 +115,6 @@ mark :13
 committer riz <riz> 1158268590 +0000
 data 33
 2190483e8079df73ca6844812d511f39
-
 
 reset refs/heads/master
 from :11

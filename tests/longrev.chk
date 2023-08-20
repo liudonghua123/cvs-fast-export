@@ -9,7 +9,6 @@ mark :2
 committer foo <foo> 101200 +0000
 data 26
 *** empty log message ***
-
 M 100644 :1 README
 M 100644 inline .gitignore
 data 199
@@ -56,7 +55,6 @@ mark :4
 committer foo <foo> 102400 +0000
 data 20
 Updated for branch1
-
 from :2
 M 100644 :3 README
 property cvs-revisions 15 README 1.1.2.1
@@ -73,7 +71,6 @@ mark :6
 committer foo <foo> 103600 +0000
 data 20
 Updated for branch2
-
 from :4
 M 100644 :5 README
 property cvs-revisions 19 README 1.1.2.1.2.1
@@ -90,7 +87,6 @@ mark :8
 committer foo <foo> 104800 +0000
 data 20
 Updated for branch3
-
 from :6
 M 100644 :7 README
 property cvs-revisions 23 README 1.1.2.1.2.1.2.1
@@ -107,7 +103,6 @@ mark :10
 committer foo <foo> 106000 +0000
 data 20
 Updated for branch4
-
 from :8
 M 100644 :9 README
 property cvs-revisions 27 README 1.1.2.1.2.1.2.1.2.1
@@ -124,7 +119,6 @@ mark :12
 committer foo <foo> 107200 +0000
 data 20
 Updated for branch5
-
 from :10
 M 100644 :11 README
 property cvs-revisions 31 README 1.1.2.1.2.1.2.1.2.1.2.1
@@ -141,7 +135,6 @@ mark :14
 committer foo <foo> 108400 +0000
 data 20
 Updated for branch6
-
 from :12
 M 100644 :13 README
 property cvs-revisions 35 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1
@@ -158,7 +151,6 @@ mark :16
 committer foo <foo> 109600 +0000
 data 20
 Updated for branch7
-
 from :14
 M 100644 :15 README
 property cvs-revisions 39 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1
@@ -175,7 +167,6 @@ mark :18
 committer foo <foo> 110800 +0000
 data 20
 Updated for branch8
-
 from :16
 M 100644 :17 README
 property cvs-revisions 43 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1
@@ -192,7 +183,6 @@ mark :20
 committer foo <foo> 112000 +0000
 data 20
 Updated for branch9
-
 from :18
 M 100644 :19 README
 property cvs-revisions 47 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1
@@ -209,7 +199,6 @@ mark :22
 committer foo <foo> 113200 +0000
 data 21
 Updated for branch10
-
 from :20
 M 100644 :21 README
 property cvs-revisions 51 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1

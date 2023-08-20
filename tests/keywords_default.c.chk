@@ -19,7 +19,6 @@ committer flameeyes <flameeyes> 1143909831 +0000
 data 69
 Import sys-freebsd into main portage.
 (Portage version: 2.1_pre7-r3)
-
 M 100644 :1 keywords_default.c
 M 100644 inline .gitignore
 data 199

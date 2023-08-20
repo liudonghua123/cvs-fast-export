@@ -8,7 +8,6 @@ mark :2
 committer mw <mw> 741899980 +0000
 data 33
 da28248b4ec75efbe0ba7461142ed60d
-
 M 100644 :1 hashsymbol
 M 100644 inline .gitignore
 data 199
@@ -52,7 +51,6 @@ mark :4
 committer mw <mw> 741899981 +0000
 data 33
 f8a1b63b883ce97d3c94a35c52e5f57a
-
 from :2
 M 100644 :3 hashsymbol
 
@@ -85,7 +83,6 @@ mark :5
 committer mycroft <mycroft> 760148666 +0000
 data 33
 de54d576de51109167df624abae26024
-
 from :4
 D hashsymbol
 

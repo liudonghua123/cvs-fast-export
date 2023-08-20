@@ -505,9 +505,9 @@ export_commit(git_commit *commit, const char *branch,
 	//printf("author %s <%s> %s\n", full, email, ts);
 	printf("committer %s <%s> %s\n", full, email, ts);
 	if (!opts->embed_ids)
-	    printf("data %zd\n%s\n", (ssize_t)strlen(commit->log), commit->log);
+	    printf("data %zd\n%s", (ssize_t)strlen(commit->log), commit->log);
 	else
-	    printf("data %zd\n%s\n%s\n", strlen(commit->log) + strlen(revpairs) + 1,
+	    printf("data %zd\n%s\n%s", strlen(commit->log) + strlen(revpairs) + 1,
 		commit->log, revpairs);
 	if (commit->parent) {
 	    if (markmap[commit->parent->serial] == 0)
