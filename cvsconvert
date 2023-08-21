@@ -15,7 +15,11 @@ Will produce spurious errors if any CVS branch name had to be sanitized.
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
 
-# pylint: disable=line-too-long,invalid-name,missing-class-docstring,useless-object-inheritance,missing-function-docstring,redefined-outer-name,consider-using-f-string,too-many-statements
+# Ugh. This is needed because puyylint removed the no-self-use check in 2.14.
+# This is the only wqy to prevent spurious pylint failures on earlier versions.
+# pylint: disable=useless-option-value
+
+# pylint: disable=line-too-long,invalid-name,missing-class-docstring,useless-object-inheritance,missing-function-docstring,redefined-outer-name,consider-using-f-string,too-many-statements,arguments-renamed
 
 # pylint: disable=multiple-imports
 import sys, os, shutil, subprocess, time, filecmp

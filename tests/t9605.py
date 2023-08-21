@@ -50,7 +50,7 @@
 #
 # Reported by Chris Rorvick.
 
-# pylint: disable=multiple-imports
+# pylint: disable=multiple-imports,superfluous-parens
 import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")

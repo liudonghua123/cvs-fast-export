@@ -14,7 +14,7 @@ Rev 1 this leads to a broken import because of a cvsps
 bug.
 '''
 
-# pylint: disable=multiple-imports
+# pylint: disable=multiple-imports,superfluous-parens
 import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")

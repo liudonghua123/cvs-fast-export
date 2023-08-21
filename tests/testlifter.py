@@ -4,6 +4,10 @@ Test framework for cvs-fast-export.
 # This code runs correctly under both Python 2 and Python 3.
 # Preserve this property!
 
+# Ugh. This is needed because puyylint removed the no-self-use check in 2.14.
+# This is the only wqy to prevent spurious pylint failures on earlier versions.
+# pylint: disable=useless-option-value
+
 # pylint: disable=line-too-long,invalid-name,useless-object-inheritance,missing-function-docstring,missing-class-docstring,.too-many-branches,too-many-arguments,too-many-locals,consider-using-f-string
 
 # pylint: disable=multiple-imports
@@ -161,7 +165,7 @@ class CVSRepository(RCSRepository):
         if verbose >= DEBUG_COMMANDS:
             sys.stdout.write("Creating module %s\n" % module)
         os.mkdir(module)
-    # pylint: disable=arguments-differ
+    # pylint: disable=arguments-differ,arguments-renamed
     def checkout(self, module, checkout=None):
         "Create a checkout of this repo."
         self.checkouts.append(CVSCheckout(self, module, checkout))

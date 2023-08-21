@@ -70,7 +70,7 @@ correctly along tags and branches.  Here is its history:
       sub3/default.
 '''
 
-# pylint: disable=multiple-imports
+# pylint: disable=multiple-imports,superfluous-parens
 import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")

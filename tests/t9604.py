@@ -5,7 +5,7 @@
 
 # pylint: disable=invalid-name,consider-using-f-string,consider-using-with
 
-# pylint: disable=multiple-imports
+# pylint: disable=multiple-imports,superfluous-parens
 import sys, tempfile, os, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")
