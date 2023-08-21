@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+1.61: 2023-08-21::
+   For git fast-export compatibility, don't emit NL adter comment text.
+
 1.60: 2023-05-14::
    Fix for expansion of $ headers, doing what the manual actually says.
    Fix for interpretation of the expand keyword.
