@@ -80,7 +80,13 @@ YY_DECL;
 					return TEXT_DATA;
 				}
 <CONTENT>[-a-zA-Z_+%][-a-zA-Z_0-9+/%=.~^\\*?#!\[\]()<>]* {
+					/* CVS-like tag identifiers */
 					fast_export_sanitize(yyscanner, cvs);
+					yylval->atom = atom(yytext);
+					return TOKEN;
+				}
+<CONTENT>[0-9]*[-0-9]*		{
+					/* A much older convention sometimes found in RCS files */
 					yylval->atom = atom(yytext);
 					return TOKEN;
 				}

@@ -1,5 +1,8 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Deal gracefully with old-style tagging sometimes found in RCS files.
+
 1.61: 2023-08-21::
    For git fast-export compatibility, don't emit NL adter comment text.
 
