@@ -70,7 +70,6 @@ extern YY_DECL;	/* FIXME: once the Bison bug requiring this is fixed */
 %type <date>	date
 %type <branch>	branches numbers
 %type <atom>	revtrailer commitid
-%type <atom>	name
 %type <atom>	author state
 %type <atom>	deltatype
 %type <atom>	group
@@ -153,19 +152,17 @@ symbols		: symbols symbol
 		|
 		  { $$ = NULL; }
 		;
-symbol		: name COLON NUMBER
+symbol		: TOKEN COLON NUMBER
 		  {
 		  	$$ = xcalloc (1, sizeof (cvs_symbol), "making symbol");
 			$$->symbol_name = $1;
 			$$->number = atom_cvs_number($3);
 		  }
 		;
-fscked_symbol	: name COLON BRAINDAMAGED_NUMBER
+fscked_symbol	: TOKEN COLON BRAINDAMAGED_NUMBER
 		  {
 		        warn("ignoring symbol %s (FreeBSD RELENG_2_1_0 braindamage?)\n", $1);
 		  }
-		;
-name		: TOKEN
 		;
 revisions	: revisions revision
 		  { *$1 = $2; $$ = &$2->next;}
