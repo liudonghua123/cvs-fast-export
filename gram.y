@@ -166,12 +166,6 @@ fscked_symbol	: name COLON BRAINDAMAGED_NUMBER
 		  }
 		;
 name		: TOKEN
-		| NUMBER
-		  {
-		    char    name[CVS_MAX_REV_LEN];
-		    cvs_number_string (&$1, name, sizeof(name));
-		    $$ = atom (name);
-		  }
 		;
 revisions	: revisions revision
 		  { *$1 = $2; $$ = &$2->next;}
