@@ -335,7 +335,7 @@ void analyze_masters(int argc, const char *argv[],
 		name[l-1] = '\0';
 	    file = name;
 	} else {
-	    file = argv[j++];
+	  file = (char *)argv[j++];
 	    if (!file)
 		break;
 	}
