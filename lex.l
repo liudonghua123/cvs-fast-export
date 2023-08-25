@@ -88,7 +88,7 @@ YY_DECL;
 <CONTENT>[0-9]*[-0-9]*		{
 					/* A much older convention sometimes found in RCS files */
 					yylval->atom = atom(yytext);
-					return TOKEN;
+					return TAGNAME;
 				}
 <ACCESSS>[a-zA-Z_][a-zA-Z_0-9]* {
 					return LOGIN;
