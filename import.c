@@ -343,12 +343,14 @@ void analyze_masters(int argc, const char *argv[],
 	if (stat(file, &stb) != 0)
 	    continue;
 	else if (S_ISDIR(stb.st_mode) != 0) {
-	    if (strstr(file, "CVSROOT") != NULL)
+	    if (strcmp(file, "CVSROOT") == 0)
 	        forest->cvsroot = true;
 	    continue;
 	} else if (!analyzer->promiscuous) {
 	    char *end = file + strlen(file);
 	    if (end - file < 2 || end[-1] != 'v' || end[-2] != ',')
+		continue;
+	    if (strstr(file, "CVSROOT") != NULL)
 		continue;
 	}
 	forest->textsize += stb.st_size;
