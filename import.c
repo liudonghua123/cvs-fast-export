@@ -343,7 +343,7 @@ void analyze_masters(int argc, const char *argv[],
 	if (stat(file, &stb) != 0)
 	    continue;
 	else if (S_ISDIR(stb.st_mode) != 0) {
-	    if (strcmp(file, "CVSROOT") == 0)
+	    if (strstr(file, "CVSROOT") != NULL)
 	        forest->cvsroot = true;
 	    continue;
 	} else if (!analyzer->promiscuous) {
