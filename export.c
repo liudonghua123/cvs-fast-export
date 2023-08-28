@@ -750,7 +750,7 @@ void export_commits(forest_t *forest,
     progress_end("done");
 
     if (opts->reposurgeon)
-	fputs("#reposurgeon sourcetype cvs\n", stdout);
+        printf("#reposurgeon sourcetype %s\n",  forest->cvsroot ? "cvs" : "rcs");
 
     struct commit_seq *history, *hp;
 

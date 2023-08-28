@@ -349,8 +349,10 @@ void analyze_masters(int argc, const char *argv[],
 	    char *end = file + strlen(file);
 	    if (end - file < 2 || end[-1] != 'v' || end[-2] != ',')
 		continue;
-	    if (strstr(file, "CVSROOT") != NULL)
+	    if (strstr(file, "CVSROOT") != NULL) {
+	        forest->cvsroot = true;
 		continue;
+	    }
 	}
 	forest->textsize += stb.st_size;
 

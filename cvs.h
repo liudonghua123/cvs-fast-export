@@ -485,6 +485,7 @@ typedef struct _forest {
     int filecount;
     off_t textsize;
     int errcount;
+    bool cvsroot;
     cvs_master *cvs;
     git_repo *git;
     generator_t *generators;

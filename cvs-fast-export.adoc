@@ -11,7 +11,7 @@ cvs-fast-export - fast-export history from a CVS repository or RCS collection.
     [-R 'revmap'] [--reposurgeon] [-e 'remote'] [-s 'stripprefix']
 
 == DESCRIPTION ==
-cvs-fast-export tries to group the per-file commits and tags in a RCS file
+cvs-fast-export tries to group the per-file commits and tags in an RCS file
 collection or CVS project repository into per-project changeset
 commits with common metadata. It emits a Git fast-import stream
 describing these changesets to standard output.
@@ -176,7 +176,9 @@ have a monotonic-increasing attributed date computed from its mark in
 the output stream - the mark value times the commit time window times two.
 
 --reposurgeon::
-Emit for each commit a list of the CVS file:revision pairs composing it as a
+Ship a sourcety[e header comment for reposurgeom to use, declaring
+"cvs" if a CVSROOT file has been seen and RCS otherwise.  Emit for
+each commit a list of the CVS file:revision pairs composing it as a
 bzr-style commit property named "cvs-revisions".  From version 2.12
 onward, reposurgeon(1) can interpret these and use them as hints for
 reference-lifting.  Also, suppresses emission of "done" trailer.
