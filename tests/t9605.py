@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-'''
+"""
 ## Testing for correct patchset estimation
-'''
+"""
 
 # Structure of the test cvs repository
 #
-#Import of a trivial CVS repository fails due to a cvsps bug.  Given the
-#following series of commits:
+# Import of a trivial CVS repository fails due to a cvsps bug.  Given the
+# following series of commits:
 #
 #    timestamp             a    b    c   message
 #    -------------------  ---  ---  ---  -------
@@ -15,7 +15,7 @@
 #    2012/12/12 21:09:46            1.2  changes
 #    2012/12/12 21:09:50       1.1  1.3  changes are done
 #
-#cvsps mangles the commit ordering (edited for brevity):
+# cvsps mangles the commit ordering (edited for brevity):
 #
 #    ---------------------
 #    PatchSet 1
@@ -46,7 +46,7 @@
 #    Members:
 #        c:1.1->1.2
 #
-#This is seen in cvsps versions 2.x and up through at least 3.7.
+# This is seen in cvsps versions 2.x and up through at least 3.7.
 #
 # Reported by Chris Rorvick.
 
@@ -55,6 +55,6 @@ import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")
 cc = testlifter.ConvertComparison(stem="t9605", module="module")
-cc.repo.retain = ("-k" in sys.argv[1:])
+cc.repo.retain = "-k" in sys.argv[1:]
 cc.compare_tree("branch", "master", True)
 cc.cleanup()

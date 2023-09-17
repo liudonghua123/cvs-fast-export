@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-'''
+"""
 ## Testing for correct timestamp handling in author maps.
-'''
+"""
 
 # pylint: disable=invalid-name,consider-using-f-string,consider-using-with
 
@@ -30,7 +30,7 @@ Rev  1 2005-01-01 00:00:00 +0000
 """
 
 cc = testlifter.ConvertComparison(stem="t9604", module="module")
-cc.repo.retain = ("-k" in sys.argv[1:])
+cc.repo.retain = "-k" in sys.argv[1:]
 cc.compare_tree("branch", "master", True)
 cc.command_returns("cd t9604-git >/dev/null; git log --format='%s %ai'", uncorrected)
 cc.cleanup()
@@ -42,7 +42,7 @@ user3=User Three <user3@domain.org> EST5EDT
 user4=User Four <user4@domain.org> MST7MDT
 """
 
-corrected="""\
+corrected = """\
 Rev 16 2006-10-29 01:00:01 -0600 User Two
 Rev 15 2006-10-29 01:59:59 -0500 User Two
 Rev 14 2006-04-02 03:00:01 -0500 User Two
@@ -61,12 +61,13 @@ Rev  2 2005-01-31 18:00:00 -0600 User Two
 Rev  1 2005-01-01 00:00:00 +0000 User One
 """
 
-afp = open(tempfile.mktemp(), "w", encoding='ascii', errors='surrogateescape')
+afp = open(tempfile.mktemp(), "w", encoding="ascii", errors="surrogateescape")
 afp.write(authormap)
 afp.flush()
-cc = testlifter.ConvertComparison(stem="t9604", module="module",
-                                  options="-A %s" % afp.name)
-cc.repo.retain = ("-k" in sys.argv[1:])
+cc = testlifter.ConvertComparison(
+    stem="t9604", module="module", options="-A %s" % afp.name
+)
+cc.repo.retain = "-k" in sys.argv[1:]
 cc.compare_tree("branch", "master", True)
 cc.command_returns("cd t9604-git >/dev/null; git log --format='%s %ai %an'", corrected)
 os.remove(afp.name)

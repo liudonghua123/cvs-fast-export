@@ -5,7 +5,7 @@
 # a lifter directly rather than through git-cvsimport.
 #
 
-'''
+"""
 This repository is for testing the ability to group revisions
 correctly along tags and branches.  Here is its history:
 
@@ -68,14 +68,14 @@ correctly along tags and branches.  Here is its history:
 
   17. Commit a change on B_SPLIT, to sub1/subsubB/default and
       sub3/default.
-'''
+"""
 
 # pylint: disable=multiple-imports,superfluous-parens
 import sys, testlifter
 
 testlifter.verbose += sys.argv[1:].count("-v")
 cc = testlifter.ConvertComparison(stem="t9602", module="module")
-cc.repo.retain = ("-k" in sys.argv[1:])
+cc.repo.retain = "-k" in sys.argv[1:]
 cc.compare_tree("branch", "master", True)
 cc.compare_tree("branch", "vendorbranch", True)
 cc.compare_tree("branch", "B_FROM_INITIALS", True)

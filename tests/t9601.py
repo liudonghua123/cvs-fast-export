@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ## Test handling of vendor branches
-'''
+"""
 
 This test was swiped from the git 1.8.1 tree, then modified to exercise
 lifters directly rather than through git-cvsimport.
@@ -39,7 +39,7 @@ Description of the files in the repository:
 Note: Without the -t 0 option this test has intermittent failures.
 This is due to commits with identical timestamps
 being canonicalized backwards from their topo order.
-'''
+"""
 
 
 # pylint: disable=multiple-imports
@@ -51,27 +51,34 @@ co = repo.checkout("module", "t9601.checkout")
 repo.convert("module", "t9601.git", more_opts="-t 0")
 
 # Check a file that was imported once
-testlifter.expect_same("t9601.checkout/imported-once.txt",
-                       "t9601.git/imported-once.txt")
+testlifter.expect_same(
+    "t9601.checkout/imported-once.txt", "t9601.git/imported-once.txt"
+)
 
 # Check a file that was imported twice
-testlifter.expect_same("t9601.checkout/imported-twice.txt",
-                       "t9601.git/imported-twice.txt")
+testlifter.expect_same(
+    "t9601.checkout/imported-twice.txt", "t9601.git/imported-twice.txt"
+)
 
 # Check a file that was imported then modified on HEAD
-testlifter.expect_same("t9601.checkout/imported-modified.txt",
-                       "t9601.git/imported-modified.txt")
+testlifter.expect_same(
+    "t9601.checkout/imported-modified.txt", "t9601.git/imported-modified.txt"
+)
 
 # Check a file that was imported, modified, then imported
-testlifter.expect_same("t9601.checkout/imported-modified-imported.txt",
-                       "t9601.git/imported-modified-imported.txt")
+testlifter.expect_same(
+    "t9601.checkout/imported-modified-imported.txt",
+    "t9601.git/imported-modified-imported.txt",
+)
 
 # Check a file that was added to HEAD then imported
-testlifter.expect_same("t9601.checkout/added-imported.txt",
-                       "t9601.git/added-imported.txt")
+testlifter.expect_same(
+    "t9601.checkout/added-imported.txt", "t9601.git/added-imported.txt"
+)
 
 # A vendor branch whose tag has been removed
-testlifter.expect_same("t9601.checkout/imported-anonymously.txt",
-                       "t9601.git/imported-anonymously.txt")
+testlifter.expect_same(
+    "t9601.checkout/imported-anonymously.txt", "t9601.git/imported-anonymously.txt"
+)
 
 co.cleanup()
