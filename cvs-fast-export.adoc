@@ -74,8 +74,8 @@ standard output:
 * Other tag and branch names are sanitized to be legal for git;
   the characters ~^\*? are removed.
 
-* Since .cvsignore files have a syntax upward-compatible with that of
-  .gitignore files, they're renamed.  In order to simulate the default
+* Since .cvsignore files have a syntax (mostly) upward-compatible with that of
+  .gitignore files, they're renamed. In order to simulate the default
   ignore behavior of CVS, those defaults are prepended to root
   .cvsignore blobs renamed to .gitignore, and a root .gitignore
   containing the defaults is generated if no such blobs exist.
@@ -176,11 +176,11 @@ have a monotonic-increasing attributed date computed from its mark in
 the output stream - the mark value times the commit time window times two.
 
 --reposurgeon::
-Ship a sourcety[e header comment for reposurgeom to use, declaring
-"cvs" if a CVSROOT file has been seen and RCS otherwise.  Emit for
-each commit a list of the CVS file:revision pairs composing it as a
-bzr-style commit property named "cvs-revisions".  From version 2.12
-onward, reposurgeon(1) can interpret these and use them as hints for
+Ship a header comment for reposurgeom to use, declaring "cvs" if a
+CVSROOT file has been seen and RCS otherwise.  Emit for each commit a
+list of the CVS file:revision pairs composing it as a bzr-style commit
+property named "cvs-revisions".  From version 2.12 onward,
+reposurgeon(1) can interpret these and use them as hints for
 reference-lifting.  Also, suppresses emission of "done" trailer.
 
 --embed-id::
@@ -359,6 +359,11 @@ committer/timestamp information for when the master was originally
 checked in, rather than when it was last checked out.  It's good
 practice to remove all dollar cookies as part of post-conversion
 cleanup.
+
+CVS ignore-pattern syntax has one obscure incompatibility with
+git's; spaces in pattern lines are supposed to be treated as
+pattern separators like newlines. These spaces are translated
+to newlines on exit.  Additionally, CVS does not document how 
 
 CVS vendor branches are a source of trouble. Sufficiently strange
 combinations of imports and local modifications will translate

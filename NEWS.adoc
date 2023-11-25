@@ -3,6 +3,7 @@
 Repository head::
    Cope with old-style tagging sometimes found in RCS files.
    Better detection of repo type (CVS vs RCS).
+   Translate CVS's handling of spaces and leading ! in ignores.
 
 1.61: 2023-08-21::
    For git fast-export compatibility, don't emit NL adter comment text.
