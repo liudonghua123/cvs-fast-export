@@ -1,6 +1,6 @@
 = cvs-fast-export project news =
 
-Repository head::
+1.62: 2023-11-26::
    Cope with old-style tagging sometimes found in RCS files.
    Better detection of repo type (CVS vs RCS).
    Translate CVS's handling of spaces and leading ! in ignores.
