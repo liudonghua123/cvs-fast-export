@@ -120,6 +120,7 @@ rev_ref_tsort(rev_ref *git_branches, cvs_master *masters, size_t nmasters)
 	*sorted_tail = r;
 	r->next = NULL;
 	sorted_tail = &r->next;
+	progress_step();
     }
     return sorted_git_branches;
 }
@@ -976,7 +977,7 @@ collate_to_changesets(cvs_master *masters, size_t nmasters, int verbose)
      * In later operations we always want to walk parent branches
      * before children, with trunk first.
      */
-    progress_begin("Sorting...", nmasters);
+    progress_begin("Sorting...", head_count);
     gl->heads = rev_ref_tsort(gl->heads, masters, nmasters);
     if (!gl->heads) {
 	free(refs);
