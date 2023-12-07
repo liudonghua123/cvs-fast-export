@@ -1,5 +1,4 @@
 cvs-fast-export: null branch name, probably from a damaged Attic file
-cvs-fast-export: null branch name, probably from a damaged Attic file
 blob
 mark :1
 data 16
@@ -115,14 +114,5 @@ mark :13
 committer riz <riz> 1158268590 +0000
 data 33
 2190483e8079df73ca6844812d511f39
-
-reset refs/heads/master
-from :11
-
-reset refs/heads/null
-from :13
-
-reset refs/heads/yamt-pdpolicy
-from :12
 
 done

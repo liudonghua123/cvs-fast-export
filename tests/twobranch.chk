@@ -102,10 +102,4 @@ from :6
 M 100644 :9 README
 property cvs-revisions 11 README 1.3
 
-reset refs/heads/master
-from :10
-
-reset refs/heads/samplebranch
-from :8
-
 done

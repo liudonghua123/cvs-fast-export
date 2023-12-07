@@ -86,10 +86,4 @@ de54d576de51109167df624abae26024
 from :4
 D hashsymbol
 
-reset refs/heads/master
-from :5
-
-reset refs/heads/netbsd-0-9
-from :4
-
 done

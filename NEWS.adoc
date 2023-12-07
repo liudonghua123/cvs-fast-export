@@ -4,6 +4,7 @@ Repository head::
    Leading !\n in .cvsignore files is translated correctly.
    Leading # characters on .cvsignore lines get escaped.
    Spaces in .cvsignore files are translated correctly.
+   git fast-export no longer ships branch-tip exports; track this.
 
 1.62: 2023-11-26::
    Cope with old-style tagging sometimes found in RCS files.

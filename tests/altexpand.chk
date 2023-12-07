@@ -57,7 +57,4 @@ M 100644 :3 altexpand
 reset refs/tags/rc1
 from :4
 
-reset refs/heads/master
-from :4
-
 done

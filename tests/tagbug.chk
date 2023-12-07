@@ -61,7 +61,4 @@ D bar.c
 reset refs/tags/tag
 from :4
 
-reset refs/heads/master
-from :4
-
 done

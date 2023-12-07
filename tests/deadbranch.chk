@@ -57,7 +57,4 @@ data 33
 4a486f01d33c531a71545e0fa34fc4e3
 from :3
 
-reset refs/heads/master
-from :4
-
 done

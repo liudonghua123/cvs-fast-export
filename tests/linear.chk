@@ -57,7 +57,4 @@ from :2
 M 100644 :3 README
 property cvs-revisions 11 README 1.2
 
-reset refs/heads/master
-from :4
-
 done

@@ -170,6 +170,7 @@ static char *blobfile(const char *basename,
 
 static void export_blob(node_t *node, 
 			void *buf, const size_t len,
+
 			export_options_t *opts)
 /* output the blob, or save where it will be available for random access */
 {
@@ -761,7 +762,6 @@ void export_commits(forest_t *forest,
 		    export_options_t *opts, export_stats_t *stats)
 /* export a revision list as a git fast-import stream */
 {
-    rev_ref *h;
     tag_t *t;
     git_repo *rl = forest->git;
     generator_t *gp;
@@ -835,13 +835,16 @@ void export_commits(forest_t *forest,
 
     free(history);
 
-    for (h = rl->heads; h; h = h->next) {
+#ifdef __UNUSED__
+    // git fast-export no longer emits branch-tip resets.
+    for (rev_ref *h = rl->heads; h; h = h->next) {
 	if (display_date(h->commit, markmap[h->commit->serial], opts->force_dates) > opts->fromtime)
 	    printf("reset %s%s\nfrom :%d\n\n",
 		   opts->branch_prefix,
 		   visualize_branch_name(h->ref_name),
 		   (int)markmap[h->commit->serial]);
     }
+#endif /* __UNUSED__ */
     free(markmap);
 
     progress_end("done");

@@ -203,7 +203,4 @@ from :4
 reset refs/tags/4-4-0
 from :4
 
-reset refs/heads/master
-from :4
-
 done

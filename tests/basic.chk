@@ -43,7 +43,4 @@ core
 
 property cvs-revisions 11 README 1.1
 
-reset refs/heads/master
-from :2
-
 done

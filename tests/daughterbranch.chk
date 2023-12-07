@@ -74,10 +74,4 @@ from :4
 M 100644 :5 feedyourhead
 property cvs-revisions 17 feedyourhead 1.1
 
-reset refs/heads/master
-from :6
-
-reset refs/heads/samplebranch
-from :4
-
 done

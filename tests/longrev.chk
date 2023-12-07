@@ -203,37 +203,4 @@ from :20
 M 100644 :21 README
 property cvs-revisions 51 README 1.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1.2.1
 
-reset refs/heads/master
-from :2
-
-reset refs/heads/branch1
-from :4
-
-reset refs/heads/branch2
-from :6
-
-reset refs/heads/branch3
-from :8
-
-reset refs/heads/branch4
-from :10
-
-reset refs/heads/branch5
-from :12
-
-reset refs/heads/branch6
-from :14
-
-reset refs/heads/branch7
-from :16
-
-reset refs/heads/branch8
-from :18
-
-reset refs/heads/branch9
-from :20
-
-reset refs/heads/branch10
-from :22
-
 done

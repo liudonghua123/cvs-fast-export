@@ -260,10 +260,4 @@ property cvs-revisions 11 README 1.5
 reset refs/tags/illegal
 from :23
 
-reset refs/heads/master
-from :23
-
-reset refs/heads/samplebranch
-from :21
-
 done

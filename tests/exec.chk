@@ -57,7 +57,4 @@ from :2
 M 100644 :3 nonexec
 property cvs-revisions 12 nonexec 1.1
 
-reset refs/heads/master
-from :4
-
 done

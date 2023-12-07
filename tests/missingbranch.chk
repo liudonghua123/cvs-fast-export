@@ -106,10 +106,4 @@ eac3a5a5fe408f0129d454a84fc3fdb5
 from :8
 M 100644 :9 missingbranch
 
-reset refs/heads/master
-from :8
-
-reset refs/heads/master-UNNAMED-BRANCH
-from :10
-
 done

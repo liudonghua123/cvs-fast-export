@@ -189,10 +189,4 @@ data 33
 from :22
 M 100644 :23 emptylabel
 
-reset refs/heads/master
-from :24
-
-reset refs/heads/master-UNNAMED-BRANCH
-from :14
-
 done

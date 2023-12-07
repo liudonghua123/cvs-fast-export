@@ -54,7 +54,4 @@ This is a second sample commit
 from :2
 M 100644 :3 noedit
 
-reset refs/heads/master
-from :4
-
 done

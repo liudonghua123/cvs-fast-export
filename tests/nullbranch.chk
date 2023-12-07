@@ -1,6 +1,5 @@
 cvs-fast-export: warning - putting nullbranch,v rev 1.1.0.2 on unnamed branch master-UNNAMED-BRANCH off master
 cvs-fast-export: null branch name, probably from a damaged Attic file
-cvs-fast-export: null branch name, probably from a damaged Attic file
 blob
 mark :1
 data 64
@@ -71,14 +70,5 @@ mark :6
 committer jplejacq <jplejacq> 1512484400 +0000
 data 66
 defect: 1 commit changes merged from HEAD to br_REL-042916 branch
-
-reset refs/heads/master
-from :5
-
-reset refs/heads/null
-from :6
-
-reset refs/heads/master-UNNAMED-BRANCH
-from :2
 
 done

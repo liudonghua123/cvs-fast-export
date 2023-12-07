@@ -28,10 +28,4 @@ This commit should alter the master branch.
 from :6
 M 100644 :9 README
 
-reset refs/heads/master
-from :10
-
-reset refs/heads/samplebranch
-from :8
-
 done

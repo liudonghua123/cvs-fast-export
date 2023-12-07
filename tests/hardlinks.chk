@@ -178,7 +178,4 @@ Removed.
 from :2
 D hardlinks
 
-reset refs/heads/master
-from :3
-
 done

@@ -52,7 +52,4 @@ core
 # CVS default ignores end
 
 
-reset refs/heads/master
-from :2
-
 done

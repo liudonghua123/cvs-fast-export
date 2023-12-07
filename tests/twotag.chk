@@ -80,10 +80,4 @@ from :6
 M 100644 :2 tweedledum
 property cvs-revisions 15 tweedledum 1.1
 
-reset refs/heads/master
-from :6
-
-reset refs/heads/FUBAR
-from :7
-
 done

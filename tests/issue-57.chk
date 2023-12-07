@@ -93,10 +93,4 @@ from :7
 M 100644 :8 metadata.xml
 property cvs-revisions 17 metadata.xml 1.2
 
-reset refs/heads/master
-from :9
-
-reset refs/heads/import-1.1.1
-from :5
-
 done

@@ -247,10 +247,4 @@ from :22
 M 100644 :27 Makefile.am
 property cvs-revisions 20 Makefile.am 1.1.1.1
 
-reset refs/heads/master
-from :26
-
-reset refs/heads/import-1.1.1
-from :28
-
 done
