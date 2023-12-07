@@ -152,6 +152,13 @@ cleancheck:
 	@$(MAKE) -s -C tests clean
 	@$(MAKE) -s check
 
+fixme:
+	@if command -v rg; then \
+		rg --no-heading FIX''ME; \
+	else \
+		find . -type f -exec grep -n FIX''ME {} /dev/null \; | grep -v "[.]git"; \
+	fi
+
 install: install-bin install-man
 install-bin: cvs-fast-export cvssync cvsconvert
 	$(INSTALL) -d "$(target)/bin"

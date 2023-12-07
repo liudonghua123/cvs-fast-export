@@ -1,5 +1,10 @@
 = cvs-fast-export project news =
 
+Repository head::
+   Leading !\n in .cvsignore files is translated correctly.
+   Leading # characters on .cvsignore lines get escaped.
+   Spaces in .cvsignore files are translated correctly.
+
 1.62: 2023-11-26::
    Cope with old-style tagging sometimes found in RCS files.
    Better detection of repo type (CVS vs RCS).

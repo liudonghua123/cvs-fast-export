@@ -174,42 +174,50 @@ static void export_blob(node_t *node,
 /* output the blob, or save where it will be available for random access */
 {
     /*
-     * This is the only place we do interpretation of ignore.
+     * This is the only place we do interpretation of ignores.
+     *
+     * Fortunately, git's ignore-pattern glob syntax was designed to
+     * be upward-compatible from CVS's.  The major differences are that
+     * git treats a # as a comment leader and Git doesn't interpret
+     * spaces as pattern separators.
      *
      * For the record, GNU CVS does its ignore pattern matching with a
      * local implementation of POSIX fnmatch(3) with 0 flags. Patterns
      * match against the pathnames of files relative to the repository
-     * root.  Available wildcards are * and ?;, both [ ] and [! ] are
-     * available. Unlike POSIX fnmatch(3), the dash for character ranges
-     * *is* supported in the GNU CVS code.  The path segment separator / is not
-     * treated specially in any way.  The zero flags mean that \ acts
-     * to escape wildcard characters, and there are no restrictions on
-     * matching a period.
+     * root.  Available wildcards are * and ?;, both [ ] and [^ ] are
+     * available and ! is an alternate for ^. Unlike POSIX fnmatch(3),
+     * the dash for character ranges *is* supported in the GNU CVS
+     * code.  The path segment separator / is not treated specially in
+     * any way.  The zero flags mean that \ acts to escape wildcard
+     * characters, and there are no restrictions on matching a period.
      *
      * It is unclear what effect, if any, a .cvsignore in a subdirectory
      * is supposed to have, if any.
      */
+    bool is_ignore = strcmp(node->commit->master->name, ".cvsignore") == 0;
     size_t extralen = 0;
 
     export_stats.snapsize += len;
 
-    if (strcmp(node->commit->master->name, ".cvsignore") == 0) {
+    char *cbuf = (char *)buf;
+    size_t clen = len;
+    if (is_ignore) {
 	if (!noignores)
 	    extralen = sizeof(CVS_IGNORES) - 1;
 	/*
 	 * Two incredibly obscure features of CVS:
 	 * 1. Spaces in include files are supposed to be
 	 *    treated equivalently to newlines,  Yes, really.
-	 * 2. A leading "!\n" says to ignore the defaults,
-	 *    which is actually upward-compatible with Git's
-	 *    more general ! negation.
+	 * 2. A leading "!\n" says to ignore the defaults.
 	 */
-	char *cbuf = (char *)buf;
 	for (char *cp = cbuf; cp < cbuf + len; cp++)
 	    if (*cp == ' ')
 		*cp = '\n';
-	if (strlen(cbuf) >= 2 && cbuf[0] == '!' && cbuf[1] == '\n')
+	if (strlen(cbuf) >= 2 && cbuf[0] == '!' && cbuf[1] == '\n') {
 	    extralen = 0;
+	    cbuf += 2;
+	    clen -= 2;
+	}
     }
 
     node->commit->serial = seqno_next();
@@ -232,7 +240,13 @@ static void export_blob(node_t *node,
 	fprintf(wfp, "data %lu\n", (unsigned long)(len + extralen));
 	if (extralen > 0)
 	    fwrite(CVS_IGNORES, extralen, sizeof(char), wfp);
-	fwrite(buf, len, sizeof(char), wfp);
+	for (char *cp = cbuf; cp < cbuf + len; cp++) {
+	    // CVS .cvsignores don't have hash-led comments. so if we
+	    // see one it needs to be escaped.
+	    if (is_ignore && cp[0] == '#' && (cp == cbuf || cp[-1] == '\n'))
+	        fputc('\\', wfp);
+	    fputc(*cp, wfp);
+	}
 	fputc('\n', wfp);
 	(void)fclose(wfp);
     }

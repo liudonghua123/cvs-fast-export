@@ -79,6 +79,10 @@ standard output:
   ignore behavior of CVS, those defaults are prepended to root
   .cvsignore blobs renamed to .gitignore, and a root .gitignore
   containing the defaults is generated if no such blobs exist.
+  Leading # characters on .cvsignore lines are escaped so git
+  won't misunderstand them as comment leaders, and spaces in these
+  lines are mapped to line feeds because CVS treats spaces as
+  pattern separators.
 
 * The CVS-NT extension keywords "owner", "group", "deltatype", "kopt",
   "permissions", "mergepoint", "filename", "hardlinks", and "username"
@@ -295,7 +299,8 @@ even for incremental dumps; thus, processing time and memory
 requirements will rise with the total repository size even when
 the requested reporting interval of the incremental dump is small.
 
-These problems cannot be fixed in cvs-fast-export; they are inherent to CVS.
+These problems cannot be fixed in cvs-fast-export; they are inherent
+to CVS.
 
 == REQUIREMENTS AND PERFORMANCE ==
 Because the code is designed for dealing with large data sets, it has
@@ -359,11 +364,6 @@ committer/timestamp information for when the master was originally
 checked in, rather than when it was last checked out.  It's good
 practice to remove all dollar cookies as part of post-conversion
 cleanup.
-
-CVS ignore-pattern syntax has one obscure incompatibility with
-git's; spaces in pattern lines are supposed to be treated as
-pattern separators like newlines. These spaces are translated
-to newlines on exit.  Additionally, CVS does not document how 
 
 CVS vendor branches are a source of trouble. Sufficiently strange
 combinations of imports and local modifications will translate
